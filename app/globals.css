@@ -9,7 +9,15 @@
   --hover-red-btn: #c5220d;
   --hover-dark-btn: #212121;
   --main-button: #af1918;
-  --overlay: #00000042;
+  --secondary-button: #530061;
+  --hover-purple-btn: #67007a;
+  --overlay: #00000051;
+  --circle-gradient: radial-gradient(
+    circle,
+    rgba(118, 44, 168, 1) 0%,
+    rgba(83, 0, 97, 1) 43%,
+    rgba(13, 10, 48, 1) 100%
+  );
 }
 
 @media (prefers-color-scheme: dark) {
