@@ -1,6 +1,8 @@
 import React from "react";
 import { FaGithub } from "react-icons/fa";
 import Link from "next/link";
+import Input from "@/components/Input";
+import TextDivider from "@/components/TextDivider";
 
 const ForgotPassword = () => {
   return (
@@ -12,13 +14,13 @@ const ForgotPassword = () => {
         No worries! Please enter your email.
       </p>
       <div className="flex flex-col gap-4 pt-6 pb-4">
-        <input
+        <Input
+          type="email"
           name="email"
           id="email"
-          data-cy="email-input"
           placeholder="example@mail.com"
-          required
           className="relative w-[100%] bg-[#363636] mx-auto p-3 border rounded border-white sm:text-sm md:text-base text-white mb-2"
+          data-cy="email-input"
         />
         <button
           type="submit"
@@ -27,11 +29,7 @@ const ForgotPassword = () => {
           Reset Password
         </button>
       </div>
-      <div className="flex text-[#959494] items-center gap-4 mb-4">
-        <div className="flex-1 bg-[#959494] h-[1px]"></div>
-        <span className="text-sm">Or</span>
-        <div className="flex-1 bg-[#959494] h-[1px]"></div>
-      </div>
+      <TextDivider />
       <div className="flex items-center justify-center h-8">
         <div className="bg-[#747373] hover:bg-[#929191] p-2 rounded-full hover:cursor-pointer">
           <FaGithub className="text-xl" />
