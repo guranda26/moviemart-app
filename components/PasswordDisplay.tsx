@@ -21,8 +21,12 @@ const PasswordDisplay: React.FC<PasswordProps> = ({
   const handlePasswordDisplay = () => {
     setShowPassword((prev) => !prev);
   };
+
   return (
-    <div className="relative w-[100%] bg-[#363636] mx-auto p-3 mb-4 border rounded border-white sm:text-sm md:text-base text-white">
+    <div
+      suppressHydrationWarning={true}
+      className="relative w-[100%] bg-[#363636] mx-auto p-3 mb-4 border rounded border-white sm:text-sm md:text-base text-white"
+    >
       <Input
         type={showPassword ? "text" : "password"}
         name="password"

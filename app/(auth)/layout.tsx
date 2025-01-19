@@ -17,13 +17,13 @@ export const metadata: Metadata = {
   description: "Watch movies and series exclusively on Moviemart",
 };
 
-export default function AuthLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning={true}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

@@ -6,7 +6,10 @@ export default function AuthLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <section className="flex items-center justify-center min-h-screen bg-[#252525] p-4">
+    <section
+      className="flex items-center justify-center min-h-screen bg-[#252525] p-4"
+      suppressHydrationWarning={true}
+    >
       <div className="bg-circle-background w-[150px] h-[150px] sm:w-[250px] sm:h-[250px] rounded-full absolute left-4"></div>
       <div className="bg-circle-background w-[150px] h-[150px] rounded-full absolute left-1/4 top-1/2"></div>
       <div className="bg-[#181818] border-2 border-white rounded-lg shadow-lg w-full max-w-sm p-8 pt-10 z-10">

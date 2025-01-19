@@ -26,8 +26,6 @@ const page = () => {
             <Link
               href="/subscribe"
               className="rounded-lg border border-solid border-redButton transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-hoverDarkBtn dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 xs:px-8 sm:px-10 w-full"
-              target="_blank"
-              rel="noopener noreferrer"
             >
               Subscribe
             </Link>
