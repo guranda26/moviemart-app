@@ -11,6 +11,7 @@ export default {
       backgroundImage: {
         "hero-background": "url('/assets/oppenheimer.jpeg')",
         "circle-background": "var(--circle-gradient)",
+        "bg-gradient": "var(--bg-gradient)",
       },
       colors: {
         background: "var(--background)",

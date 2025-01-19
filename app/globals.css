@@ -18,6 +18,12 @@
     rgba(83, 0, 97, 1) 43%,
     rgba(13, 10, 48, 1) 100%
   );
+  --bg-gradient: linear-gradient(
+    90deg,
+    rgba(138, 28, 14, 1) 0%,
+    rgba(82, 8, 47, 1) 46%,
+    rgba(52, 1, 38, 1) 85%
+  );
 }
 
 @media (prefers-color-scheme: dark) {
@@ -34,4 +40,27 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 1s ease-in-out;
+}
+
+.animated-image {
+  transition: transform 0.5s ease-in-out;
+}
+
+.animated-image:hover {
+  transform: scale(1.1);
 }
