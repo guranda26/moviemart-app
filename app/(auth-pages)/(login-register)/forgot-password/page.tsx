@@ -39,8 +39,8 @@ const ForgotPassword = () => {
         <span>Don&apos;t have an account?&nbsp;</span>
         <Link
           className="font-medium underline text-white"
-          href="/register"
-          data-cy="register"
+          href="/sign-up"
+          data-cy="sign-up"
         >
           Sign Up
         </Link>

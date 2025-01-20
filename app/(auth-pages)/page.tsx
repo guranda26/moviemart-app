@@ -17,7 +17,7 @@ const page = () => {
           </div>
           <div className="flex flex-col gap-4 items-cente">
             <Link
-              href="/login"
+              href="/sign-in"
               className="rounded-lg border border-solid border-transparent transition-colors flex items-center justify-center bg-redButton text-background gap-2 hover:bg-hoverRedBtn dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 xs:px-8 sm:px-10 w-full"
               rel="noopener noreferrer"
             >

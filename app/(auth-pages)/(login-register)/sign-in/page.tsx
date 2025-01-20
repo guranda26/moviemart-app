@@ -1,20 +1,21 @@
 import React from "react";
 import Image from "next/image";
-// import "react-toastify/dist/ReactToastify.css";
+import "react-toastify/dist/ReactToastify.css";
 import { FaGithub } from "react-icons/fa";
 import Link from "next/link";
 import Input from "@/components/Input";
 import PasswordDisplay from "@/components/PasswordDisplay";
 import TextDivider from "@/components/TextDivider";
+import { signInAction } from "@/actions";
 
 const user = "/assets/user.svg";
 
 const Login = () => {
-  //   toast.success("Successfully Logged in!", {
-  //     position: "top-center",
-  //     autoClose: 2000,
-  //     closeOnClick: true,
-  //   });
+  // toast.success("Successfully Logged in!", {
+  //   position: "top-center",
+  //   autoClose: 2000,
+  //   closeOnClick: true,
+  // });
 
   return (
     <>
@@ -24,7 +25,7 @@ const Login = () => {
       <p className="text-[#c6c6c6] text-sm mb-4 mt-1 font-semibold">
         Pick up where you left off.
       </p>
-      <div className="flex flex-col gap-4 pt-6 pb-4">
+      <form className="flex flex-col gap-4 pt-6 pb-4">
         <div className="relative w-[100%] bg-[#363636] mx-auto p-3 border rounded border-white sm:text-sm md:text-base text-white">
           <Input
             type="email"
@@ -46,10 +47,11 @@ const Login = () => {
         <button
           type="submit"
           className="xs:w-[100%] py-3 rounded-md bg-redButton hover:bg-hoverRedBtn text-white text-md font-bold"
+          formAction={signInAction}
         >
           Sign In
         </button>
-      </div>
+      </form>
       <Link
         href={"/forgot-password"}
         className="text-sm inline-block text-white hover:text-[#ccc] font-semibold text-center mb-8 w-full"
@@ -66,8 +68,8 @@ const Login = () => {
         <span>Don&apos;t have an account?&nbsp;</span>
         <Link
           className="font-medium underline text-white"
-          href="/register"
-          data-cy="register"
+          href="/sign-up"
+          data-cy="sign-up"
         >
           Sign up
         </Link>
