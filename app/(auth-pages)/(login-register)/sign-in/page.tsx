@@ -7,14 +7,16 @@ import PasswordDisplay from "@/components/PasswordDisplay";
 import TextDivider from "@/components/TextDivider";
 import { signInAction } from "@/actions";
 import OAuthProviders from "@/components/auth/OAuthProviders";
+import { Message } from "@/components/auth/FormMessage";
+import { MessageProps } from "../forgot-password/page";
+import CustomMsg from "@/components/CustomMsg";
 
 const user = "/assets/user.svg";
 
-const Login = () => {
-  // const user = await getUser();
-  // if (!user) {
-  //   return redirect("/home");
-  // }
+const Login = async (props: { searchParams: Promise<Message> }) => {
+  const searchParams = await props.searchParams;
+  const sucessMsg = (searchParams as MessageProps)?.success;
+  const errorMsg = (searchParams as MessageProps)?.error;
 
   return (
     <>
@@ -69,6 +71,11 @@ const Login = () => {
           Sign up
         </Link>
       </p>
+      {sucessMsg ? (
+        <CustomMsg action={"success"} msg={sucessMsg} />
+      ) : errorMsg ? (
+        <CustomMsg action={"error"} msg={errorMsg} />
+      ) : null}
     </>
   );
 };

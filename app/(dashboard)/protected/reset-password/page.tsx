@@ -2,8 +2,6 @@ import { resetPasswordAction } from "@/actions";
 import { FormMessage, Message } from "@/components/auth/FormMessage";
 import Input from "@/components/Input";
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer, toast } from "react-toastify";
-import { redirect } from "next/navigation";
 import SuccessMsg from "@/components/SuccessMsg";
 
 export type SuccessMsgProp = {
@@ -50,9 +48,8 @@ export default async function ResetPassword(props: {
         >
           Reset password
         </button>
+        <FormMessage message={searchParams} />
       </form>
-      <FormMessage message={searchParams} />
-      {/* <ToastContainer /> */}
       {successMsg && <SuccessMsg msg={successMsg} />}
     </section>
   );

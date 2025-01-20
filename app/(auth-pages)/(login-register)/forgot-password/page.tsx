@@ -1,11 +1,25 @@
 import React from "react";
 import Link from "next/link";
 import Input from "@/components/Input";
+import { FormMessage, Message } from "@/components/auth/FormMessage";
 import TextDivider from "@/components/TextDivider";
-import { forgotPasswordAction, resetPasswordAction } from "@/actions";
+import { forgotPasswordAction } from "@/actions";
 import OAuthProviders from "@/components/auth/OAuthProviders";
+import CustomMsg from "@/components/CustomMsg";
 
-const ForgotPassword = () => {
+export type MessageProps = {
+  success?: "success";
+  error?: "error";
+};
+
+const ForgotPassword = async (props: { searchParams: Promise<Message> }) => {
+  const searchParams = await props.searchParams;
+
+  const sucessMsg = (searchParams as MessageProps)?.success;
+  const errorMsg = (searchParams as MessageProps)?.error;
+
+  console.log("which?", sucessMsg, errorMsg);
+
   return (
     <>
       <h2 className="sm:text-2xl xs:text-xl text-md font-semibold text-[#e3e2e2]">
@@ -34,15 +48,23 @@ const ForgotPassword = () => {
       <TextDivider />
       <OAuthProviders />
       <p className="text-xs text-wrap sm:text-sm flex flex-wrap justify-center md:textmd text-white text-center mt-2">
-        <span>Don&apos;t have an account?&nbsp;</span>
+        <span>Return back?&nbsp;</span>
         <Link
           className="font-medium underline text-white"
-          href="/sign-up"
-          data-cy="sign-up"
+          href="/sign-in"
+          data-cy="sign-in"
         >
-          Sign Up
+          Sign In
         </Link>
       </p>
+      {sucessMsg ? (
+        <CustomMsg action={"success"} msg={sucessMsg} />
+      ) : errorMsg ? (
+        <CustomMsg action={"error"} msg={errorMsg} />
+      ) : (
+        <CustomMsg action={"error"} msg={"error"} />
+      )}
+      <FormMessage message={searchParams} />
     </>
   );
 };

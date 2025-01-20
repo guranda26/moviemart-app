@@ -5,8 +5,14 @@ import PasswordDisplay from "@/components/PasswordDisplay";
 import TextDivider from "@/components/TextDivider";
 import { signUpAction } from "@/actions";
 import OAuthProviders from "@/components/auth/OAuthProviders";
+import { Message } from "@/components/auth/FormMessage";
+import { MessageProps } from "../forgot-password/page";
+import CustomMsg from "@/components/CustomMsg";
 
-const Register = async () => {
+const Register = async (props: { searchParams: Promise<Message> }) => {
+  const searchParams = await props.searchParams;
+  const sucessMsg = (searchParams as MessageProps)?.success;
+  const errorMsg = (searchParams as MessageProps)?.error;
   return (
     <>
       <h2 className="xs:text-2xl text-xl font-semibold text-[#e3e2e2]">
@@ -54,6 +60,11 @@ const Register = async () => {
           Login
         </Link>
       </p>
+      {sucessMsg ? (
+        <CustomMsg action={"success"} msg={sucessMsg} />
+      ) : errorMsg ? (
+        <CustomMsg action={"error"} msg={errorMsg} />
+      ) : null}
     </>
   );
 };
