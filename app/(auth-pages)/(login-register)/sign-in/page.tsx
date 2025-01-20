@@ -7,6 +7,7 @@ import Input from "@/components/Input";
 import PasswordDisplay from "@/components/PasswordDisplay";
 import TextDivider from "@/components/TextDivider";
 import { signInAction } from "@/actions";
+import GithubAuth from "@/components/auth/GithubAuth";
 
 const user = "/assets/user.svg";
 
@@ -59,11 +60,7 @@ const Login = () => {
         Forgot password?
       </Link>
       <TextDivider />
-      <div className="flex items-center justify-center h-8">
-        <div className="bg-[#747373] hover:bg-[#929191] p-2 rounded-full hover:cursor-pointer">
-          <FaGithub className="text-xl" />
-        </div>
-      </div>
+      <GithubAuth />
       <p className="text-xs text-wrap sm:text-sm flex flex-wrap justify-center md:textmd text-white text-center mt-2">
         <span>Don&apos;t have an account?&nbsp;</span>
         <Link

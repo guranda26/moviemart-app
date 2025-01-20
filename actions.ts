@@ -63,7 +63,7 @@ export const signInAction = async (formData: FormData) => {
   });
 
   if (error) {
-    return encodedRedirect("error", "/login", error.message);
+    return encodedRedirect("error", "/sign-in", error.message);
   }
 
   return redirect("/protected");
@@ -145,3 +145,34 @@ export const signOutAction = async () => {
   await supabase.auth.signOut();
   return redirect("/");
 };
+
+type Provider =
+  | "google"
+  | "github"
+  | "facebook"
+  | "twitter"
+  | "linkedin"
+  | "apple";
+
+const signInWith = (provider: Provider) => async () => {
+  const supabase = await createClient();
+
+  const auth_callback_url = `${process.env.SITE_URL}/protected/auth/callback`;
+
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider,
+    options: {
+      redirectTo: auth_callback_url,
+    },
+  });
+
+  console.log(data);
+
+  if (error) {
+    console.log(error);
+  }
+  if (data.url) redirect(data.url);
+};
+
+export const signinWithGithub = signInWith("github");
+export const signinWithGoogle = signInWith("google");
