@@ -1,20 +1,23 @@
-import { type NextRequest } from "next/server";
-import { updateSession } from "@/utils/supabase/middleware";
+import { type NextRequest, NextResponse } from "next/server";
+import { protectRoute } from "@/utils/supabase/server";
 
 export async function middleware(request: NextRequest) {
-  return await updateSession(request);
+  const pathname = request.nextUrl.pathname;
+
+  const { redirect } = await protectRoute(pathname);
+
+  if (redirect) {
+    if (pathname === redirect) {
+      return NextResponse.next();
+    }
+    return NextResponse.redirect(new URL(redirect, request.url));
+  }
+
+  return NextResponse.next();
 }
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * - images - .svg, .png, .jpg, .jpeg, .gif, .webp
-     * Feel free to modify this pattern to include more paths.
-     */
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$|app/auth/callback/route.ts).*)",
   ],
 };

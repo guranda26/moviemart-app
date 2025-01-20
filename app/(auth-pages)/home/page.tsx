@@ -2,7 +2,7 @@ import AuthFooter from "@/components/footer/AuthFooter";
 import Link from "next/link";
 import React from "react";
 
-const page = () => {
+const HomePage = async () => {
   return (
     <section className="flex flex-col items-center justify-between bg-black min-h-screen relative">
       <section className="flex flex-col items-center justify-center bg-black-700 bg-hero-background bg-cover bg-center bg-no-repeat min-h-[85vh] w-full text-[#e5e5e5] sm:text-4xl text-2xl font-bold relative">
@@ -39,4 +39,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default HomePage;

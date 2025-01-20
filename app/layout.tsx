@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { getUser } from "@/utils/supabase/server";
+import { redirect } from "next/navigation";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,7 +19,7 @@ export const metadata: Metadata = {
   description: "Watch movies and series exclusively on Moviemart",
 };
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

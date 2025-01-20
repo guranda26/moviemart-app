@@ -1,12 +1,12 @@
 import React from "react";
-import { FaGithub } from "react-icons/fa";
 import Link from "next/link";
 import Input from "@/components/Input";
 import PasswordDisplay from "@/components/PasswordDisplay";
 import TextDivider from "@/components/TextDivider";
 import { signUpAction } from "@/actions";
+import OAuthProviders from "@/components/auth/OAuthProviders";
 
-const Register = () => {
+const Register = async () => {
   return (
     <>
       <h2 className="xs:text-2xl text-xl font-semibold text-[#e3e2e2]">
@@ -36,17 +36,14 @@ const Register = () => {
         <button
           type="submit"
           className="xs:w-[100%] py-3 rounded-md bg-purpleButton hover:bg-hoverPurpleBtn text-white text-md font-bold"
+          // pendingText="Signing up..."
           formAction={signUpAction}
         >
           Sign Up
         </button>
       </form>
       <TextDivider />
-      <div className="flex items-center justify-center h-8">
-        <div className="bg-[#747373] hover:bg-[#929191] p-2 rounded-full hover:cursor-pointer">
-          <FaGithub className="text-xl" />
-        </div>
-      </div>
+      <OAuthProviders />
       <p className="text-xs text-wrap sm:text-sm flex flex-wrap justify-center md:textmd text-white text-center mt-2">
         <span>Already Registered?&nbsp;</span>
         <Link

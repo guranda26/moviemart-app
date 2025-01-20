@@ -1,22 +1,20 @@
 import React from "react";
 import Image from "next/image";
 import "react-toastify/dist/ReactToastify.css";
-import { FaGithub } from "react-icons/fa";
 import Link from "next/link";
 import Input from "@/components/Input";
 import PasswordDisplay from "@/components/PasswordDisplay";
 import TextDivider from "@/components/TextDivider";
 import { signInAction } from "@/actions";
-import GithubAuth from "@/components/auth/GithubAuth";
+import OAuthProviders from "@/components/auth/OAuthProviders";
 
 const user = "/assets/user.svg";
 
 const Login = () => {
-  // toast.success("Successfully Logged in!", {
-  //   position: "top-center",
-  //   autoClose: 2000,
-  //   closeOnClick: true,
-  // });
+  // const user = await getUser();
+  // if (!user) {
+  //   return redirect("/home");
+  // }
 
   return (
     <>
@@ -60,7 +58,7 @@ const Login = () => {
         Forgot password?
       </Link>
       <TextDivider />
-      <GithubAuth />
+      <OAuthProviders />
       <p className="text-xs text-wrap sm:text-sm flex flex-wrap justify-center md:textmd text-white text-center mt-2">
         <span>Don&apos;t have an account?&nbsp;</span>
         <Link

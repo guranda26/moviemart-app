@@ -6,7 +6,7 @@ const page = () => {
     <h1>
       Protected Page
       <form action={signOutAction}>
-        <button type="submit">Sign out</button>
+        {/* <button type="submit">Sign out</button> */}
       </form>
     </h1>
   );

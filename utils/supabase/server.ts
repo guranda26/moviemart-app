@@ -18,12 +18,44 @@ export const createClient = async () => {
               cookieStore.set(name, value, options);
             });
           } catch (error) {
-            // The `set` method was called from a Server Component.
-            // This can be ignored if you have middleware refreshing
-            // user sessions.
+            console.error(error);
           }
         },
       },
     }
   );
 };
+
+export async function getUser() {
+  const { auth } = await createClient();
+  const user = (await auth.getUser()).data.user;
+  return user;
+}
+
+export async function protectRoute(pathname: string) {
+  const user = await getUser();
+
+  if (
+    !user &&
+    ![
+      "/sign-in",
+      "/sign-up",
+      "/home",
+      "/forgot-password",
+      "/subscribe",
+      "/privacy-policy",
+      "/terms-and-conditions",
+      "/auth/callback",
+      "/protected/reset-password",
+      "/reset-password",
+    ].includes(pathname)
+  ) {
+    return { redirect: "/home" };
+  }
+
+  if (user && ["/sign-in", "/sign-up"].includes(pathname)) {
+    return { redirect: "/" };
+  }
+
+  return { redirect: null };
+}

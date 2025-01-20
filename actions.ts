@@ -4,6 +4,7 @@ import { encodedRedirect } from "@/utils/utils";
 import { createClient } from "@/utils/supabase/server";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 export const signUpAction = async (formData: FormData) => {
   console.log("formData", formData);
@@ -66,7 +67,9 @@ export const signInAction = async (formData: FormData) => {
     return encodedRedirect("error", "/sign-in", error.message);
   }
 
-  return redirect("/protected");
+  revalidatePath("/", "layout");
+
+  return redirect("/");
 };
 
 export const forgotPasswordAction = async (formData: FormData) => {
@@ -143,7 +146,7 @@ export const resetPasswordAction = async (formData: FormData) => {
 export const signOutAction = async () => {
   const supabase = await createClient();
   await supabase.auth.signOut();
-  return redirect("/");
+  return redirect("/home");
 };
 
 type Provider =
@@ -157,7 +160,7 @@ type Provider =
 const signInWith = (provider: Provider) => async () => {
   const supabase = await createClient();
 
-  const auth_callback_url = `${process.env.SITE_URL}/protected/auth/callback`;
+  const auth_callback_url = `${process.env.SITE_URL}/auth/callback`;
 
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider,
@@ -166,10 +169,10 @@ const signInWith = (provider: Provider) => async () => {
     },
   });
 
-  console.log(data);
+  console.log("data", data);
 
   if (error) {
-    console.log(error);
+    console.error(error);
   }
   if (data.url) redirect(data.url);
 };
