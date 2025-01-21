@@ -13,8 +13,6 @@ export default async function ResetPassword(props: {
 }) {
   const searchParams = await props.searchParams;
 
-  console.log(searchParams);
-
   const successMsg = (searchParams as SuccessMsgProp).success;
 
   return (

@@ -10,14 +10,7 @@ const page = async () => {
   //   data: { user },
   // } = await supabase.auth.getUser();
 
-  return (
-    <h1>
-      Redirect here
-      <form action={signOutAction}>
-        <button type="submit">Sign out</button>
-      </form>
-    </h1>
-  );
+  return <h1>Redirect here</h1>;
 };
 
 export default page;

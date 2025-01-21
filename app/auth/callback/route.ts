@@ -8,7 +8,7 @@ export async function GET(request: Request) {
   const redirectTo =
     requestUrl.searchParams.get("redirect_to")?.toString() || "/";
 
-  console.log("redirectTo", redirectTo);
+  // console.log("redirectTo", redirectTo);
 
   if (code) {
     const supabase = await createClient();

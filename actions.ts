@@ -33,24 +33,29 @@ export const signUpAction = async (formData: FormData) => {
   });
 
   const user = data.user;
-  console.log("data", user);
+  console.log("user", user);
 
-  if (error) {
-    const { error: profileError } = await supabase
-      .from("profiles")
-      .upsert({ id: user?.id, username });
-
-    if (profileError) {
-      console.error(profileError.message);
-      return encodedRedirect("error", "/sign-up", "Failed to save username");
-    }
-  } else {
-    return encodedRedirect(
-      "success",
-      "/sign-up",
-      "Thanks for signing up! Please check your email for a verification link."
-    );
+  if (error || !user) {
+    // Handle error during sign-up
+    console.error(error?.message || "Unknown error during sign-up");
+    return encodedRedirect("error", "/sign-up", "Sign-up failed");
   }
+
+  // Insert user data into the profile table
+  const { error: profileError } = await supabase
+    .from("profile")
+    .upsert({ id: user.id, username, email });
+
+  if (profileError) {
+    console.error("Error inserting profile data:", profileError.message);
+    return encodedRedirect("error", "/sign-up", "Failed to save profile");
+  }
+
+  return encodedRedirect(
+    "success",
+    "/sign-up",
+    "Thanks for signing up! Please check your email for a verification link."
+  );
 };
 
 export const signInAction = async (formData: FormData) => {

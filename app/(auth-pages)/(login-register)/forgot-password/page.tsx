@@ -18,8 +18,6 @@ const ForgotPassword = async (props: { searchParams: Promise<Message> }) => {
   const sucessMsg = (searchParams as MessageProps)?.success;
   const errorMsg = (searchParams as MessageProps)?.error;
 
-  console.log("which?", sucessMsg, errorMsg);
-
   return (
     <>
       <h2 className="sm:text-2xl xs:text-xl text-md font-semibold text-[#e3e2e2]">
