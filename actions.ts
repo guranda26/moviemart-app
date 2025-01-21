@@ -37,12 +37,10 @@ export const signUpAction = async (formData: FormData) => {
   console.log("user", user);
 
   if (error || !user) {
-    // Handle error during sign-up
     console.error(error?.message || "Unknown error during sign-up");
     return encodedRedirect("error", "/sign-up", "Sign-up failed");
   }
 
-  // Insert user data into the profile table
   const { error: profileError } = await supabase
     .from("profile")
     .upsert({ id: user.id, username, email, age });
@@ -178,9 +176,33 @@ const signInWith = (provider: Provider) => async () => {
   console.log("data", data);
 
   if (error) {
-    console.error(error);
+    console.error("Error during OAuth sign-in:", error);
   }
-  if (data.url) redirect(data.url);
+
+  if (data?.url) {
+    redirect(data.url);
+  } else {
+    const user = (await supabase.auth.getUser()).data.user;
+    console.log("user", user);
+
+    if (user) {
+      const username = user.user_metadata?.user_name || "GitHub User";
+      const email = user.email;
+      const age = "";
+
+      console.log("user?", user);
+
+      const { error: profileError } = await supabase
+        .from("profile")
+        .upsert({ id: user.id, username, email, age });
+
+      if (profileError) {
+        console.error("Error saving profile data:", profileError);
+      } else {
+        console.log("Profile saved successfully.");
+      }
+    }
+  }
 };
 
 export const signinWithGithub = signInWith("github");

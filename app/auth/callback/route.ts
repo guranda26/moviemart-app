@@ -8,11 +8,49 @@ export async function GET(request: Request) {
   const redirectTo =
     requestUrl.searchParams.get("redirect_to")?.toString() || "/";
 
-  // console.log("redirectTo", redirectTo);
-
   if (code) {
     const supabase = await createClient();
-    await supabase.auth.exchangeCodeForSession(code);
+    const { data: session, error: authError } =
+      await supabase.auth.exchangeCodeForSession(code);
+
+    if (authError) {
+      console.error("Error exchanging code for session:", authError);
+      return NextResponse.json(
+        { error: "Failed to exchange code for session", status: 500 },
+        { status: 500 }
+      );
+    }
+
+    if (session?.user) {
+      console.log("Authenticated user:", session.user);
+
+      const { data: profile, error: profileError } = await supabase
+        .from("profile")
+        .select("*")
+        .eq("id", session.user.id)
+        .single();
+
+      if (profileError) {
+        console.log("Profile not found, creating profile...");
+
+        const username = session.user.user_metadata?.full_name || "New User";
+        const email = session.user.email;
+
+        const { data: newProfile, error: createError } = await supabase
+          .from("profile")
+          .insert({ id: session.user.id, username, email });
+
+        if (createError) {
+          console.error("Error creating profile:", createError);
+          return NextResponse.json({
+            error: "Failed to create user profile",
+            status: 500,
+          });
+        }
+
+        console.log("New profile created:", newProfile);
+      }
+    }
   }
 
   if (redirectTo) {

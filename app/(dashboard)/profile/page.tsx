@@ -1,6 +1,7 @@
 "use client";
 
 import Input from "@/components/Input";
+import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 
@@ -31,9 +32,12 @@ const ProfilePage = () => {
     email: "",
     age: "",
   });
+
   const [error, setError] = useState<string | null>(null);
   const [validationErrors, setValidationErrors] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(false);
+
+  const profileImg = "/assets/profile.png";
 
   useEffect(() => {
     fetch("/api/fetch-user")
@@ -137,8 +141,17 @@ const ProfilePage = () => {
   if (!profile.id) return <p className="text-gray-500">Loading...</p>;
 
   return (
-    <section className="max-w-4xl mx-auto p-6">
-      <h2 className="text-3xl font-semibold mb-6">Edit Profile</h2>
+    <section className="max-w-4xl mx-auto p-6 h-screen">
+      <div className="flex items-center justify-center gap-2 mb-6">
+        <Image
+          width={40}
+          height={0}
+          alt="profile"
+          src={profileImg}
+          className="h-auto xs:w-[50px]"
+        />
+        <h2 className="text-2xl xs:text-3xl font-semibold">Edit Profile</h2>
+      </div>
       <form
         onSubmit={handleSubmit}
         className="bg-gray-800 p-6 rounded-lg shadow-md space-y-4"
