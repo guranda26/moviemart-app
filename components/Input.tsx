@@ -4,9 +4,11 @@ interface InputProps {
   type: string;
   name: string;
   id: string;
-  placeholder: string;
+  placeholder?: string;
+  value?: string | number;
   "data-cy"?: string;
   className?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -14,8 +16,10 @@ const Input: React.FC<InputProps> = ({
   name,
   id,
   placeholder,
+  value,
   className,
   "data-cy": dataCy,
+  onChange,
 }) => {
   return (
     <input
@@ -23,8 +27,10 @@ const Input: React.FC<InputProps> = ({
       name={name}
       id={id}
       placeholder={placeholder}
+      value={value}
       className={className}
       data-cy={dataCy}
+      onChange={onChange}
       required
     />
   );

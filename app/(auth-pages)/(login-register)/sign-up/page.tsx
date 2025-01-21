@@ -38,6 +38,14 @@ const Register = async (props: { searchParams: Promise<Message> }) => {
           className="relative w-[100%] bg-[#363636] mx-auto p-3 border rounded border-white sm:text-sm md:text-base text-white"
           data-cy="email-input"
         />
+        <Input
+          type={"number"}
+          name="age"
+          id="age"
+          placeholder="age"
+          className="relative w-[100%] bg-[#363636] mx-auto p-3 border rounded border-white sm:text-sm md:text-base text-white"
+          data-cy="age-input"
+        />
         <PasswordDisplay showIcon={false} />
         <button
           type="submit"

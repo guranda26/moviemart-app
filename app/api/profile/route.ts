@@ -7,7 +7,7 @@ export async function POST(req: Request) {
 
     console.log("response", response);
 
-    const { id, username, email, password } = response;
+    const { id, username, email, password, age } = response;
 
     // if (!name || !description || !image_link) {
     //   throw new Error("Name, description, and photo URL are required");
@@ -21,6 +21,7 @@ export async function POST(req: Request) {
         username,
         email,
         password,
+        age,
       },
     ]);
 

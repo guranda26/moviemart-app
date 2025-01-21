@@ -12,10 +12,11 @@ export const signUpAction = async (formData: FormData) => {
   const username = formData.get("username")?.toString();
   const email = formData.get("email")?.toString();
   const password = formData.get("password")?.toString();
+  const age = formData.get("age");
   const supabase = await createClient();
   const origin = (await headers()).get("origin");
 
-  if (!email || !password || !username) {
+  if (!email || !password || !username || !age) {
     return encodedRedirect(
       "error",
       "/sign-up",
@@ -28,7 +29,7 @@ export const signUpAction = async (formData: FormData) => {
     password,
     options: {
       emailRedirectTo: `${origin}/auth/callback`,
-      data: { username },
+      data: { username, age },
     },
   });
 
@@ -44,7 +45,7 @@ export const signUpAction = async (formData: FormData) => {
   // Insert user data into the profile table
   const { error: profileError } = await supabase
     .from("profile")
-    .upsert({ id: user.id, username, email });
+    .upsert({ id: user.id, username, email, age });
 
   if (profileError) {
     console.error("Error inserting profile data:", profileError.message);
