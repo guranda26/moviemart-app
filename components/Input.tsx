@@ -4,6 +4,7 @@ interface InputProps {
   type: string;
   name: string;
   id: string;
+  min?: string;
   placeholder?: string;
   value?: string | number;
   "data-cy"?: string;
@@ -16,6 +17,7 @@ const Input: React.FC<InputProps> = ({
   name,
   id,
   placeholder,
+  min,
   value,
   className,
   "data-cy": dataCy,
@@ -28,6 +30,7 @@ const Input: React.FC<InputProps> = ({
       id={id}
       placeholder={placeholder}
       value={value}
+      min={value}
       className={className}
       data-cy={dataCy}
       onChange={onChange}

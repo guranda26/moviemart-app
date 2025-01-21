@@ -7,11 +7,15 @@ import Input from "./Input";
 interface PasswordProps {
   leftPadding?: string;
   showIcon?: boolean;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
 }
 
 const PasswordDisplay: React.FC<PasswordProps> = ({
   leftPadding,
   showIcon = true,
+  onChange,
+  value,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
   const closedEye = "/assets/closed-eye.svg";
@@ -33,6 +37,8 @@ const PasswordDisplay: React.FC<PasswordProps> = ({
         id="password"
         data-cy="password-input"
         placeholder="Passwoerd"
+        onChange={onChange}
+        value={value}
         className={`bg-[#363636] outline-none pl-${leftPadding} w-[100%] text-sm`}
       />
       <Image

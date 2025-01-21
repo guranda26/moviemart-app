@@ -38,7 +38,10 @@ export const signUpAction = async (formData: FormData) => {
 
   if (error || !user) {
     console.error(error?.message || "Unknown error during sign-up");
-    return encodedRedirect("error", "/sign-up", "Sign-up failed");
+    return {
+      success: false,
+      message: error?.message || "Sign-up failed",
+    };
   }
 
   const { error: profileError } = await supabase
@@ -47,14 +50,13 @@ export const signUpAction = async (formData: FormData) => {
 
   if (profileError) {
     console.error("Error inserting profile data:", profileError.message);
-    return encodedRedirect("error", "/sign-up", "Failed to save profile");
+    return profileError.message || "Failed to save profile";
   }
-
-  return encodedRedirect(
-    "success",
-    "/sign-up",
-    "Thanks for signing up! Please check your email for a verification link."
-  );
+  return {
+    success: true,
+    message:
+      "Thanks for signing up! Please check your email for a verification link.",
+  };
 };
 
 export const signInAction = async (formData: FormData) => {
@@ -68,12 +70,10 @@ export const signInAction = async (formData: FormData) => {
   });
 
   if (error) {
-    return encodedRedirect("error", "/sign-in", error.message);
+    return { success: false, error: error.message };
   }
 
-  revalidatePath("/", "layout");
-
-  return redirect("/");
+  return { success: true };
 };
 
 export const forgotPasswordAction = async (formData: FormData) => {
