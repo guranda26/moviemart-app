@@ -1,10 +1,9 @@
 "use server";
 
-import { encodedRedirect } from "@/utils/utils";
+import { encodedRedirect, returnError } from "@/utils/utils";
 import { createClient } from "@/utils/supabase/server";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { revalidatePath } from "next/cache";
 
 export const signUpAction = async (formData: FormData) => {
   console.log("formData", formData);
@@ -86,6 +85,21 @@ export const forgotPasswordAction = async (formData: FormData) => {
     return encodedRedirect("error", "/forgot-password", "Email is required");
   }
 
+  const { data, error: queryError } = await supabase
+    .from("profile")
+    .select("email")
+    .eq("email", email)
+    .single();
+
+  if (queryError || !data) {
+    console.error(queryError?.message);
+    return encodedRedirect(
+      "error",
+      "/forgot-password",
+      "No account with that email exists."
+    );
+  }
+
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
     redirectTo: `${origin}/auth/callback?redirect_to=/protected/reset-password`,
   });
@@ -117,11 +131,17 @@ export const resetPasswordAction = async (formData: FormData) => {
   const confirmPassword = formData.get("confirmPassword") as string;
 
   if (!password || !confirmPassword) {
-    encodedRedirect(
-      "error",
-      "/protected/reset-password",
-      "Password and confirm password are required"
-    );
+    return {
+      success: false,
+      message: "The user doesn't exist",
+    };
+  }
+
+  if (password !== confirmPassword) {
+    const errorResponse = returnError("error", "Passwords do not match");
+    console.log("errorResponse", errorResponse);
+
+    return errorResponse;
   }
 
   if (password !== confirmPassword) {
@@ -137,13 +157,15 @@ export const resetPasswordAction = async (formData: FormData) => {
   });
 
   if (error) {
-    encodedRedirect(
-      "error",
-      "/protected/reset-password",
-      "Password update failed"
-    );
+    encodedRedirect("error", "/protected/reset-password", error.message);
   }
 
+  // if (error) {
+  //   return {
+  //     success: false,
+  //     message: "Password update failed: " + error.message,
+  //   };
+  // }
   encodedRedirect("success", "/protected/reset-password", "Password updated");
 };
 

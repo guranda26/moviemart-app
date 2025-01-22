@@ -55,14 +55,8 @@ const ForgotPassword = async (props: { searchParams: Promise<Message> }) => {
           Sign In
         </Link>
       </p>
-      {sucessMsg ? (
-        <CustomMsg action={"success"} msg={sucessMsg} />
-      ) : errorMsg ? (
-        <CustomMsg action={"error"} msg={errorMsg} />
-      ) : (
-        <CustomMsg action={"error"} msg={"error"} />
-      )}
-      <FormMessage message={searchParams} />
+      {sucessMsg && <CustomMsg action={"success"} msg={sucessMsg} />}
+      {errorMsg && <CustomMsg action={"error"} msg={errorMsg} />}
     </>
   );
 };
