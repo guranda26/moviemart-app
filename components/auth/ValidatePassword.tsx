@@ -5,7 +5,6 @@ import Input from "../Input";
 import { z } from "zod";
 import "react-toastify/dist/ReactToastify.css";
 import { resetPasswordAction } from "@/actions";
-import { useRouter } from "next/navigation";
 
 const passwordSchema = z
   .object({
@@ -33,7 +32,6 @@ const ValidatePassword = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const router = useRouter();
 
   useEffect(() => {
     const validationResult = passwordSchema.safeParse({

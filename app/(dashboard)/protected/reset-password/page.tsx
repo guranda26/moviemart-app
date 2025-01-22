@@ -1,6 +1,4 @@
-import { resetPasswordAction } from "@/actions";
-import { FormMessage, Message } from "@/components/auth/FormMessage";
-import Input from "@/components/Input";
+import { Message } from "@/components/auth/FormMessage";
 import "react-toastify/dist/ReactToastify.css";
 import CustomMsg from "@/components/CustomMsg";
 import ValidatePassword from "@/components/auth/ValidatePassword";

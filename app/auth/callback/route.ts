@@ -31,7 +31,7 @@ export async function GET(request: Request) {
         .single();
 
       if (profileError) {
-        console.log("Profile not found, creating profile...");
+        console.error("Profile not found, creating profile...", profile);
 
         const username = session.user.user_metadata?.full_name || "New User";
         const email = session.user.email;

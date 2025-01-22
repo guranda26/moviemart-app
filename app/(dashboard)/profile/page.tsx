@@ -4,8 +4,15 @@ import Input from "@/components/Input";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
+import { ZodIssue } from "zod";
 
 import { z } from "zod";
+
+interface ValidationErrors {
+  username?: string;
+  email?: string;
+  age?: string;
+}
 
 const userSchema = z.object({
   id: z.string().optional(),
@@ -34,7 +41,8 @@ const ProfilePage = () => {
   });
 
   const [error, setError] = useState<string | null>(null);
-  const [validationErrors, setValidationErrors] = useState<any>(null);
+  const [validationErrors, setValidationErrors] =
+    useState<ValidationErrors | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
   const profileImg = "/assets/profile.png";
@@ -117,7 +125,7 @@ const ProfilePage = () => {
     } catch (err) {
       if (err instanceof z.ZodError) {
         const formattedErrors = Object.fromEntries(
-          err.errors.map((curr: any) => [curr.path[0], curr.message])
+          err.errors.map((curr: ZodIssue) => [curr.path[0], curr.message])
         );
         setValidationErrors(formattedErrors);
         toast.error("Validation failed. Please check your inputs.", {
