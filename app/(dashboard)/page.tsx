@@ -1,3 +1,4 @@
+import SkeletonLoading from "@/components/BlogcardLoader";
 import React from "react";
 
 const page = async () => {
@@ -7,7 +8,11 @@ const page = async () => {
   //   data: { user },
   // } = await supabase.auth.getUser();
 
-  return <h1>Redirect here</h1>;
+  return (
+    <>
+      <h1>Redirect here</h1>
+    </>
+  );
 };
 
 export default page;

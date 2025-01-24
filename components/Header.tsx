@@ -9,7 +9,7 @@ const Header = () => {
           backgroundColor: "lightblue",
           padding: "1rem",
         }}
-        className="flex justify-between"
+        className="flex justify-between max-w-screen"
       >
         <p>Header</p>
         <form action={signOutAction}>
