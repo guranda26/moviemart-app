@@ -20,7 +20,7 @@ const Header = () => {
             <li>
               <Link href={"/"}>
                 <Image
-                  src={"/assets/logo2.png"}
+                  src={"/assets/logo.png"}
                   alt="logo"
                   width={70}
                   height={80}
