@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Lato } from "next/font/google";
 import "./globals.css";
+import Providers from "@/components/Providers";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -39,7 +40,7 @@ export default async function DashboardLayout({
       <body
         className={`${playfair.variable} ${lato.variable} antialiased min-h-screen flex flex-col`}
       >
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

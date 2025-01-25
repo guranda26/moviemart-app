@@ -2,9 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import "react-loading-skeleton/dist/skeleton.css";
-import FetchPosts from "@/components/BlogData";
-import BlogList from "@/components/BlogList";
-import LoadingBlogs from "@/components/BlogcardLoader";
+import FetchPosts from "@/components/blog/BlogData";
+import BlogList from "@/components/blog/BlogList";
+import LoadingBlogs from "@/components/blog/BlogcardLoader";
 
 export default function SkeletonLoading() {
   const [isLoading, setIsLoading] = useState(true);
@@ -26,7 +26,7 @@ export default function SkeletonLoading() {
   }, []);
 
   return (
-    <section className="bg-black min-h-screen max-w-screen p-4 pt-14">
+    <section className="min-h-screen max-w-screen p-4 pt-14 text-[#161616]">
       {isLoading ? <LoadingBlogs /> : <BlogList posts={posts} />}
     </section>
   );

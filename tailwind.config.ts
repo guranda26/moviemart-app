@@ -6,6 +6,7 @@ export default {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: "class",
   theme: {
     extend: {
       backgroundImage: {
@@ -23,6 +24,14 @@ export default {
         hoverDarkBtn: "var(--hover-dark-btn)",
         overlay: "var(--overlay)",
         bgDark: "var(--bg-dark)",
+        headerBg: "var(--header-bg)",
+        textCol: "var(--text-main)",
+        userCard: "var(--user-card)",
+        profileBg: "var(--profile-bg)",
+        inputCol: "var(--input-col)",
+        btnBg: "var(--btn-bg)",
+        btnCol: "var(--btn-col)",
+        footerBg: "var(--footer-bg)",
       },
       boxShadow: {
         "custom-inner": "var(--inner-box-shadow)",

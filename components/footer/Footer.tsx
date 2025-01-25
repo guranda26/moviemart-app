@@ -5,9 +5,9 @@ const Footer = () => {
     <section>
       <footer
         style={{
-          backgroundColor: "lightgrey",
           padding: "1rem",
         }}
+        className="bg-footerBg"
       >
         <p>Footer</p>
       </footer>

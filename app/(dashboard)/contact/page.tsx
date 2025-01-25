@@ -104,7 +104,7 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section className="flex-1 flex flex-col justify-evenly mx-auto xs:p-6 py-6 px-2 max-w-screen w-screen bg-bgDark text-white relative">
+    <section className="flex-1 flex flex-col justify-evenly mx-auto xs:p-6 py-6 px-2 max-w-screen w-screen text-textCol relative">
       <div className="text-center mb-8">
         <h2 className="text-xl font-bold mb-4 xs:text-2xl">
           {" "}
@@ -125,7 +125,7 @@ const Contact: React.FC = () => {
 
         <form
           onSubmit={handleSubmit}
-          className="w-full max-w-md bg-gray-800 shadow-md rounded-lg xs:p-6 p-3 mx-auto text-white"
+          className="w-full max-w-md bg-profileBg shadow-md rounded-lg xs:p-6 p-3 mx-auto text-white"
         >
           <div className="mb-4">
             <label className="block text-sm font-medium mb-2" htmlFor="name">
@@ -137,7 +137,7 @@ const Contact: React.FC = () => {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md p-2 bg-gray-700"
+              className="w-full border border-gray-300 rounded-md p-2 bg-inputCol"
             />
             {errors.name && (
               <p className="text-red-500 text-sm">{errors.name}</p>
@@ -153,7 +153,7 @@ const Contact: React.FC = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md p-2 bg-gray-700"
+              className="w-full border border-gray-300 rounded-md p-2 bg-inputCol"
             />
             {errors.email && (
               <p className="text-red-500 text-sm">{errors.email}</p>
@@ -169,7 +169,7 @@ const Contact: React.FC = () => {
               name="subject"
               value={formData.subject}
               onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md p-2 bg-gray-700"
+              className="w-full border border-gray-300 rounded-md p-2 bg-inputCol"
             />
             {errors.subject && (
               <p className="text-red-500 text-sm">{errors.subject}</p>
@@ -185,7 +185,7 @@ const Contact: React.FC = () => {
               rows={4}
               value={formData.message}
               onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md p-2 bg-gray-700"
+              className="w-full border border-gray-300 rounded-md p-2 bg-inputCol"
             />
             {errors.message && (
               <p className="text-red-500 text-sm">{errors.message}</p>
@@ -196,7 +196,7 @@ const Contact: React.FC = () => {
           )}
           <button
             type="submit"
-            className="w-full bg-purpleButton text-white font-medium py-2 rounded-md hover:bg-hoverPurpleBtn"
+            className="w-full bg-btnBg text-btnCol font-medium py-2 rounded-md hover:bg-hoverRedBtn"
           >
             Send Message
           </button>

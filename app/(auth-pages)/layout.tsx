@@ -4,6 +4,7 @@ import { Playfair_Display, Lato } from "next/font/google";
 import ".././globals.css";
 import { Suspense } from "react";
 import Loading from "@/components/Loading";
+import ThemeButton from "@/components/ThemeButton";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -40,6 +41,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body className={`${playfair.variable} ${lato.variable} antialiased`}>
+        <ThemeButton />
         <Suspense fallback={<Loading />}>{children}</Suspense>
       </body>
     </html>

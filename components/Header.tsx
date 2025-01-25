@@ -2,6 +2,7 @@ import { signOutAction } from "@/actions";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import ThemeButton from "./ThemeButton";
 import { GiExitDoor } from "react-icons/gi";
 import { LuCircleUserRound } from "react-icons/lu";
 import "react-tooltip/dist/react-tooltip.css";
@@ -13,7 +14,7 @@ const Header = () => {
         style={{
           padding: "1rem",
         }}
-        className="flex justify-between max-w-screen bg-yellow-500"
+        className="flex justify-between max-w-screen bg-headerBg"
       >
         <nav className="w-full px-10">
           <ul className="flex items-center justify-between">
@@ -40,8 +41,7 @@ const Header = () => {
             <li className="relative group">
               <Link href="/profile" className="text-2xl relative">
                 <LuCircleUserRound />
-                {/* Tooltip */}
-                <span className="hidden md:inline-block absolute left-1/2 -translate-x-1/2 -top-10 bg-gray-800 text-white text-sm py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="hidden md:inline-block absolute left-1/2 -translate-x-1/2 -top-10 bg-gray-800 text-sm py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white">
                   Profile
                 </span>
               </Link>
@@ -56,6 +56,9 @@ const Header = () => {
                   <span>Sign out</span>
                 </button>
               </form>
+            </li>
+            <li>
+              <ThemeButton />
             </li>
           </ul>
         </nav>

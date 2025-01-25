@@ -150,7 +150,7 @@ const ProfilePage = () => {
   if (!profile.id) return <Loading />;
 
   return (
-    <section className="max-w-4xl mx-auto p-6 bg-gray-800 flex flex-col justify-center flex-1 w-3/4 lg:w-1/2">
+    <section className="max-w-4xl mx-auto p-6 custom-gradient flex flex-col justify-evenly flex-1 w-3/4 lg:w-[40%] my-[60px] shadow-md">
       <div className="flex flex-col items-center justify-center gap-4 mb-6">
         <h2 className="text-2xl xs:text-3xl font-semibold text-white text-center">
           Edit Profile
@@ -165,7 +165,7 @@ const ProfilePage = () => {
       </div>
       <form
         onSubmit={handleSubmit}
-        className="p-6 rounded-lg shadow-md space-y-4"
+        className="px-6 rounded-lg space-y-4 flex flex-col gap-3"
       >
         <div className="flex flex-col">
           <label htmlFor="username" className="text-white mb-2 font-medium">
@@ -175,7 +175,7 @@ const ProfilePage = () => {
             type="text"
             name="username"
             id="username"
-            className="p-3 border-2 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 outline-none"
+            className="p-3 border-2 rounded-lg bg-inputCol text-white focus:outline-none focus:ring-2 outline-none"
             value={profile.username}
             onChange={handleChange}
           />
@@ -195,7 +195,7 @@ const ProfilePage = () => {
             id="email"
             value={profile.email}
             onChange={handleChange}
-            className="p-3 border-2 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 outline-none"
+            className="p-3 border-2 rounded-lg bg-inputCol text-white focus:outline-none focus:ring-2 outline-none"
           />
           {validationErrors?.email && (
             <p className="text-red-500 text-sm mt-1">
@@ -203,7 +203,7 @@ const ProfilePage = () => {
             </p>
           )}
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col mb-5">
           <label htmlFor="age" className="text-white mb-2 font-medium">
             Age:
           </label>
@@ -213,7 +213,7 @@ const ProfilePage = () => {
             id="age"
             value={profile.age}
             onChange={handleChange}
-            className="p-3 border-2 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 outline-none"
+            className="p-3 border-2 rounded-lg bg-inputCol text-white focus:outline-none focus:ring-2 outline-none"
           />
           {validationErrors?.age && (
             <p className="text-red-500 text-sm mt-1">{validationErrors.age}</p>
@@ -221,9 +221,9 @@ const ProfilePage = () => {
         </div>
         <button
           type="submit"
-          className="mt-6 w-full py-3 bg-redButton text-white font-semibold rounded-lg shadow-lg hover:bg-hoverRedBtn transition"
+          className="w-full py-3 bg-btnBg text-btnCol font-semibold rounded-lg shadow-lg hover:bg-hoverRedBtn hover:text-white transition mt-auto"
         >
-          {loading ? "Submitting..." : "Save Changes"}
+          {loading ? "Submitting..." : "Save chnages"}
         </button>
       </form>
       <ToastContainer />
