@@ -2,12 +2,13 @@ import { BlogData } from "@/Interfaces/Blogs";
 import Image from "next/image";
 import React, { Suspense } from "react";
 import AutoPlayVideo from "./VideoAutoPlay";
+import Loading from "./Loading";
 
 const BlogList = ({ posts }: { posts: BlogData[] }) => {
   return (
     <section className="bg-black min-h-screen max-w-screen p-4">
       <section className="text-white mx-auto">
-        <Suspense fallback={<p>Loading video...</p>}>
+        <Suspense fallback={<Loading />}>
           <AutoPlayVideo src="/assets/banner.mp4" width="auto" />
         </Suspense>
       </section>

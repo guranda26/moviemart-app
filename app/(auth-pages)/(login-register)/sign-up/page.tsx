@@ -9,6 +9,7 @@ import { signUpAction } from "@/actions";
 import OAuthProviders from "@/components/auth/OAuthProviders";
 import CustomMsg from "@/components/CustomMsg";
 import { z } from "zod";
+import Loading from "@/components/Loading";
 
 const passwordRegex = new RegExp(
   "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&.])[A-Za-z\\d@$!%*?&.]{8,20}$"
@@ -79,7 +80,6 @@ const Register: React.FC<RegisterProps> = ({ searchParams }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     if (name === "age") {
-      // Convert the value to a number if the input's name is 'age'
       setFormData({
         ...formData,
         [name]: value === "" ? "" : Number(value),
@@ -125,7 +125,7 @@ const Register: React.FC<RegisterProps> = ({ searchParams }) => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (

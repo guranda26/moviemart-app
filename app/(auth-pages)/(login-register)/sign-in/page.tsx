@@ -11,6 +11,7 @@ import { signInAction } from "@/actions";
 import OAuthProviders from "@/components/auth/OAuthProviders";
 import CustomMsg from "@/components/CustomMsg";
 import { useRouter } from "next/navigation";
+import Loading from "@/components/Loading";
 
 const user = "/assets/user.svg";
 
@@ -56,7 +57,12 @@ const Login: React.FC<LoginProps> = ({ searchParams }) => {
     })();
   }, [searchParams]);
 
-  if (isLoading) return <p className="text-gray-500">Loading...</p>;
+  if (isLoading)
+    return (
+      <p className="text-gray-500">
+        <Loading />
+      </p>
+    );
 
   return (
     <>
