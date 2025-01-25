@@ -3,6 +3,7 @@
 import Input from "@/components/Input";
 import React, { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
+import emailjs from "emailjs-com";
 import { z } from "zod";
 
 const contactSchema = z.object({
@@ -64,23 +65,25 @@ const Contact: React.FC = () => {
     }
 
     try {
-      const response = await fetch("/api/send-email", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      await emailjs.send(
+        "service_8hutyql",
+        "template_ar46vjr",
+        {
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject || "No Subject",
+          message: formData.message,
+        },
+        "UZ16V7aOepQVpGrq9"
+      );
 
-      if (response.ok) {
-        setSuccessMessage("Your message has been sent successfully!");
-        setFormData({ name: "", email: "", subject: "", message: "" });
-        toast.success("Message sent successfully!", {
-          position: "top-center",
-          autoClose: 3000,
-          closeOnClick: true,
-        });
-      } else {
-        throw new Error("Failed to send the message.");
-      }
+      setSuccessMessage("Your message has been sent successfully!");
+      setFormData({ name: "", email: "", subject: "", message: "" });
+      toast.success(successMessage, {
+        position: "top-center",
+        autoClose: 3000,
+        closeOnClick: true,
+      });
     } catch (error) {
       setErrors({ form: "Something went worng. Please try again later." });
       toast.error("Something went worng. Please try again later.", {
@@ -182,9 +185,6 @@ const Contact: React.FC = () => {
           </div>
           {errors.form && (
             <p className="text-red-500 text-sm mb-4">{errors.form}</p>
-          )}
-          {successMessage && (
-            <p className="text-green-500 text-sm mb-4">{successMessage}</p>
           )}
           <button
             type="submit"
