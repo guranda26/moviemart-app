@@ -160,7 +160,7 @@ const ProfilePage = () => {
           height={100}
           alt="profile"
           src={profileImg}
-          className="h-auto xs:w-[200px] xs:h-[100]"
+          className="h-auto xs:w-[150px] xs:h-[150] sm:w-[200px] sm:h-[200]"
         />
       </div>
       <form
