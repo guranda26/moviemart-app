@@ -1,5 +1,3 @@
-import React from "react";
-
 const FetchPosts = async () => {
   try {
     const response = await fetch("/blogsData.json");

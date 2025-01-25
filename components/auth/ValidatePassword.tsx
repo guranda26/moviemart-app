@@ -59,6 +59,10 @@ const ValidatePassword = () => {
     }
   };
 
+  const handleFormAction = async (formData: FormData): Promise<void> => {
+    await resetPasswordAction(formData);
+  };
+
   function ResetErrors() {
     const validationResult = passwordSchema.safeParse({
       password,
@@ -96,7 +100,7 @@ const ValidatePassword = () => {
         //   !passwordSchema.safeParse({ password, confirmPassword }).success
         // }
         onClick={ResetErrors}
-        formAction={resetPasswordAction}
+        formAction={handleFormAction}
         className="w-full py-3 rounded-md bg-purple bg-purpleButton hover:bg-hoverPurpleBtn text-white font-bold mb-2"
       >
         Reset password

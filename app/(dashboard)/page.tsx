@@ -1,4 +1,3 @@
-import SkeletonLoading from "@/components/BlogcardLoader";
 import Image from "next/image";
 import React from "react";
 

@@ -2,13 +2,20 @@
 
 import Input from "@/components/Input";
 import React, { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 import { z } from "zod";
 
 const contactSchema = z.object({
-  name: z.string().min(2, "Name should be at least 2 characters long."),
-  email: z.string().email("Invalid email format."),
-  subject: z.string().min(1, "Subject is required."),
-  message: z.string().min(10, "Message must be at least 10 characters long."),
+  name: z
+    .string()
+    .min(2, "Name should be at least 2 characters long.")
+    .max(140, "Too long!"),
+  email: z.string().email("Invalid email format.").max(140, "Too long!"),
+  subject: z.string().optional(),
+  message: z
+    .string()
+    .min(10, "Message must be at least 10 characters long.")
+    .max(280, "Too long!"),
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
@@ -26,7 +33,6 @@ const Contact: React.FC = () => {
   const [errors, setErrors] = useState<ErrorState>({});
   const [successMessage, setSuccessMessage] = useState<string>("");
 
-  // Handle input changes
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -49,6 +55,11 @@ const Contact: React.FC = () => {
         }
       });
       setErrors(fieldErrors);
+      toast.error("Please fix the errors in the form.", {
+        position: "top-center",
+        autoClose: 3000,
+        closeOnClick: true,
+      });
       return;
     }
 
@@ -61,17 +72,28 @@ const Contact: React.FC = () => {
 
       if (response.ok) {
         setSuccessMessage("Your message has been sent successfully!");
-        setFormData({ name: "", email: "", subject: "", message: "" }); // Reset form
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        toast.success("Message sent successfully!", {
+          position: "top-center",
+          autoClose: 3000,
+          closeOnClick: true,
+        });
       } else {
         throw new Error("Failed to send the message.");
       }
     } catch (error) {
-      setErrors({ form: "An error occurred. Please try again later." });
+      setErrors({ form: "Something went worng. Please try again later." });
+      toast.error("Something went worng. Please try again later.", {
+        position: "top-center",
+        autoClose: 3000,
+        closeOnClick: true,
+      });
+      console.error(error);
     }
   };
 
   return (
-    <section className="flex-1 flex flex-col justify-evenly mx-auto xs:p-6 py-6 px-2 max-w-screen w-screen bg-bgDark text-white">
+    <section className="flex-1 flex flex-col justify-evenly mx-auto xs:p-6 py-6 px-2 max-w-screen w-screen bg-bgDark text-white relative">
       <div className="text-center mb-8">
         <h2 className="text-xl font-bold mb-4 xs:text-2xl">
           {" "}
@@ -130,7 +152,7 @@ const Contact: React.FC = () => {
             <label className="block text-sm font-medium mb-2" htmlFor="subject">
               Subject
             </label>
-            <Input
+            <input
               type="text"
               id="subject"
               name="subject"
@@ -181,6 +203,7 @@ const Contact: React.FC = () => {
           <li>📧 Email: contact@moviestream.com</li>
         </ul>
       </div>
+      <ToastContainer className={"absolute top-10"} />
     </section>
   );
 };

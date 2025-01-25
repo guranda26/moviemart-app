@@ -9,12 +9,6 @@ export async function POST(req: Request) {
 
     const { id, username, email, password, age } = response;
 
-    // if (!name || !description || !image_link) {
-    //   throw new Error("Name, description, and photo URL are required");
-    // }
-
-    // const generatedId = Date.now();
-
     const { error } = await supabase.from("profile").insert([
       {
         id,
