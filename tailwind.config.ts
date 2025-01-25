@@ -22,6 +22,7 @@ export default {
         hoverPurpleBtn: "var(--hover-purple-btn)",
         hoverDarkBtn: "var(--hover-dark-btn)",
         overlay: "var(--overlay)",
+        bgDark: "var(--bg-dark)",
       },
       boxShadow: {
         "custom-inner": "var(--inner-box-shadow)",

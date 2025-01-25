@@ -32,6 +32,11 @@ const Header = () => {
                 Blogs
               </Link>
             </li>
+            <li>
+              <Link href={"/contact"} className="text-2xl">
+                Contact
+              </Link>
+            </li>
             <li className="relative group">
               <Link href="/profile" className="text-2xl relative">
                 <LuCircleUserRound />
