@@ -64,17 +64,25 @@ const Contact: React.FC = () => {
       return;
     }
 
+    const service_id = process.env.NEXT_PUBLIC_SERVICE_ID;
+    const template_id = process.env.NEXT_PUBLIC_TEMPLATE_ID;
+    const emailjs_public_key = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+
+    if (!service_id || !template_id || !emailjs_public_key) {
+      throw new Error("Missing environment variables for EmailJS");
+    }
+
     try {
       await emailjs.send(
-        "service_8hutyql",
-        "template_ar46vjr",
+        service_id,
+        template_id,
         {
           name: formData.name,
           email: formData.email,
           subject: formData.subject || "No Subject",
           message: formData.message,
         },
-        "UZ16V7aOepQVpGrq9"
+        emailjs_public_key
       );
 
       setSuccessMessage("Your message has been sent successfully!");
