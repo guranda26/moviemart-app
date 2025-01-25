@@ -1,6 +1,7 @@
 "use client";
 
 import Input from "@/components/Input";
+import Loading from "@/components/Loading";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
@@ -146,7 +147,7 @@ const ProfilePage = () => {
     }
   };
 
-  if (!profile.id) return <p className="text-gray-500">Loading...</p>;
+  if (!profile.id) return <Loading />;
 
   return (
     <section className="max-w-4xl mx-auto p-6 h-screen">

@@ -13,6 +13,7 @@
   --hover-purple-btn: #67007a;
   --overlay: #00000051;
   --banner-bg: #540c0c;
+  --logo-bg: #941f1f;
   --circle-gradient: radial-gradient(
     circle,
     rgba(118, 44, 168, 1) 0%,
@@ -25,6 +26,9 @@
     rgba(82, 8, 47, 1) 46%,
     rgba(52, 1, 38, 1) 85%
   );
+
+  --font-playfair: "Playfair Display", serif;
+  --font-lato: "Lato", sans-serif;
 
   --inner-box-shadow: inset 0px 5px 4px 0px rgba(26, 26, 26, 0.24);
 }
@@ -39,10 +43,21 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-lato), Arial, Helvetica, sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a {
+  font-family: var(--font-playfair), Arial, Helvetica, sans-serif;
+  font-weight: 700;
 }
 
 @keyframes fadeIn {

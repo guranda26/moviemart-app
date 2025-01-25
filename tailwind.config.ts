@@ -24,8 +24,10 @@ export default {
         overlay: "var(--overlay)",
       },
       boxShadow: {
-        // "custom-inner": "inset 0px 2px 4px 0px rgba(0, 0, 0, 0.06)",
         "custom-inner": "var(--inner-box-shadow)",
+      },
+      animation: {
+        "custom-spin": "spin 0.8s linear infinite",
       },
     },
     screens: {

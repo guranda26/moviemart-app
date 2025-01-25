@@ -1,7 +1,8 @@
 import SkeletonLoading from "@/components/BlogcardLoader";
+import Image from "next/image";
 import React from "react";
 
-const page = async () => {
+const MainPage = async () => {
   // const supabase = await createClient();
 
   // const {
@@ -9,10 +10,11 @@ const page = async () => {
   // } = await supabase.auth.getUser();
 
   return (
-    <>
+    <section className="min-h-screen mx-auto">
       <h1>Redirect here</h1>
-    </>
+      <Image src={"/assets/logo2.png"} alt="logo" width={70} height={80} />
+    </section>
   );
 };
 
-export default page;
+export default MainPage;
