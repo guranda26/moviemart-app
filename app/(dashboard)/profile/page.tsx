@@ -46,7 +46,7 @@ const ProfilePage = () => {
     useState<ValidationErrors | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const profileImg = "/assets/profile.png";
+  const profileImg = "/assets/user.png";
 
   useEffect(() => {
     fetch("/api/fetch-user")
@@ -150,20 +150,22 @@ const ProfilePage = () => {
   if (!profile.id) return <Loading />;
 
   return (
-    <section className="max-w-4xl mx-auto p-6 h-screen">
-      <div className="flex items-center justify-center gap-2 mb-6">
+    <section className="max-w-4xl mx-auto p-6 bg-gray-800 flex flex-col justify-center flex-1 w-3/4 lg:w-1/2">
+      <div className="flex flex-col items-center justify-center gap-4 mb-6">
+        <h2 className="text-2xl xs:text-3xl font-semibold text-white text-center">
+          Edit Profile
+        </h2>
         <Image
-          width={40}
-          height={0}
+          width={100}
+          height={100}
           alt="profile"
           src={profileImg}
-          className="h-auto xs:w-[50px]"
+          className="h-auto xs:w-[200px] xs:h-[100]"
         />
-        <h2 className="text-2xl xs:text-3xl font-semibold">Edit Profile</h2>
       </div>
       <form
         onSubmit={handleSubmit}
-        className="bg-gray-800 p-6 rounded-lg shadow-md space-y-4"
+        className="p-6 rounded-lg shadow-md space-y-4"
       >
         <div className="flex flex-col">
           <label htmlFor="username" className="text-white mb-2 font-medium">

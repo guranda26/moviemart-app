@@ -36,7 +36,9 @@ export default async function DashboardLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
-      <body className={`${playfair.variable} ${lato.variable} antialiased`}>
+      <body
+        className={`${playfair.variable} ${lato.variable} antialiased min-h-screen flex flex-col`}
+      >
         {children}
       </body>
     </html>
