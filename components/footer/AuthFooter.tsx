@@ -3,7 +3,7 @@ import React from "react";
 
 const AuthFooter = () => {
   return (
-    <footer className="text-white text-xs flex flex-col sm:flex-row h-full gap-2 justify-center items-center text-center">
+    <footer className="text-textCol text-xs flex flex-col sm:flex-row h-full gap-2 justify-center items-center text-center">
       <Link className="hover:text-[#c6c6c6]" href={"/privacy-policy"}>
         Privacy Policy
       </Link>{" "}

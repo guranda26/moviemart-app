@@ -52,6 +52,7 @@
 }
 
 .light {
+  --foreground: #f8ede3;
   --header-bg: #e5d0ac;
   --text-main: #161616;
   --background: #f8ede3;
@@ -61,6 +62,10 @@
   --btn-bg: #f8ede3;
   --btn-col: #161616;
   --footer-bg: #e4e0e1;
+  --hover-dark-btn: #ccc;
+  --main-button: #af1918;
+  --bg-auth: #b99470;
+  --auth-form: #795757;
 }
 
 .dark {
@@ -69,16 +74,18 @@
   --background: #161616;
   --profile-bg: #540c0c;
   --btn-bg: #161616;
-  --btn-col: #f8ede3;
+  --hover-dark-btn: #444444;
   --footer-bg: #2a3335;
-
+  --hover-dark-btn: #212121;
+  --main-button: #8c1515;
+  --bg-auth: #1f1f1f;
+  --auth-form: #181818;
   /* --profile-bg: linear-gradient(
     0deg,
     rgba(101, 44, 139, 1) 0%,
     rgba(103, 0, 120, 0.9150035014005602) 49%,
     rgba(77, 34, 102, 1) 100%
   ); */
-
   --input-col: rgba(112, 62, 62, 0.548);
 }
 

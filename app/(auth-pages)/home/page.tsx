@@ -1,11 +1,13 @@
 import AuthFooter from "@/components/footer/AuthFooter";
+import ThemeButton from "@/components/ThemeButton";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
 const HomePage = async () => {
   return (
-    <section className="flex flex-col items-center justify-between bg-black min-h-screen relative">
+    <section className="flex flex-col items-center justify-between bg-background max-h-screen relative">
+      <ThemeButton />
       <section className="flex flex-col items-center justify-center bg-black-700 bg-hero-background bg-cover bg-center bg-no-repeat h-screen w-full text-[#e5e5e5] sm:text-4xl text-2xl font-bold relative">
         <div className="absolute inset-0 bg-overlay"></div>
         <div className="relative z-10 flex flex-col items-center justify-center mx-auto translate-y-3/4 px-4 gap-3">
@@ -27,24 +29,23 @@ const HomePage = async () => {
               Be the first one to watch the latest movies & Series on MovieMart
             </p>
           </div>
-          <div className="flex flex-col gap-4 items-cente">
+          <div className="flex flex-col gap-4 items-center">
             <Link
               href="/sign-in"
-              className="rounded-lg border border-solid border-transparent transition-colors flex items-center justify-center bg-redButton text-background gap-2 hover:bg-hoverRedBtn dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 xs:px-8 sm:px-10 w-full"
+              className="rounded-lg border border-solid border-transparent transition-colors flex items-center justify-center bg-redButton text-textCol gap-2 hover:bg-hoverRedBtn text-sm sm:text-base h-10 sm:h-12 px-4 xs:px-8 sm:px-10 w-full"
               rel="noopener noreferrer"
             >
               Login
             </Link>
             <Link
               href="/subscribe"
-              className="rounded-lg border border-solid border-redButton transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-hoverDarkBtn dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 xs:px-8 sm:px-10 w-full"
+              className="rounded-lg border border-solid border-redButton transition-colors flex items-center justify-center bg-foreground text-textCol gap-2 hover:bg-hoverDarkBtn text-sm sm:text-base h-10 sm:h-12 px-4 xs:px-8 sm:px-10 w-full"
             >
               Subscribe
             </Link>
           </div>
         </div>
       </section>
-      {/* <AuthFooter /> */}
       <section className="h-full py-3">
         <AuthFooter />
       </section>

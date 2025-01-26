@@ -40,8 +40,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
-      <body className={`${playfair.variable} ${lato.variable} antialiased`}>
-        <ThemeButton />
+      <body
+        className={`${playfair.variable} ${lato.variable} antialiased`}
+        max-h-screen
+      >
         <Suspense fallback={<Loading />}>{children}</Suspense>
       </body>
     </html>

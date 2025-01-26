@@ -32,6 +32,8 @@ export default {
         btnBg: "var(--btn-bg)",
         btnCol: "var(--btn-col)",
         footerBg: "var(--footer-bg)",
+        bgAuth: "var(--bg-auth)",
+        authForm: "var(--auth-form)",
       },
       boxShadow: {
         "custom-inner": "var(--inner-box-shadow)",
