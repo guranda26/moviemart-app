@@ -6,6 +6,10 @@ import { protectRoute } from "@/utils/supabase/server";
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
+  // if (pathname.startsWith("/api/")) {
+  //   return NextResponse.next();
+  // }
+
   const normalizedPathname = pathname.replace(/^\/(ka|en)(?=\/|$)/, "");
 
   console.log("Normalized Pathname:", normalizedPathname);
@@ -13,9 +17,9 @@ export async function middleware(request: NextRequest) {
   const { redirect } = await protectRoute(normalizedPathname);
 
   if (redirect) {
-    if (pathname === redirect) {
-      return NextResponse.next();
-    }
+    // if (pathname === redirect) {
+    //   return NextResponse.next();
+    // }
     return NextResponse.redirect(new URL(redirect, request.url));
   }
 
@@ -24,7 +28,6 @@ export async function middleware(request: NextRequest) {
     return i18nResponse;
   }
 
-  // If the user accesses the root '/', redirect to the default locale
   if (pathname === "/") {
     const defaultLocale = i18nConfig.defaultLocale || "en";
     return NextResponse.redirect(
@@ -45,6 +48,6 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|mp4)$|app/auth/callback/route.ts)(?:ka|en)?.*)",
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|mp4)$|app/auth/callback/api/route.ts|api/)(?:ka|en)?.*)",
   ],
 };

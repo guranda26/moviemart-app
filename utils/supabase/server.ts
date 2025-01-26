@@ -40,6 +40,8 @@ export async function protectRoute(pathname: string) {
   console.log("Original Pathname:", pathname);
   console.log("Normalized Pathname:", normalizedPathname);
 
+  const authRoutes = ["/sign-in", "/sign-up", "/forgot-password", "/home"];
+
   if (
     !user &&
     ![
@@ -48,17 +50,17 @@ export async function protectRoute(pathname: string) {
       "/home",
       "/forgot-password",
       "/subscribe",
-      "/privacy-policy",
-      "/terms-and-conditions",
+      // "/privacy-policy",
+      // "/terms-and-conditions",
       "/auth/callback",
       "/protected/reset-password",
       "/reset-password",
-    ].includes(normalizedPathname)
+    ].includes(pathname)
   ) {
     return { redirect: "/home" };
   }
 
-  if (user && ["/sign-in", "/sign-up"].includes(normalizedPathname)) {
+  if (user && authRoutes.includes(pathname)) {
     console.log("Redirecting to /");
     return { redirect: "/" };
   }

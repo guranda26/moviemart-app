@@ -7,6 +7,10 @@ export async function middleware(request: NextRequest) {
   // const normalizedPathname = pathname.replace(/^\/(ka|en)(?=\/|$)/, "");
   // console.log("Normalized Pathname:", normalizedPathname);
 
+  // if (pathname.startsWith("/api/")) {
+  //   return NextResponse.next();
+  // }
+
   const { redirect } = await protectRoute(pathname);
 
   if (redirect) {
@@ -21,6 +25,6 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|mp4)$|app/auth/callback/route.ts).*)",
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|mp4)$|app/auth/callback/api/route.ts|api/).*)",
   ],
 };
