@@ -50,13 +50,16 @@ export default async function ResetPassword({
       locale={locale}
       namespaces={i18nNameSpace}
     >
-      <section className="flex flex-col items-center justify-center min-h-screen bg-[#252525] p-4 text-white">
-        <div className="text-left">
-          <h1 className="text-2xl font-medium">{t("auth:reset_pass")}</h1>
-          <p className="text-sm text-foreground/60">{t("auth:reset_msg")}</p>
-        </div>
-        <form className="flex flex-col w-full max-w-md p-4 gap-2 [&>input]:mb-4 relative">
-          {/* <Input
+      <section className="flex flex-col items-center justify-center min-h-screen bg-bgAuth p-4 text-white flex-1 w-full">
+        <div className="flex-col items-center justify-center bg-authForm border-2 border-white rounded-lg shadow-lg p-8 pt-10">
+          <div className="px-4">
+            <h1 className="text-xl xs:text-2xl font-medium mb-2">
+              {t("auth:reset_pass")}
+            </h1>
+            <p className="text-sm text-foreground/60">{t("auth:reset_msg")}</p>
+          </div>
+          <form className="flex flex-col w-full max-w-md p-4 gap-2 [&>input]:mb-4 relative">
+            {/* <Input
           type="password"
           name="password"
           id="password"
@@ -65,8 +68,8 @@ export default async function ResetPassword({
           placeholder="New password"
           className="relative w-[100%] bg-[#363636] mx-auto p-3 border rounded border-white sm:text-sm md:text-base text-white mb-2"
         /> */}
-          <ValidatePassword />
-          {/* <Input
+            <ValidatePassword />
+            {/* <Input
           type="password"
           name="confirmPassword"
           id="confirmPassword"
@@ -80,8 +83,9 @@ export default async function ResetPassword({
         >
           Reset password
         </button> */}
-          {/* <FormMessage message={searchParams} /> */}
-        </form>
+            {/* <FormMessage message={searchParams} /> */}
+          </form>
+        </div>
         {successMsg && <SuccessMsg msg={successMsg} />}
         {errorMsg && <CustomMsg action="error" msg={errorMsg} />}
       </section>
