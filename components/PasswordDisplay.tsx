@@ -3,13 +3,8 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import Input from "./Input";
-
-interface PasswordProps {
-  leftPadding?: string;
-  showIcon?: boolean;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  value?: string;
-}
+import { PasswordProps } from "@/Interfaces/PasswordProps";
+import { useTranslation } from "react-i18next";
 
 const PasswordDisplay: React.FC<PasswordProps> = ({
   leftPadding,
@@ -21,6 +16,8 @@ const PasswordDisplay: React.FC<PasswordProps> = ({
   const closedEye = "/assets/closed-eye.svg";
   const eye = "/assets/eye.svg";
   const keyIcon = "/assets/key.svg";
+
+  const { t } = useTranslation();
 
   const handlePasswordDisplay = () => {
     setShowPassword((prev) => !prev);
@@ -36,7 +33,7 @@ const PasswordDisplay: React.FC<PasswordProps> = ({
         name="password"
         id="password"
         data-cy="password-input"
-        placeholder="Passwoerd"
+        placeholder={t("common:password")}
         onChange={onChange}
         value={value}
         className={`bg-[#363636] outline-none pl-${leftPadding} w-[100%] text-sm`}

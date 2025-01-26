@@ -12,6 +12,7 @@ import OAuthProviders from "@/components/auth/OAuthProviders";
 import CustomMsg from "@/components/CustomMsg";
 import { useRouter } from "next/navigation";
 import Loading from "@/components/Loading";
+import { useTranslation } from "react-i18next";
 
 const user = "/assets/user.svg";
 
@@ -25,6 +26,8 @@ interface LoginProps {
 }
 
 const Login: React.FC<LoginProps> = ({ searchParams }) => {
+  const { t } = useTranslation();
+
   const [isLoading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
@@ -67,10 +70,10 @@ const Login: React.FC<LoginProps> = ({ searchParams }) => {
   return (
     <>
       <h2 className="xs:text-2xl text-xl font-semibold text-[#e3e2e2]">
-        Welcome Back, Movieholik!
+        {t("auth:login_heading")}
       </h2>
       <p className="text-[#c6c6c6] text-sm mb-4 mt-1 font-semibold">
-        Pick up where you left off.
+        {t("auth:login_paragraph")}
       </p>
       <form onSubmit={handleLogin} className="flex flex-col gap-4 pt-6 pb-4">
         <div className="relative w-[100%] bg-[#363636] mx-auto p-3 border rounded border-white sm:text-sm md:text-base text-white">
@@ -78,7 +81,7 @@ const Login: React.FC<LoginProps> = ({ searchParams }) => {
             type="email"
             name="email"
             id="email"
-            placeholder="Email"
+            placeholder={t("common:email")}
             className={`bg-[#363636] outline-none pl-4 w-full text-sm`}
             data-cy="email-input"
           />
@@ -95,25 +98,25 @@ const Login: React.FC<LoginProps> = ({ searchParams }) => {
           type="submit"
           className="xs:w-[100%] py-3 rounded-md bg-redButton hover:bg-hoverRedBtn text-white text-md font-bold"
         >
-          {isLoading ? "Logging in..." : "Sign In"}
+          {isLoading ? `${t("auth:logging_in")}` : `${t("auth:sign_in")}`}
         </button>
       </form>
       <Link
         href={"/forgot-password"}
         className="text-sm inline-block text-white hover:text-[#ccc] font-semibold text-center mb-8 w-full"
       >
-        Forgot password?
+        {t("auth:forgot_pass")}
       </Link>
       <TextDivider />
       <OAuthProviders />
       <p className="text-xs text-wrap sm:text-sm flex flex-wrap justify-center md:textmd text-white text-center mt-2">
-        <span>Don&apos;t have an account?&nbsp;</span>
+        <span> {t("auth:redirect_sign_up")}&nbsp; </span>
         <Link
           className="font-medium underline text-white"
           href="/sign-up"
           data-cy="sign-up"
         >
-          Sign up
+          {t("auth:sign_up")}
         </Link>
       </p>
       {errorMessage && <CustomMsg action="error" msg={errorMessage} />}

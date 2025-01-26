@@ -2,18 +2,13 @@
 
 import Input from "@/components/Input";
 import Loading from "@/components/Loading";
+import { FormElements } from "@/Interfaces/Forms";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { ZodIssue } from "zod";
 
 import { z } from "zod";
-
-interface ValidationErrors {
-  username?: string;
-  email?: string;
-  age?: string;
-}
 
 const userSchema = z.object({
   id: z.string().optional(),
@@ -42,8 +37,9 @@ const ProfilePage = () => {
   });
 
   const [error, setError] = useState<string | null>(null);
-  const [validationErrors, setValidationErrors] =
-    useState<ValidationErrors | null>(null);
+  const [validationErrors, setValidationErrors] = useState<FormElements | null>(
+    null
+  );
   const [loading, setLoading] = useState<boolean>(false);
 
   const profileImg = "/assets/user.png";

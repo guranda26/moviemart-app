@@ -5,6 +5,7 @@ import Input from "../Input";
 import { z } from "zod";
 import "react-toastify/dist/ReactToastify.css";
 import { resetPasswordAction } from "@/actions";
+import { useTranslation } from "react-i18next";
 
 const passwordSchema = z
   .object({
@@ -32,6 +33,8 @@ const ValidatePassword = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     const validationResult = passwordSchema.safeParse({
@@ -82,7 +85,7 @@ const ValidatePassword = () => {
         id="password"
         onChange={handleInputChange}
         value={password}
-        placeholder="New password"
+        placeholder={t("auth:new_pass")}
         className="relative w-full bg-[#363636] p-3 border rounded border-white mb-2"
       />
       <Input
@@ -91,7 +94,7 @@ const ValidatePassword = () => {
         id="confirmPassword"
         onChange={handleInputChange}
         value={confirmPassword}
-        placeholder="Confirm password"
+        placeholder={t("auth:confirm_pass")}
         className="relative w-full bg-[#363636] p-3 border rounded border-white mb-2"
       />
       <button
@@ -103,7 +106,7 @@ const ValidatePassword = () => {
         formAction={handleFormAction}
         className="w-full py-3 rounded-md bg-purple bg-purpleButton hover:bg-hoverPurpleBtn text-white font-bold mb-2"
       >
-        Reset password
+        {t("auth:reset_pass")}
       </button>
 
       {passwordError && (

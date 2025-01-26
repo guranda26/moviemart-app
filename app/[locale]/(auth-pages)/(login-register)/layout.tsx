@@ -1,5 +1,5 @@
-import ThemeButton from "@/components/ThemeButton";
 import "../.././globals.css";
+import AuthHeader from "@/components/header/AuthHeader";
 
 export default function AuthLayout({
   children,
@@ -8,7 +8,7 @@ export default function AuthLayout({
 }>) {
   return (
     <section className="h-screen flex flex-col">
-      <ThemeButton />
+      <AuthHeader />
       <section
         className="flex items-center justify-center max-h-screen bg-bgAuth p-4 flex-1"
         suppressHydrationWarning={true}

@@ -10,6 +10,8 @@ import OAuthProviders from "@/components/auth/OAuthProviders";
 import CustomMsg from "@/components/CustomMsg";
 import { z } from "zod";
 import Loading from "@/components/Loading";
+import { useTranslation } from "react-i18next";
+import { FormElements } from "@/Interfaces/Forms";
 
 const passwordRegex = new RegExp(
   "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&.])[A-Za-z\\d@$!%*?&.]{8,20}$"
@@ -48,13 +50,6 @@ interface RegisterProps {
   searchParams: Promise<Message>;
 }
 
-interface FormElements {
-  username?: string;
-  email?: string;
-  age?: string;
-  password?: string;
-}
-
 const Register: React.FC<RegisterProps> = ({ searchParams }) => {
   const [formData, setFormData] = useState<FormData>({
     username: "",
@@ -65,6 +60,8 @@ const Register: React.FC<RegisterProps> = ({ searchParams }) => {
   const [message, setMessage] = useState<Message | null>(null);
   const [loading, setLoading] = useState(true);
   const [errors, setErrors] = useState<FormElements>({});
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchParams = async () => {
@@ -131,17 +128,17 @@ const Register: React.FC<RegisterProps> = ({ searchParams }) => {
   return (
     <>
       <h2 className="xs:text-2xl text-xl font-semibold text-[#e3e2e2]">
-        Let&apos;s Get Started!
+        {t("auth:sign_up_heading")}
       </h2>
       <p className="text-[#c6c6c6] text-sm mb-4 mt-1 font-semibold">
-        Dive into the best movies and series with us.
+        {t("auth:sign_up_paragraph")}
       </p>
       <form className="flex flex-col gap-4 pt-6 pb-4" onSubmit={handleSubmit}>
         <Input
           type="text"
           name="username"
           id="username"
-          placeholder="Username"
+          placeholder={t("common:username")}
           value={formData.username}
           onChange={handleChange}
           className="relative w-[100%] bg-[#363636] mx-auto p-3 border rounded border-white sm:text-sm md:text-base text-white outline-none"
@@ -151,7 +148,7 @@ const Register: React.FC<RegisterProps> = ({ searchParams }) => {
           type="email"
           name="email"
           id="email"
-          placeholder="Email"
+          placeholder={t("common:email")}
           value={formData.email}
           onChange={handleChange}
           className="relative w-[100%] bg-[#363636] mx-auto p-3 border rounded border-white sm:text-sm md:text-base text-white outline-none"
@@ -162,7 +159,7 @@ const Register: React.FC<RegisterProps> = ({ searchParams }) => {
           name="age"
           id="age"
           min="14"
-          placeholder="Age"
+          placeholder={t("common:age")}
           value={formData.age}
           onChange={handleChange}
           className="relative w-[100%] bg-[#363636] mx-auto p-3 border rounded border-white sm:text-sm md:text-base text-white outline-none"
@@ -178,15 +175,15 @@ const Register: React.FC<RegisterProps> = ({ searchParams }) => {
           type="submit"
           className="xs:w-[100%] py-3 rounded-md bg-purpleButton hover:bg-hoverPurpleBtn text-white text-md font-bold"
         >
-          Sign Up
+          {t("auth:sign_up")}
         </button>
       </form>
       <TextDivider />
       <OAuthProviders />
       <p className="text-xs text-wrap sm:text-sm flex flex-wrap justify-center md:textmd text-white text-center mt-2">
-        <span>Already Registered?&nbsp;</span>
+        <span>{t("auth:sign_up")}&nbsp;</span>
         <Link className="font-medium underline text-white" href="/sign-in">
-          Login
+          {t("auth:login")}
         </Link>
       </p>
       {message && <CustomMsg action={message?.type} msg={message?.content} />}

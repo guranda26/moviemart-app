@@ -5,8 +5,9 @@ import React from "react";
 import AuthHeader from "@/components/header/AuthHeader";
 import TranslationsProvider from "@/components/TranslationsProvider";
 import initTranslations from "@/utils/i18n";
+import { LocaleParams } from "@/Interfaces/Locale";
 
-const HomePage = async ({ params }) => {
+const HomePage = async ({ params }: LocaleParams) => {
   const { locale } = await params;
 
   const i18nNameSpace = ["home"];
@@ -38,8 +39,7 @@ const HomePage = async ({ params }) => {
               </div>
               <h2 className="text-center">{t("home:heading")}</h2>
               <p className="text-[1rem] text-[#c6c6c6] text-center">
-                Be the first one to watch the latest movies & Series on
-                MovieMart
+                {t("home:paragraph")}
               </p>
             </div>
             <div className="flex flex-col gap-4 items-center">
@@ -48,13 +48,13 @@ const HomePage = async ({ params }) => {
                 className="rounded-lg border border-solid border-transparent transition-colors flex items-center justify-center bg-redButton text-textCol gap-2 hover:bg-hoverRedBtn text-sm sm:text-base h-10 sm:h-12 px-4 xs:px-8 sm:px-10 w-full text-white"
                 rel="noopener noreferrer"
               >
-                Login
+                {t("home:login_btn")}
               </Link>
               <Link
                 href="/subscribe"
                 className="rounded-lg border border-solid border-redButton transition-colors flex items-center justify-center bg-darkBtn text-textCol gap-2 hover:bg-hoverDarkBtn text-sm sm:text-base h-10 sm:h-12 px-4 xs:px-8 sm:px-10 w-full text-white"
               >
-                Subscribe
+                {t("home:subscribe_btn")}
               </Link>
             </div>
           </div>
