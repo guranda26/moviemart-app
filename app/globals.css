@@ -66,6 +66,7 @@
   --main-button: #af1918;
   --bg-auth: #b99470;
   --auth-form: #795757;
+  --dark-btn: #282828;
 }
 
 .dark {
@@ -80,6 +81,7 @@
   --main-button: #8c1515;
   --bg-auth: #1f1f1f;
   --auth-form: #181818;
+  --dark-btn: #161616;
   /* --profile-bg: linear-gradient(
     0deg,
     rgba(101, 44, 139, 1) 0%,

@@ -32,14 +32,14 @@ const HomePage = async () => {
           <div className="flex flex-col gap-4 items-center">
             <Link
               href="/sign-in"
-              className="rounded-lg border border-solid border-transparent transition-colors flex items-center justify-center bg-redButton text-textCol gap-2 hover:bg-hoverRedBtn text-sm sm:text-base h-10 sm:h-12 px-4 xs:px-8 sm:px-10 w-full"
+              className="rounded-lg border border-solid border-transparent transition-colors flex items-center justify-center bg-redButton text-textCol gap-2 hover:bg-hoverRedBtn text-sm sm:text-base h-10 sm:h-12 px-4 xs:px-8 sm:px-10 w-full text-white"
               rel="noopener noreferrer"
             >
               Login
             </Link>
             <Link
               href="/subscribe"
-              className="rounded-lg border border-solid border-redButton transition-colors flex items-center justify-center bg-foreground text-textCol gap-2 hover:bg-hoverDarkBtn text-sm sm:text-base h-10 sm:h-12 px-4 xs:px-8 sm:px-10 w-full"
+              className="rounded-lg border border-solid border-redButton transition-colors flex items-center justify-center bg-darkBtn text-textCol gap-2 hover:bg-hoverDarkBtn text-sm sm:text-base h-10 sm:h-12 px-4 xs:px-8 sm:px-10 w-full text-white"
             >
               Subscribe
             </Link>

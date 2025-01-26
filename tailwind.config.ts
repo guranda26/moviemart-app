@@ -18,6 +18,7 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
         redButton: "var(--main-button)",
+        darkBtn: "var(--dark-btn)",
         purpleButton: "var(--secondary-button)",
         hoverRedBtn: "var(--hover-red-btn)",
         hoverPurpleBtn: "var(--hover-purple-btn)",
