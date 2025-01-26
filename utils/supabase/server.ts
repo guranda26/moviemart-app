@@ -36,9 +36,9 @@ export async function protectRoute(pathname: string) {
   const normalizedPathname = pathname.replace(/^\/(ka|en)(?=\/|$)/, "");
   const user = await getUser();
 
-  console.log("User:", user);
-  console.log("Original Pathname:", pathname);
-  console.log("Normalized Pathname:", normalizedPathname);
+  // console.log("User:", user);
+  // console.log("Original Pathname:", pathname);
+  // console.log("Normalized Pathname:", normalizedPathname);
 
   const authRoutes = ["/sign-in", "/sign-up", "/forgot-password", "/home"];
 
@@ -65,8 +65,8 @@ export async function protectRoute(pathname: string) {
     return { redirect: "/" };
   }
 
-  console.log("Original Pathname:", pathname);
-  console.log("Normalized Pathname:", pathname);
+  // console.log("Original Pathname:", pathname);
+  // console.log("Normalized Pathname:", pathname);
 
   return { redirect: null };
 }

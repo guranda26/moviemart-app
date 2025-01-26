@@ -14,7 +14,9 @@ export default function SkeletonLoading() {
     const loadPosts = async () => {
       try {
         const posts = await FetchPosts();
-        setPosts(posts.data);
+        console.log("posts", posts);
+        setPosts(posts);
+
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching posts:", error);
@@ -24,6 +26,8 @@ export default function SkeletonLoading() {
 
     loadPosts();
   }, []);
+
+  console.log("posts data", posts);
 
   return (
     <section className="min-h-screen max-w-screen p-4 pt-14 text-[#161616]">

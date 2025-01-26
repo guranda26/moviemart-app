@@ -5,7 +5,7 @@ export async function POST(req: Request) {
   try {
     const response = await req.json();
 
-    console.log("response", response);
+    // console.log("response", response);
 
     const { id, username, email, password, age } = response;
 

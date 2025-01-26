@@ -33,7 +33,7 @@ export const signUpAction = async (formData: FormData) => {
   });
 
   const user = data.user;
-  console.log("user", user);
+  // console.log("user", user);
 
   if (error || !user) {
     console.error(error?.message || "Unknown error during sign-up");
@@ -195,7 +195,7 @@ const signInWith = (provider: Provider) => async () => {
     },
   });
 
-  console.log("data", data);
+  // console.log("data", data);
 
   if (error) {
     console.error("Error during OAuth sign-in:", error);
@@ -205,14 +205,14 @@ const signInWith = (provider: Provider) => async () => {
     redirect(data.url);
   } else {
     const user = (await supabase.auth.getUser()).data.user;
-    console.log("user", user);
+    // console.log("user", user);
 
     if (user) {
       const username = user.user_metadata?.user_name || "GitHub User";
       const email = user.email;
       const age = "";
 
-      console.log("user?", user);
+      // console.log("user?", user);
 
       const { error: profileError } = await supabase
         .from("profile")

@@ -22,7 +22,7 @@ export async function GET(request: Request) {
     }
 
     if (session?.user) {
-      console.log("Authenticated user:", session.user);
+      // console.log("Authenticated user:", session.user);
 
       const { data: profile, error: profileError } = await supabase
         .from("profile")
@@ -48,7 +48,7 @@ export async function GET(request: Request) {
           });
         }
 
-        console.log("New profile created:", newProfile);
+        // console.log("New profile created:", newProfile);
       }
     }
   }

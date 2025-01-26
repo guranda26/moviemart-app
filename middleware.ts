@@ -12,7 +12,7 @@ export async function middleware(request: NextRequest) {
 
   const normalizedPathname = pathname.replace(/^\/(ka|en)(?=\/|$)/, "");
 
-  console.log("Normalized Pathname:", normalizedPathname);
+  // console.log("Normalized Pathname:", normalizedPathname);
 
   const { redirect } = await protectRoute(normalizedPathname);
 
