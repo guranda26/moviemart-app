@@ -1,13 +1,24 @@
+"use client";
+
 import { signOutAction } from "@/actions";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import ThemeButton from "./ThemeButton";
+import ThemeButton from "../ThemeButton";
 import { GiExitDoor } from "react-icons/gi";
 import { LuCircleUserRound } from "react-icons/lu";
+import { useTranslation } from "react-i18next";
+import ToggleLanguage from "../ToggleLanguage";
 import "react-tooltip/dist/react-tooltip.css";
+// import initTranslations from "@/utils/i18n";
+
+export enum Locale {
+  en = "EN",
+  ka = "KA",
+}
 
 const Header = () => {
+  const { t } = useTranslation();
   return (
     <section>
       <header
@@ -30,12 +41,12 @@ const Header = () => {
             </li>
             <li>
               <Link href={"/blogs"} className="text-2xl">
-                Blogs
+                {t("header:blog")}
               </Link>
             </li>
             <li>
               <Link href={"/contact"} className="text-2xl">
-                Contact
+                {t("header:contact")}
               </Link>
             </li>
             <li className="relative group">
@@ -53,12 +64,15 @@ const Header = () => {
                   className="font-bold flex flex-col items-center"
                 >
                   <GiExitDoor width={20} className="text-3xl" />
-                  <span>Sign out</span>
+                  <span>{t("header:sign_out")}</span>
                 </button>
               </form>
             </li>
             <li>
               <ThemeButton />
+            </li>
+            <li className="text-center md:flex md:flex-col">
+              <ToggleLanguage />
             </li>
           </ul>
         </nav>

@@ -27,7 +27,11 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/api/blogs/blogsData.jaon"
+    "public/assets/*.mp4",
+    "public/assets/*",
+    "app/api/blogs/blogsData.jaon",
+    "public/blogsData.jaon",
+    "src/utils/i18n.js"
   ],
   "exclude": ["node_modules"]
 }

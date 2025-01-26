@@ -1,6 +1,6 @@
 const FetchPosts = async () => {
   try {
-    const response = await fetch("/blogsData.json");
+    const response = await fetch("/public/blogsData.json");
 
     if (!response.ok) {
       throw new Error("Failed to fetch posts");

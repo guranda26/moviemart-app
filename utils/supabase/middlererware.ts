@@ -1,64 +1,26 @@
-// import { createServerClient } from "@supabase/ssr";
-// import { type NextRequest, NextResponse } from "next/server";
-// import { getSupabaseClient } from "@/lib/supabaseClient";
+import { type NextRequest, NextResponse } from "next/server";
+import { protectRoute } from "@/utils/supabase/server";
 
-// export const updateSession = async (request: NextRequest) => {
-//   // This `try/catch` block is only here for the interactive tutorial.
-//   // Feel free to remove once you have Supabase connected.
-//   try {
-//     // Create an unmodified response
-//     let response = NextResponse.next({
-//       request: {
-//         headers: request.headers,
-//       },
-//     });
+export async function middleware(request: NextRequest) {
+  const pathname = request.nextUrl.pathname;
 
-//     const supabase = createServerClient(
-//       process.env.NEXT_PUBLIC_SUPABASE_URL!,
-//       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-//       {
-//         cookies: {
-//           getAll() {
-//             return request.cookies.getAll();
-//           },
-//           setAll(cookiesToSet) {
-//             cookiesToSet.forEach(({ name, value }) =>
-//               request.cookies.set(name, value)
-//             );
-//             response = NextResponse.next({
-//               request,
-//             });
-//             cookiesToSet.forEach(({ name, value, options }) =>
-//               response.cookies.set(name, value, options)
-//             );
-//           },
-//         },
-//       }
-//     );
+  // const normalizedPathname = pathname.replace(/^\/(ka|en)(?=\/|$)/, "");
+  // console.log("Normalized Pathname:", normalizedPathname);
 
-//     // This will refresh session if expired - required for Server Components
-//     // https://supabase.com/docs/guides/auth/server-side/nextjs
-//     const user = await supabase.auth.getUser();
+  const { redirect } = await protectRoute(pathname);
 
-//     // protected routes
-//     if (request.nextUrl.pathname.startsWith("/protected") && user.error) {
-//       return NextResponse.redirect(new URL("/home", request.url));
-//     }
+  if (redirect) {
+    if (pathname === redirect) {
+      return NextResponse.next();
+    }
+    return NextResponse.redirect(new URL(redirect, request.url));
+  }
 
-//     if (request.nextUrl.pathname === "/" && !user.error) {
-//       return NextResponse.redirect(new URL("/", request.url));
-//     }
+  return NextResponse.next();
+}
 
-//     // if (request.nextUrl.pathname.startsWith("/home") && !user.error) {
-//     //   return NextResponse.redirect(new URL("/", request.url));
-//     // }
-
-//     return response;
-//   } catch (e) {
-//     return NextResponse.next({
-//       request: {
-//         headers: request.headers,
-//       },
-//     });
-//   }
-// };
+export const config = {
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|mp4)$|app/auth/callback/route.ts).*)",
+  ],
+};

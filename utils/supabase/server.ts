@@ -33,7 +33,12 @@ export async function getUser() {
 }
 
 export async function protectRoute(pathname: string) {
+  const normalizedPathname = pathname.replace(/^\/(ka|en)(?=\/|$)/, "");
   const user = await getUser();
+
+  console.log("User:", user);
+  console.log("Original Pathname:", pathname);
+  console.log("Normalized Pathname:", normalizedPathname);
 
   if (
     !user &&
@@ -48,14 +53,18 @@ export async function protectRoute(pathname: string) {
       "/auth/callback",
       "/protected/reset-password",
       "/reset-password",
-    ].includes(pathname)
+    ].includes(normalizedPathname)
   ) {
     return { redirect: "/home" };
   }
 
-  if (user && ["/sign-in", "/sign-up"].includes(pathname)) {
+  if (user && ["/sign-in", "/sign-up"].includes(normalizedPathname)) {
+    console.log("Redirecting to /");
     return { redirect: "/" };
   }
+
+  console.log("Original Pathname:", pathname);
+  console.log("Normalized Pathname:", pathname);
 
   return { redirect: null };
 }

@@ -10,7 +10,7 @@ const MainPage = async () => {
 
   return (
     <section className="min-h-screen mx-auto">
-      <h1>Redirect here</h1>
+      {/* <h1>{t("products:heading")}</h1> */}
       <Image src={"/assets/logo2.png"} alt="logo" width={70} height={80} />
     </section>
   );

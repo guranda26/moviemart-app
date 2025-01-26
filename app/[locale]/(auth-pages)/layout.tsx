@@ -38,14 +38,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en" suppressHydrationWarning={true}>
-      <body
-        className={`${playfair.variable} ${lato.variable} antialiased`}
-        max-h-screen
-      >
-        <Suspense fallback={<Loading />}>{children}</Suspense>
-      </body>
-    </html>
-  );
+  return <Suspense fallback={<Loading />}>{children}</Suspense>;
 }

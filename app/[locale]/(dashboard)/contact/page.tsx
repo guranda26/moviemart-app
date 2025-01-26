@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import emailjs from "emailjs-com";
 import { z } from "zod";
+import { useTranslation } from "react-i18next";
 
 const contactSchema = z.object({
   name: z
@@ -24,6 +25,8 @@ type ContactFormData = z.infer<typeof contactSchema>;
 type ErrorState = Partial<Record<keyof ContactFormData | "form", string>>;
 
 const Contact: React.FC = () => {
+  const { t } = useTranslation();
+
   const [formData, setFormData] = useState<ContactFormData>({
     name: "",
     email: "",
@@ -108,20 +111,20 @@ const Contact: React.FC = () => {
       <div className="text-center mb-8">
         <h2 className="text-xl font-bold mb-4 xs:text-2xl">
           {" "}
-          Welcome to MovieMart! 👋
+          {t("contact:welcome_msg")}! 👋
         </h2>
         <p className="mb-2 xs:text-xl font-semibold">
-          Your go-to place for an endless collection of movies and series, ready
-          to stream anytime, anywhere. 🎥🍿
+          {t("contact:welcome_first_text")} 🎥🍿
         </p>
         <p className="xs:text-xl font-semibold">
-          Feel free to reach out if you have any questions, need help, or have
-          suggestions for our website. 🚀
+          {t("contact:welcome_second_text")} 🚀
         </p>
       </div>
 
       <div className="text-center">
-        <h4 className="text-lg xs:text-2xl font-bold mb-4">Contact Us</h4>
+        <h4 className="text-lg xs:text-2xl font-bold mb-4">
+          {t("contact:contact_us")}
+        </h4>
 
         <form
           onSubmit={handleSubmit}
@@ -129,7 +132,7 @@ const Contact: React.FC = () => {
         >
           <div className="mb-4">
             <label className="block text-sm font-medium mb-2" htmlFor="name">
-              Name
+              {t("contact:name")}
             </label>
             <Input
               type="text"
@@ -145,7 +148,7 @@ const Contact: React.FC = () => {
           </div>
           <div className="mb-4">
             <label className="block text-sm font-medium mb-2" htmlFor="email">
-              Email
+              {t("contact:email")}
             </label>
             <Input
               type="email"
@@ -161,7 +164,7 @@ const Contact: React.FC = () => {
           </div>
           <div className="mb-4">
             <label className="block text-sm font-medium mb-2" htmlFor="subject">
-              Subject
+              {t("contact:subject")}
             </label>
             <input
               type="text"
@@ -177,7 +180,7 @@ const Contact: React.FC = () => {
           </div>
           <div className="mb-4">
             <label className="block text-sm font-medium mb-2" htmlFor="message">
-              Message
+              {t("contact:message")}
             </label>
             <textarea
               id="message"
@@ -198,17 +201,17 @@ const Contact: React.FC = () => {
             type="submit"
             className="w-full bg-btnBg text-btnCol font-medium py-2 rounded-md hover:bg-hoverRedBtn"
           >
-            Send Message
+            {t("contact:contact_btn")}
           </button>
         </form>
-        <p className="my-4 xs:text-xl">Use the form to send us a message.</p>
-        <p className="my-4 xs:text-xl">We’ll get back to you soon.</p>
+        <p className="my-4 xs:text-xl">{t("contact:form_description")}</p>
+        <p className="my-4 xs:text-xl">{t("contact:description_msg")}</p>
       </div>
       <div className="my-8 text-center break-all">
         <ul className="list-none space-y-2">
-          <li>📍 Address: 123 Movie Street, Streaming City, SC 45678</li>
-          <li>📞 Phone: +1 (123) 456-7890</li>
-          <li>📧 Email: contact@moviestream.com</li>
+          <li>📍 {t("contact:address")}</li>
+          <li>📞 {t("contact:phone")} +1 (123) 456-7890</li>
+          <li>📧 {t("contact:email_static")} contact@moviestream.com</li>
         </ul>
       </div>
       <ToastContainer className={"absolute top-10"} />

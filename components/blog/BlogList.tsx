@@ -4,12 +4,14 @@ import React, { Suspense } from "react";
 import AutoPlayVideo from "../VideoAutoPlay";
 import Loading from "../Loading";
 
+const videoUrl = "/assets/banner.mp4";
+
 const BlogList = ({ posts }: { posts: BlogData[] }) => {
   return (
     <section className="min-h-screen max-w-screen p-4">
       <section className="text-textCol mx-auto">
         <Suspense fallback={<Loading />}>
-          <AutoPlayVideo src="/assets/banner.mp4" width="auto" />
+          <AutoPlayVideo src={videoUrl} width="auto" />
         </Suspense>
       </section>
       <ul className="max-w-[1400px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 m-auto">
