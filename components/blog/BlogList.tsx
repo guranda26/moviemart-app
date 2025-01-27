@@ -41,18 +41,15 @@ const BlogList = ({ posts }: { posts: BlogData[] }) => {
             const localizedTitle = locale === "ka" ? title_ka : title;
 
             return (
-              <li
-                key={id}
-                className="flex-1 lg:max-w-[360px w-[100%] overflow-y-hidden"
-              >
-                <div className="min-h-[250px] max-w-[360px] relative">
+              <li key={id} className="flex-1 lg:max-w-[360px w-[100%]">
+                <div className="h-[250px] max-w-[360px] relative overflow-y-hidden">
                   <img
                     src={imageSrc}
                     alt="blog"
                     className="xs:flex-1 lg:max-w-[100%] object-cover min-h-[100%] xs:object-contain"
                   />
                 </div>
-                <div className="flex flex-col gap-3 bg-white py-4 px-6 min-h-[270px] shadow-custom-inner">
+                <div className="flex flex-col gap-3 bg-white py-4 px-6 min-h-[270px] sm:h-[270px] shadow-custom-inner">
                   <p>{locale === "ka" ? date_ka : date}</p>
                   <div className="flex flex-wrap xs:inline-flex gap-2">
                     {localizedTags.map(
@@ -67,7 +64,7 @@ const BlogList = ({ posts }: { posts: BlogData[] }) => {
                         )
                     )}
                   </div>
-                  <h3 className="m-auto justify-self-end self-end text-xl xs:text-2xl font-semibold">
+                  <h3 className="m-auto justify-self-end self-end text-xl xs:text-2xl font-semibold truncate-with-arrow">
                     {localizedTitle}
                   </h3>
                 </div>

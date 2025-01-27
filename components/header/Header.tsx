@@ -21,12 +21,7 @@ const Header = () => {
   const { t } = useTranslation();
   return (
     <section>
-      <header
-        style={{
-          padding: "1rem",
-        }}
-        className="flex justify-between max-w-screen bg-headerBg"
-      >
+      <header className="flex justify-between max-w-screen bg-headerBg">
         <nav className="w-full px-10">
           <ul className="flex items-center justify-between">
             <li>

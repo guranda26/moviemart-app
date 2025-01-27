@@ -30,7 +30,7 @@ export default function SkeletonLoading() {
   console.log("posts data", posts);
 
   return (
-    <section className="min-h-screen max-w-screen p-4 pt-14 text-[#161616]">
+    <section className="min-h-screen max-w-screen p-4 text-[#161616]">
       {isLoading ? <LoadingBlogs /> : <BlogList posts={posts} />}
     </section>
   );
