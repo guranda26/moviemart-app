@@ -47,11 +47,11 @@ const BlogList = ({ posts }: { posts: BlogData[] }) => {
                   href={`blogs/${id}`}
                   className="flex-1 lg:max-w-[360px w-[100%]"
                 >
-                  <div className="h-[250px] lg:max-w-[360px] relative overflow-y-hidden">
+                  <div className="h-[250px] lg:max-w-[360px] relative overflow-y-hidden bg-black">
                     <img
                       src={imageSrc}
                       alt="blog"
-                      className="xs:flex-1 lg:max-w-[100%] object-cover min-h-[100%] lg:object-contain"
+                      className="xs:flex-1 lg:max-w-[100%] object-cover min-h-[100%]"
                     />
                   </div>
                   <div className="flex flex-col gap-3 bg-white py-4 px-6 min-h-[270px] sm:h-[270px] shadow-custom-inner">
