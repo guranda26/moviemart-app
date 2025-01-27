@@ -2,7 +2,6 @@ import { BlogData } from "@/Interfaces/Blogs";
 import React, { Suspense } from "react";
 import AutoPlayVideo from "../VideoAutoPlay";
 import Loading from "../Loading";
-import { NextRequest } from "next/server";
 import useLocaleFromPath from "../UsePath";
 
 const videoUrl = "/assets/banner.mp4";
