@@ -65,13 +65,13 @@ const BlogPage = async ({ params }: { params: Params }) => {
     <section className="relative p-4">
       <Link
         href={"/blogs"}
-        className="absolute top-16 xl:top-4 left-4 my-2 xl:my-0 flex items-center gap-2 px-2 py-1 xs:px-4 xs:py-2 text-sm font-medium text-white bg-redButton rounded shadow hover:bg-hoverRedBtn transition-transform transform hover:scale-105 duration-300"
+        className="absolute top-16 lg:top-4 left-4 my-2 xl:my-0 flex items-center gap-2 px-2 py-1 xs:px-4 xs:py-2 text-sm font-medium text-white bg-redButton rounded shadow hover:bg-hoverRedBtn transition-transform transform hover:scale-105 duration-300 z-50"
       >
-        <ArrowLeft className="w-4 h-4" />
+        <ArrowLeft className="w-4 h-4 inline-block" />
         <span className="hidden xl:inline-block">Go Back</span>
       </Link>
 
-      <article className="max-w-4xl mx-auto bg-articleBg shadow-md overflow-hidden animate-slide-in">
+      <article className="max-w-4xl mx-auto bg-articleBg shadow-md overflow-hidden animate-slide-in z-90">
         <div className="flex flex-wrap gap-2 p-4 justify-center xs:justify-normal animate-slide-in">
           {localizedTags.map(
             (tag, index) =>
