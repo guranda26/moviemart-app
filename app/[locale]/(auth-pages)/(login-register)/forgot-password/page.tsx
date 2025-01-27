@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import Input from "@/components/Input";
-import { Message } from "@/components/auth/FormMessage";
 import TextDivider from "@/components/TextDivider";
 import { forgotPasswordAction } from "@/actions";
 import OAuthProviders from "@/components/auth/OAuthProviders";

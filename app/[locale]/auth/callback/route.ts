@@ -36,7 +36,7 @@ export async function GET(request: Request) {
         const username = session.user.user_metadata?.full_name || "New User";
         const email = session.user.email;
 
-        const { data: newProfile, error: createError } = await supabase
+        const { error: createError } = await supabase
           .from("profile")
           .insert({ id: session.user.id, username, email });
 
