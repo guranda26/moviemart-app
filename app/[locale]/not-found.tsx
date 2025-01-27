@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import "./globals.css";
 import Image from "next/image";
+import ReturnBackButton from "@/components/ReturnBack";
 
 export default function NotFoundPage() {
   const movieImg = "/assets/movie.png";
@@ -29,12 +30,7 @@ export default function NotFoundPage() {
           >
             Explore Movies
           </Link>
-          <Link
-            href="/subscribe"
-            className="bg-redButton hover:bg-hoverRedBtn border border-[#7e1313] text-white px-4 py-2 rounded-lg transition"
-          >
-            Subscribe Us
-          </Link>
+          <ReturnBackButton />
         </div>
         <footer className="absolute bottom-4 w-full text-center text-sm text-gray-400">
           © 2025 MovieMart. All Rights Reserved.

@@ -67,6 +67,7 @@
   --bg-auth: #b99470;
   --auth-form: #795757;
   --dark-btn: #282828;
+  --article-bg: #f5f5f5;
 }
 
 .dark {
@@ -82,13 +83,7 @@
   --bg-auth: #1f1f1f;
   --auth-form: #181818;
   --dark-btn: #161616;
-  /* --profile-bg: linear-gradient(
-    0deg,
-    rgba(101, 44, 139, 1) 0%,
-    rgba(103, 0, 120, 0.9150035014005602) 49%,
-    rgba(77, 34, 102, 1) 100%
-  ); */
-  --input-col: rgba(112, 62, 62, 0.548);
+  --article-bg: #fff5e4;
 }
 
 .custom-gradient {

@@ -34,6 +34,7 @@ export default {
         btnCol: "var(--btn-col)",
         footerBg: "var(--footer-bg)",
         bgAuth: "var(--bg-auth)",
+        articleBg: "var(--article-bg)",
         authForm: "var(--auth-form)",
       },
       boxShadow: {
@@ -41,6 +42,25 @@ export default {
       },
       animation: {
         "custom-spin": "spin 0.8s linear infinite",
+        "fade-in": "fadeIn 1s ease-in-out",
+        "fade-in-delayed": "fadeIn 1.5s ease-in-out",
+        "slide-in": "slideIn 1s ease-in-out",
+      },
+      keyframes: {
+        fadeIn: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        slideIn: {
+          "0%": {
+            transform: "translateX(-50%)",
+            opacity: "0",
+          },
+          "100%": {
+            transform: "translateX(0)",
+            opacity: "1",
+          },
+        },
       },
     },
     screens: {
