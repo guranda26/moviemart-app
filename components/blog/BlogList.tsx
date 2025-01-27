@@ -4,7 +4,7 @@ import AutoPlayVideo from "../VideoAutoPlay";
 import Loading from "../Loading";
 import useLocaleFromPath from "../UsePath";
 
-const videoUrl = "/assets/banner.mp4";
+const bannerUrl = "/assets/banner-video.mp4";
 
 const BlogList = ({ posts }: { posts: BlogData[] }) => {
   const locale = useLocaleFromPath();
@@ -15,10 +15,10 @@ const BlogList = ({ posts }: { posts: BlogData[] }) => {
     <section className="min-h-screen max-w-screen p-4">
       <section className="text-textCol mx-auto">
         <Suspense fallback={<Loading />}>
-          <AutoPlayVideo src={videoUrl} width="auto" />
+          <AutoPlayVideo src={bannerUrl} width="auto" />
         </Suspense>
       </section>
-      <ul className="max-w-[1400px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 m-auto">
+      <ul className="max-w-[1400px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 m-auto pt-4 sm:pt-2">
         {posts.map(
           ({
             id,
@@ -42,11 +42,11 @@ const BlogList = ({ posts }: { posts: BlogData[] }) => {
 
             return (
               <li key={id} className="flex-1 lg:max-w-[360px w-[100%]">
-                <div className="h-[250px] max-w-[360px] relative overflow-y-hidden">
+                <div className="h-[250px] lg:max-w-[360px] relative overflow-y-hidden">
                   <img
                     src={imageSrc}
                     alt="blog"
-                    className="xs:flex-1 lg:max-w-[100%] object-cover min-h-[100%] xs:object-contain"
+                    className="xs:flex-1 lg:max-w-[100%] object-cover min-h-[100%] lg:object-contain"
                   />
                 </div>
                 <div className="flex flex-col gap-3 bg-white py-4 px-6 min-h-[270px] sm:h-[270px] shadow-custom-inner">

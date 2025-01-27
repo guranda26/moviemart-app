@@ -8,7 +8,7 @@ export default function LoadingBlogs() {
   return (
     <section className="max-w-[1400px] grid gap-5 mx-auto">
       <div className="grid grid-cols-1">
-        <div className="bg-gray-300 h-[100px] xs:h-[200px] md:h-[300px] lg:h-[400px] xl:h-[520px] animate-pulse shadow-md p-4">
+        <div className="bg-gray-300 min-h-[130px] xs:min-h-[200px] h-auto md:min-h-[300px] animate-pulse shadow-md p-4">
           <Skeleton
             height="100%"
             width="100%"
