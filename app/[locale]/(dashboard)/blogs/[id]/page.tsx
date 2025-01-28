@@ -89,7 +89,7 @@ const BlogPage = async ({ params }: { params: Params }) => {
         <img
           src={imageSrc}
           alt={TITLE}
-          className="w-full h-85 object-cover transform hover:scale-105 transition-transform duration-500"
+          className="w-full h-85 max-h-[450px] object-cover transform hover:scale-105 transition-transform duration-500"
         />
         <div className="p-6">
           <h1 className="text-3xl font-bold mb-4 text-gray-900 animate-fade-in-delayed">
@@ -105,20 +105,30 @@ const BlogPage = async ({ params }: { params: Params }) => {
                 (index !== DESCRIPTION.split(". ").length - 1 ? "." : "")}
             </p>
           ))}
-          <div className="w-100% overflow-x-hidden">
+          <div className="w-100% overflow-x-hidden mb-2">
             {additionalImageSrc && (
               <img
                 src={additionalImageSrc}
                 alt={TITLE}
-                className="w-full h-60 xs:h-[17rem] object-cover transform hover:scale-105 transition-transform duration-500"
+                className="w-full h-60 xs:h-[17rem] object-cover transform hover:scale-105 transition-transform duration-500 bg-top"
               />
             )}
           </div>
-          {EXTRA_DESCRIPTION && (
-            <p className="text-base text-gray-800 mb-4 mt-2 leading-relaxed">
-              {EXTRA_DESCRIPTION}
-            </p>
-          )}
+          {EXTRA_DESCRIPTION &&
+            EXTRA_DESCRIPTION.split(". ").map(
+              (paragraph: string, index: number) => (
+                <p
+                  key={index}
+                  className="text-base text-gray-800 mb-4 leading-relaxed"
+                >
+                  {paragraph.trim() +
+                    (index !== EXTRA_DESCRIPTION.split(". ").length - 1
+                      ? "."
+                      : "")}
+                </p>
+              )
+            )}
+
           <div className="flex items-center gap-6 text-gray-700 text-sm">
             <div className="flex items-center gap-2 animate-fade-in-delayed">
               <Folder className="w-4 h-4 text-gray-600" />

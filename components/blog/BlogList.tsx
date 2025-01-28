@@ -42,7 +42,10 @@ const BlogList = ({ posts }: { posts: BlogData[] }) => {
             const localizedTitle = locale === "ka" ? title_ka : title;
 
             return (
-              <li key={id}>
+              <li
+                key={id}
+                className="sm:transform sm:transition-transform sm:duration-300 sm:hover:scale-105 sm:hover:shadow-lg animate-fade-in"
+              >
                 <Link
                   href={`blogs/${id}`}
                   className="flex-1 lg:max-w-[360px w-[100%]"
@@ -51,7 +54,7 @@ const BlogList = ({ posts }: { posts: BlogData[] }) => {
                     <img
                       src={imageSrc}
                       alt="blog"
-                      className="xs:flex-1 lg:max-w-[100%] object-cover min-h-[100%]"
+                      className="xs:flex-1 lg:max-w-[100%] object-cover min-h-[100%] bg-center"
                     />
                   </div>
                   <div className="flex flex-col gap-3 bg-white py-4 px-6 min-h-[270px] sm:h-[270px] shadow-custom-inner">
