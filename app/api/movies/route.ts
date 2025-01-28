@@ -5,7 +5,7 @@ export async function GET() {
   try {
     const supabase = await createClient();
     const { data: movies, error } = await supabase.from("movies").select("*");
-    console.log("data", movies);
+    // console.log("data", movies);
 
     if (error) {
       throw new Error(`Supabase error: ${error.message}`);
