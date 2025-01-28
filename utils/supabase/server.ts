@@ -1,7 +1,9 @@
+"use server";
+
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 
-export const createClient = async () => {
+export default async function createClient() {
   const cookieStore = await cookies();
 
   return createServerClient(
@@ -24,7 +26,7 @@ export const createClient = async () => {
       },
     }
   );
-};
+}
 
 export async function getUser() {
   const { auth } = await createClient();
@@ -64,9 +66,6 @@ export async function protectRoute(pathname: string) {
     console.log("Redirecting to /");
     return { redirect: "/" };
   }
-
-  // console.log("Original Pathname:", pathname);
-  // console.log("Normalized Pathname:", pathname);
 
   return { redirect: null };
 }

@@ -7,6 +7,7 @@ export interface Movies {
   category: string;
   category_ka: string;
   rating: number;
+  price: number;
   year: number;
 }
 

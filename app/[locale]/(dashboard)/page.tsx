@@ -5,6 +5,8 @@ import Link from "next/link";
 import { Params } from "next/dist/server/request/params";
 import TranslationsProvider from "@/components/TranslationsProvider";
 import initTranslations from "@/utils/i18n";
+// import Button from "@/components/Button";
+import BuyProductButton from "@/components/BuyProductButton";
 
 const MainPage = async ({ params }: { params: Params }) => {
   const movies = await FetchMovies();
@@ -20,22 +22,24 @@ const MainPage = async ({ params }: { params: Params }) => {
       locale={locale as string}
       namespaces={i18nNameSpaces}
     >
-      <section className="min-h-screen">
+      <section className="min-h-screen p-8">
         <Image src={"/assets/logo2.png"} alt="logo" width={70} height={80} />
         <h3>Movie title</h3>
-        <ul>
-          <li>
-            {movies.map(
-              ({
-                id,
-                imageSrc,
-                title,
-                title_ka,
-                rating,
-                category,
-                category_ka,
-              }) => (
-                <Link href={`/movies/${id}`} key={id}>
+        <ul className="flex gap-3">
+          {movies.map(
+            ({
+              id,
+              imageSrc,
+              title,
+              title_ka,
+              rating,
+              category,
+              category_ka,
+              price,
+              description,
+            }) => (
+              <li key={id} className="border border-purple-500">
+                <Link href={`/movies/${id}`} className="flex flex-col gap-2">
                   <img
                     src={imageSrc}
                     alt={title}
@@ -43,13 +47,24 @@ const MainPage = async ({ params }: { params: Params }) => {
                   />
                   <h3 className="text-black">{isKa ? title_ka : title}</h3>
                   <h3>{rating}</h3>
+                  <p>{price}</p>
                   <h3>
                     {t("products:genre")} {isKa ? category_ka : category}
                   </h3>
                 </Link>
-              )
-            )}
-          </li>
+                <button className="bg-redButton hover:bg-hoverRedBtn border border-[#7e1313] text-white px-4 py-2 rounded-lg transition">
+                  {t("products:buy_now")}
+                </button>
+                <BuyProductButton
+                  productId={id}
+                  productName={title}
+                  productImage={imageSrc}
+                  productDescription={description}
+                  productPrice={price}
+                />
+              </li>
+            )
+          )}
         </ul>
       </section>
     </TranslationsProvider>
