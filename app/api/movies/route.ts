@@ -1,17 +1,25 @@
 import { NextResponse } from "next/server";
 import createClient from "@/utils/supabase/server";
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
+    const url = new URL(req.url);
+    const searchQuery = url.searchParams.get("q") || "";
+
     const supabase = await createClient();
-    const { data: movies, error } = await supabase.from("movies").select("*");
-    // console.log("data", movies);
+    let query = supabase.from("movies").select("*");
+
+    if (searchQuery) {
+      query = query.ilike("title", `%${searchQuery}%`);
+    }
+
+    const { data: movies, error } = await query;
 
     if (error) {
       throw new Error(`Supabase error: ${error.message}`);
     }
 
-    return new Response(JSON.stringify(movies), { status: 200 });
+    return NextResponse.json(movies, { status: 200 });
   } catch (error) {
     console.error("Error fetching movies:", error);
     return NextResponse.json(
@@ -20,6 +28,7 @@ export async function GET() {
     );
   }
 }
+
 
 // export async function POST(req: Request) {
 //   try {

@@ -9,6 +9,9 @@ export interface Movies {
   rating: number;
   price: number;
   year: number;
+  bannerImg?: string;
+  type?: string;
+  type_ka?: string;
 }
 
 export interface MovieData {
