@@ -21,13 +21,12 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const supabase = await createClient();
 
-    // Insert order into Supabase
+    const supabase = await createClient();
     const { error } = await supabase
       .from("orders")
       .insert({
-        product_id: productId,
+        movie_id: productId,
         user_id: user.id,
         title: productName,
         price: productPrice,

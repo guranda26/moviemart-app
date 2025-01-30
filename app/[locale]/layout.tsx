@@ -6,6 +6,7 @@ import { dir } from "i18next";
 import i18nConfig from "../../configs/i18ncofig";
 import "./globals.css";
 import Providers from "@/components/Providers";
+import ClientSideToastContainer from "@/components/ClientSideToastContainer";
 
 export const metadata: Metadata = {
   title: "Moviemart Platform",
@@ -56,16 +57,19 @@ export default async function DashboardLayout({
     "common",
   ]);
   return (
-    <html lang={locale} dir={dir(locale)} suppressHydrationWarning={true}>
+    <html lang={locale} dir={dir(locale)} suppressHydrationWarning>
       <body
-        className={`${playfair.variable} ${lato.variable} antialiased flex flex-col`}
+        className={`${playfair.variable} ${lato.variable} flex flex-col`}
       >
         <TranslationsProvider
           resources={resources}
           locale={locale}
           namespaces={["products", "contact"]}
         >
-          <Providers>{children}</Providers>
+          <Providers>
+          <ClientSideToastContainer />
+            {children}
+          </Providers>
         </TranslationsProvider>
       </body>
     </html>

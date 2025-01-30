@@ -2,17 +2,17 @@
 
 import React from "react";
 
-interface Product {
-  name: string;
+interface Movie {
+  title: string;
   price: number;
-  image_link?: string;
+  imageSrc?: string;
 }
 
 interface CartItem {
   stripe_price_id: string;
   quantity: number;
-  stripe_product_id: string;
-  products: Product;
+  stripe_movie_id: string;
+  movies: Movie;
 }
 
 interface CheckoutButtonProps {
@@ -22,7 +22,7 @@ interface CheckoutButtonProps {
 const CheckoutButton: React.FC<CheckoutButtonProps> = ({ cart }) => {
   const transformCartToLineItems = () =>
     cart.map((item) => {
-      if (!item.products.name || !item.products.price) {
+      if (!item.movies.title || !item.movies.title) {
         console.error("Invalid item data: ", item);
       }
 
@@ -30,10 +30,10 @@ const CheckoutButton: React.FC<CheckoutButtonProps> = ({ cart }) => {
         price_data: {
           currency: "usd",
           product_data: {
-            name: item.products.name,
-            images: item.products.image_link ? [item.products.image_link] : [],
+            name: item.movies.title,
+            images: item.movies.imageSrc ? [item.movies.imageSrc] : [],
           },
-          unit_amount: Math.round(item.products.price * 100), // Convert price to cents
+          unit_amount: Math.round(item.movies.price * 100),
         },
         quantity: 1,
       };

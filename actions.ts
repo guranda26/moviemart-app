@@ -75,14 +75,13 @@ export const signInAction = async (formData: FormData) => {
 
 export const forgotPasswordAction = async (formData: FormData) => {
   const email = formData.get("email")?.toString();
-  const supabase = await createClient();
   const origin = (await headers()).get("origin");
   const callbackUrl = formData.get("callbackUrl")?.toString();
 
   if (!email) {
     return encodedRedirect("error", "/forgot-password", "Email is required");
   }
-
+  const supabase = await createClient();
   const { data, error: queryError } = await supabase
     .from("profile")
     .select("email")
@@ -123,7 +122,6 @@ export const forgotPasswordAction = async (formData: FormData) => {
 };
 
 export const resetPasswordAction = async (formData: FormData) => {
-  const supabase = await createClient();
 
   const password = formData.get("password") as string;
   const confirmPassword = formData.get("confirmPassword") as string;
@@ -149,6 +147,7 @@ export const resetPasswordAction = async (formData: FormData) => {
       "Passwords do not match"
     );
   }
+  const supabase = await createClient();
 
   const { error } = await supabase.auth.updateUser({
     password: password,
@@ -182,10 +181,9 @@ type Provider =
   | "apple";
 
 const signInWith = (provider: Provider) => async () => {
-  const supabase = await createClient();
 
   const auth_callback_url = `${process.env.SITE_URL}/auth/callback`;
-
+  const supabase = await createClient();
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider,
     options: {

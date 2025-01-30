@@ -7,9 +7,11 @@ import CheckoutButton from "@/components/CheckoutBtn";
 // import RedirectToProductBtn from "../../../components/RedirectToProductPage";
 
 const Page = () => {
-  const { cart, setCart } = useCart();
+  const { cart = [], setCart, fetchCart } = useCart();
 
   const onDelete = async (productId: number) => {
+    console.log('deleting productId', productId);
+    
     if (!confirm("Are you sure you want to delete this item?")) return;
 
     try {
@@ -28,29 +30,32 @@ const Page = () => {
         throw new Error("Failed to delete the item from the cart");
       }
 
-      if (cart) {
-        setCart(cart.filter((item) => item.product_id !== productId));
-      }
+      await fetchCart();
+
+      console.log('cart', cart);
+
+      
+
     } catch (error) {
       console.error("Error deleting item:", error);
       alert("There was an error deleting the item. Please try again.");
     }
   };
 
-  const onUpdate = async (productId: number, newQuantity: number) => {
-    if (cart) {
-      const updatedCart = cart.map((item) =>
-        item.product_id === productId
-          ? { ...item, quantity: newQuantity }
-          : item
-      );
-      setCart(updatedCart);
-    }
-  };
+  // const onUpdate = async (productId: number, newQuantity: number) => {
+  //   if (cart) {
+  //     const updatedCart = cart.map((item) =>
+  //       item.movie_id === productId
+  //         ? { ...item, quantity: newQuantity }
+  //         : item
+  //     );
+  //     setCart(updatedCart);
+  //   }
+  // };
 
   const totalAmount = cart
     ? cart.reduce(
-        (total, item) => total + item.products.price * item.quantity,
+        (total, item) => total + item.movies.price * item.quantity,
         0
       )
     : 0;
@@ -61,40 +66,48 @@ const Page = () => {
       {cart ? (
         <>
           <div className="md:hidden">
-            {cart.map((item) => (
+            {cart.map((item, index) => (
               <div
                 key={item.id}
+                id={`${item.id}`}
                 className="border-t p-2 flex justify-between items-center"
               >
                 <img
-                  src={item.products.image_link}
-                  alt={item.products.name}
+                  src={item.movies.imageSrc}
+                  alt={item.movies.title}
                   className="min-w-[20px] max-w-[45px] rounded-full mr-2"
                 />
                 <div className="flex-1">
                   <h2 className="text-sm font-medium text-gray-700">
-                    {item.products.name}
+                    {item.movies.title}
                   </h2>
                   <p className="text-xs text-gray-600">
-                    Price: ${item.products.price}
+                    Price: ${item.movies.price}
                   </p>
                 </div>
-                <form className="flex gap-2">
+                {/* <form className="flex gap-2">
                   <input
                     type="number"
                     className="w-10 border border-gray-300 rounded-md p-1"
                     value={item.quantity}
                     min="1"
-                    onChange={(e) => {
-                      const newQuantity = Number(e.target.value);
-                      onUpdate(item.product_id, newQuantity);
-                    }}
+                    // onChange={(e) => {
+                    //   const newQuantity = Number(e.target.value);
+                    //   onUpdate(item.movie_id, newQuantity);
+                    // }}
                   />
-                </form>
+                </form> */}
                 <div>
-                  <button className="text-red-600">
+                  {/* <button className="text-red-600">
                     <MdDelete size={20} />
-                  </button>
+                  </button> */}
+                  <button
+                        className="text-red-600"
+                        onClick={() => onDelete(item.movie_id)}
+                        data-cy={`delete-btn-${index}`}
+                      >
+                        <MdDelete size={20} />
+                      </button>
                 </div>
               </div>
             ))}
@@ -105,16 +118,10 @@ const Page = () => {
                 <tr>
                   <th className="px-4 py-3 text-md font-medium text-gray-700"></th>
                   <th className="px-4 py-3 text-md font-medium text-gray-700">
-                    Product Name
+                    Name
                   </th>
                   <th className="px-4 py-3 text-md font-medium text-gray-700">
-                    Quantity
-                  </th>
-                  <th className="px-4 py-3 text-md font-medium text-gray-700">
-                    Price per item
-                  </th>
-                  <th className="px-4 py-3 text-md font-medium text-gray-700">
-                    Total Price
+                    Price
                   </th>
                   <th className="px-4 py-3 text-md font-medium text-gray-700"></th>
                 </tr>
@@ -127,40 +134,23 @@ const Page = () => {
                     className={`border-t ${item.id}`}
                     data-cy={`cart-item-${index}`}
                   >
-                    <td className="px-3 py-4">
+                    <td className="px-4 py-3">
                       <img
-                        src={item.products.image_link}
-                        alt={item.products.name}
-                        className="min-w-[20px] max-w-[45px] rounded-full"
+                        src={item.movies.imageSrc}
+                        alt={item.movies.title}
+                        className="min-w-[30px] max-w-[45px] rounded-md"
                       />
                     </td>
-                    <td className="px-4 py-4 text-gray-700 text-sm">
-                      {item.products.name}
+                    <td className="px-4 py-3 text-gray-700 text-sm">
+                      {item.movies.title}
                     </td>
-                    <td className="px-4 py-4">
-                      <form className="flex gap-2">
-                        <input
-                          type="number"
-                          className="w-10 border border-gray-300 rounded-md p-1"
-                          value={item.quantity}
-                          min="1"
-                          onChange={(e) => {
-                            const newQuantity = Number(e.target.value);
-                            onUpdate(item.product_id, newQuantity);
-                          }}
-                        />
-                      </form>
-                    </td>
-                    <td className="px-4 py-4 text-gray-700 text-center font-semibold">
-                      {item.products.price}
-                    </td>
-                    <td className="px-4 py-4 text-gray-700 text-center font-semibold">
-                      {item.products.price * item.quantity}
+                    <td className="px-4 py-3 text-gray-700 text-center font-semibold">
+                      {item.movies.price}&#36;
                     </td>
                     <td className="py-4 text-center">
                       <button
                         className="text-red-600"
-                        onClick={() => onDelete(item.product_id)}
+                        onClick={() => onDelete(item.movie_id)}
                         data-cy={`delete-btn-${index}`}
                       >
                         <MdDelete size={20} />
@@ -178,11 +168,11 @@ const Page = () => {
         </h2>
       )}
       <div className="flex flex-col sm:flex-row items-center justify-between p-2">
-        <h2 className="md:text-2xl font-semibold">
+          <h2 className="md:text-2xl font-semibold flex items-center">
           Total Amount: {totalAmount}
+          <span className="mt-1 translate-x-[-3px]">&#xFE69;</span>
         </h2>
         <div className="flex gap-1 md:gap-2 flex-wrap">
-          {/* <RedirectToProductBtn /> */}
           {cart && cart.length > 0 && (
             <>
               <CheckoutButton cart={cart} />

@@ -6,6 +6,7 @@ import TranslationsProvider from "@/components/TranslationsProvider";
 import initTranslations from "@/utils/i18n";
 import BuyProductButton from "@/components/BuyProductButton";
 import SearchInput from "@/components/SearchInput";
+import AddToCartButton from "@/components/AddToCartBtn";
 
 const MainPage = async ({ params, searchParams }: { params: Params; searchParams?: { q?: string } }) => {
   const searchQuery = await searchParams?.q || "";
@@ -129,7 +130,12 @@ const MainPage = async ({ params, searchParams }: { params: Params; searchParams
                     {t("products:genre")} {isKa ? category_ka : category}
                   </p>
                 </Link>
-                <div className="mt-4">
+                <div className="flex sm:flex-col gap-3">
+                <AddToCartButton
+                    productId={id}
+                    productName={title}
+                    productPrice={price}
+                  />
                   <BuyProductButton
                     productId={id}
                     productName={title}

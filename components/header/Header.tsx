@@ -44,6 +44,11 @@ const Header = () => {
                 {t("header:contact")}
               </Link>
             </li>
+            <li>
+              <Link href={"/cart"} className="text-2xl">
+                {t("header:cart")}
+              </Link>
+            </li>
             <li className="relative group">
               <Link href="/profile" className="text-2xl relative">
                 <LuCircleUserRound />

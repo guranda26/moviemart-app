@@ -14,17 +14,19 @@ export const GET = async (
     }
 
     const supabase = await createClient();
+    const { data: blog, error } = await supabase
+    .from("blogs")
+    .select("*")
+    .eq("id", id)
+    .single();
+    
     const session = supabase.auth.getSession();
 
     if (!session) {
       return new Response("User not logged in", { status: 401 });
     }
 
-    const { data: blog, error } = await supabase
-      .from("blogs")
-      .select("*")
-      .eq("id", id)
-      .single();
+
 
     if (error) {
       console.error("Error fetching product:", error);
