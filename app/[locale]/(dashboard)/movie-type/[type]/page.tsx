@@ -3,11 +3,11 @@ import FetchMovies from "@/utils/supabase/lib/FetchMovies";
 import Link from "next/link";
 import TranslationsProvider from "@/components/TranslationsProvider";
 import initTranslations from "@/utils/i18n";
-import { MovieTypeParams } from "@/Interfaces/Params";
+import { MovieTypeParams } from "@/Types/types";
 
 export default async function MovieType({ params }: {params: MovieTypeParams}) {
-  const { type } = params; 
-  const { locale } = params;
+  const { type } = await params; 
+  const { locale } = await params;
 
   const movies = await FetchMovies();
 

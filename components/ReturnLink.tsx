@@ -1,14 +1,10 @@
 "use client";
 
+import { LinkProps } from "@/Types/types";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { useTranslation } from "react-i18next";
-
-type LinkProps = {
-  href: string;
-  className?: string;
-};
 
 const ReturnLink = ({ href, className }: LinkProps) => {
   const { t } = useTranslation();

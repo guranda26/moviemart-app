@@ -3,7 +3,7 @@ import { Tag, Eye, Folder } from "lucide-react";
 import initTranslations from "@/utils/i18n";
 import TranslationsProvider from "@/components/TranslationsProvider";
 import ReturnLink from "@/components/ReturnLink";
-import { BlogParams } from "@/Interfaces/Params";
+import { BlogParams } from "@/Types/types";
 
 const BlogPage = async ({ params }: { params: BlogParams }) => {
   const i18nNameSpaces = ["common", "products"];
