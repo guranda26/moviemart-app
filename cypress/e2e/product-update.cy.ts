@@ -40,7 +40,7 @@ describe("Products modifification", () => {
 
     cy.wait(5000);
 
-    cy.get("[data-cy='wishlist-language']").last().findByText("My Neighbor Totoro");
+    cy.get("[data-cy='wishlist-movie-item']").last().findByText("My Neighbor Totoro");
   });
 
   it("Modifies movie details", () => {
@@ -71,7 +71,7 @@ describe("Products modifification", () => {
     cy.get("[data-cy='edit-language-input']").select("English").should('be.visible')
     cy.get("[data-cy='save-cart-btn']").click()
     cy.wait(500);
-    cy.get("[data-cy='wishlist-movie-item']").last().findByText("English").should("be.visible");
+    cy.get("[data-cy='wishlist-language']").last().findByText("English").should("be.visible");
   });
   it("Deletes movie from the wishlist", () => {
     cy.wait(3000);
