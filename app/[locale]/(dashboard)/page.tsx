@@ -58,28 +58,31 @@ const MainPage = async ({ params, searchParams}: { params: Params; searchParams?
       <section className="min-h-screen p-8">
 
         <div className="flex gap-6 mb-8 relative">
-        <SearchInput initialSearchQuery={searchQuery} />
+        {/* <SearchInput initialSearchQuery={searchQuery} /> */}
           {sweetHomeMovie.map((movie) => (
             <div key={movie.id} className="w-screen relative">
               <img
                 src={movie.bannerImg}
                 alt={movie.title}
-                className="w-full rounded-lg h-auto max-h-[500px] overflow-hidden object-cover"
+                className="w-full rounded-lg sm:h-auto h-[500px] sm:max-h-[500px] overflow-hidden object-fill sm:object-cover"
               />
 
-              <div className="absolute inset-0 flex items-center bg-black bg-opacity-50 p-6 text-white text-center">
-                <div className="absolute w-[400px] flex flex-col items-center">
-                  <h2 className="text-3xl font-bold mb-4">
-                    {t("movie_details:watch")} <span className="block">{t("movie_details:with_us")}</span>
-                  </h2>
-                  <Link
-                    href="/subscribe"
-                    className="rounded-lg border border-solid border-redButton transition-colors flex items-center justify-center bg-darkBtn text-textCol gap-2 hover:bg-hoverDarkBtn text-sm sm:text-base h-10 sm:h-12 px-4 xs:px-8 sm:px-10 w-full max-w-[200px] text-white"
-                  >
-                    {t("home:subscribe_btn")}
-                  </Link>
-                </div>
+            <div className="flex">
+              <div className="absolute inset-0 flex sm:items-baseline justify-end pb-20 sm:pb-0 sm:justify-evenly md:justify-center lg:justify-normal gap-5 lg:items-center lg:flex-row flex-col-reverse lg:gap-5 bg-opacity-50 p-6 text-white text-center bg-yellow-400">
+                  <div className="w-[400px] flex flex-col items-start sm:items-center gap-3">
+                    <h2 className="text-xl md:text-2xl lg:text-3xl font-bold lg:mb-4 md:leading-[3rem] lg:leading-[4rem]">
+                      {t("movie_details:watch")} <span className="block text-[#931f1f]">{t("movie_details:with_us")}</span>
+                    </h2>
+                    <Link
+                      href="/subscribe"
+                      className="rounded-lg border border-solid border-redButton transition-colors flex items-center justify-center bg-darkBtn text-textCol gap-2 hover:bg-hoverDarkBtn text-sm sm:text-base h-10 sm:h-12 px-2 xs:px-8 sm:px-10 lg:w-full max-w-[200px] text-white"
+                    >
+                      {t("home:subscribe_btn")}
+                    </Link>
+                  </div>
+                  <SearchInput initialSearchQuery={searchQuery} />
               </div>
+            </div>
             </div>
           ))}
         </div>

@@ -36,9 +36,9 @@ const SearchInput = ({ initialSearchQuery }: { initialSearchQuery: string }) => 
   if (loading) return <Loading />
 
   return (
-    <div className="absolute top-1/2 left-1/2 translate-x-[-50%] z-40">
-      <form onSubmit={handleSearchSubmit} className="w-auto max-w-md mx-auto flex items-center relative">
-      <Image width={20} height={20} src="/assets/search-icon.svg" alt="search icon" className="absolute left-3" />
+    <div className="z-40 search-input">
+      <form onSubmit={handleSearchSubmit} className="w-auto max-w-[600px] sm:max-w-md mx-auto flex flex-wrap items-center relative">
+      <Image width={20} height={20} src="/assets/search-icon.svg" alt="search icon" className="absolute left-3 search-icon__hide" />
         <input
           id="search"
           name="q"
@@ -47,22 +47,28 @@ const SearchInput = ({ initialSearchQuery }: { initialSearchQuery: string }) => 
           value={searchQuery}
           onChange={handleSearchChange}
           onClick={handleClearSearch}
-          className="w-[400px] p-2 pl-10 border border-redButton rounded shadow-sm md:bg-[#e8ceb595] text-black search-placeholder"
+          className="w-max-content sm:w-[250px] md:w-[300px] sm:max-w-full lg:w-[300px] p-2 pl-10 border border-redButton rounded shadow-sm md:bg-[#e8ceb595] text-black search-placeholder"
         />
         {searchQuery && searchPage ? (
           <button
             type="button"
             onClick={handleClearSearch}
-            className="ml-2 bg-redButton hover:bg-hoverRedBtn text-white px-4 py-2 rounded"
+            className="ml-2 bg-redButton hover:bg-hoverRedBtn text-white px-4 py-2 rounded search-button"
           >
-            {t("common_placeholder:reset")}
+            <span className="search-text">
+              {t("common_placeholder:reset")}
+            </span>
+            <Image width={20} height={20} src="/assets/search-icon.svg" alt="search icon" className="hidden search-img" />
           </button>
         ) : ( 
         <button
           type="submit"
-          className="ml-2 bg-purpleButton hover:bg-hoverPurpleBtn text-white px-4 py-2 rounded"
-        >
+          className="ml-2 bg-purpleButton hover:bg-hoverPurpleBtn text-white px-4 py-2 rounded search-button"
+        > 
+        <span className="search-text">
           {t("common_placeholder:search")}
+        </span>
+        <Image width={20} height={20} src="/assets/search-icon.svg" alt="search icon" className="hidden search-img" />
         </button>)}
       </form>
     </div>

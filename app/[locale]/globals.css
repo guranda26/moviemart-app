@@ -175,3 +175,40 @@ input::placeholder{
     font-weight: bold;
   }
 }
+
+
+@media only screen and (max-width: 600px) {
+
+  .search-placeholder {
+    padding-left: 5px;
+    width: 100%;
+    max-width: auto;
+  }
+  .search-input {
+    position: absolute;
+    top: 0;
+    padding-top: 5px;
+    width: auto;
+  }
+
+  .search-text {
+    display: none;
+  }
+
+  .search-img {
+    display: inline-block;
+  }
+
+  .search-button {
+    background-color: var(--header-bg);
+    padding-left: 8px;
+    padding-right: 8px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-left: 0;
+  }
+
+  .search-icon__hide {
+    display: none;
+  }
+}
