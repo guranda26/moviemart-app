@@ -126,7 +126,8 @@ const MainPage = async ({ params, searchParams}: { params: Params; searchParams?
                 key={id}
                 className="border border-gray-300 rounded-lg p-4 shadow-md hover:shadow-lg transition"
               >
-                <Link href={`/movies/${id}`} className="flex flex-col gap-2">
+                <Link href={`/movies/${id}`} className="flex flex-col gap-2" data-cy='product-item'
+                >
                   <Image
                     src={imageSrc}
                     alt={title}

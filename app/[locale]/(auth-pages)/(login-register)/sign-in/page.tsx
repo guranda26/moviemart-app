@@ -62,9 +62,7 @@ const Login: React.FC<LoginProps> = ({ searchParams }) => {
 
   if (isLoading)
     return (
-      <p className="text-gray-500">
         <Loading />
-      </p>
     );
 
   return (

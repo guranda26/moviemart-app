@@ -32,13 +32,12 @@ export const signUpAction = async (formData: FormData) => {
   });
 
   const user = data.user;
-  // console.log("user", user);
 
   if (error || !user) {
     console.error(error?.message || "Unknown error during sign-up");
     return {
       success: false,
-      message: error?.message || "Sign-up failed",
+      message: "Sign-up failed",
     };
   }
 

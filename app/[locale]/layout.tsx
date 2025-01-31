@@ -6,7 +6,6 @@ import { dir } from "i18next";
 import i18nConfig from "../../configs/i18ncofig";
 import "./globals.css";
 import Providers from "@/components/Providers";
-import ClientSideToastContainer from "@/components/ClientSideToastContainer";
 
 export const metadata: Metadata = {
   title: "Moviemart Platform",
@@ -72,7 +71,6 @@ export default async function DashboardLayout({
           namespaces={["products", "contact"]}
         >
           <Providers>
-          <ClientSideToastContainer />
             {children}
           </Providers>
         </TranslationsProvider>

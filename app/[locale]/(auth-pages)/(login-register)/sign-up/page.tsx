@@ -12,6 +12,7 @@ import { z } from "zod";
 import Loading from "@/components/Loading";
 import { useTranslation } from "react-i18next";
 import { FormElements } from "@/Interfaces/Forms";
+import { ApiResponse, Message, RegisterProps } from "@/Interfaces/Auth";
 
 const passwordRegex = new RegExp(
   "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&.])[A-Za-z\\d@$!%*?&.]{8,20}$"
@@ -35,20 +36,6 @@ const userSchema = z.object({
 });
 
 type FormData = z.infer<typeof userSchema>;
-
-interface Message {
-  type: "error" | "success";
-  content: string;
-}
-
-interface ApiResponse {
-  success: boolean;
-  message: string;
-}
-
-interface RegisterProps {
-  searchParams: Promise<Message>;
-}
 
 const Register: React.FC<RegisterProps> = ({ searchParams }) => {
   const [formData, setFormData] = useState<FormData>({

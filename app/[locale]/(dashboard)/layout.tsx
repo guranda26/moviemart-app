@@ -3,6 +3,7 @@ import ".././globals.css";
 import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
 import i18nConfig from "@/configs/i18ncofig";
+import ClientSideToastContainer from "@/components/ClientSideToastContainer";
 
 export const metadata: Metadata = {
   title: "Moviemart Platform",
@@ -25,10 +26,13 @@ export default async function DashboardLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <>
+    <ClientSideToastContainer />
     <section className="min-h-screen flex flex-col">
       <Header />
       {children}
       <Footer />
     </section>
+    </>
   );
 }
