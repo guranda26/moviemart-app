@@ -15,10 +15,9 @@ export type MessageProps = {
 };
 
 const ForgotPassword = async ({ params, searchParams }: Props) => {
-  const message = searchParams;
+  const message = await searchParams;
+  const { locale } = await params;
 
-  const { locale } = params;
-  
   const sucessMsg = (message as MessageProps)?.success;
   const errorMsg = (message as MessageProps)?.error;
 
