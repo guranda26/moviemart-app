@@ -13,7 +13,6 @@ export const metadata: Metadata = {
 export enum Locale {
   en = "EN",
   ka = "KA",
-  es = "ES",
 }
 
 export function generateStaticParams() {
