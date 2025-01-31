@@ -17,6 +17,8 @@ describe("Products modifification", () => {
     cy.wait(2000);
 
     cy.get("[data-cy='wishlist-url']").click();
+    cy.wait(1000);
+
     cy.url().should("include", "/wishlist-form");
 
     cy.get("[data-cy='wishlist-email-input']").type("g_lemonjava@cu.edu.ge");
