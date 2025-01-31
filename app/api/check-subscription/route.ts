@@ -3,7 +3,7 @@ import { checkSubscriptionStatus } from '@/components/SubscriptionStatus';
 export async function POST(req: Request) {
   try {
     const { userId } = await req.json();
-    console.log('User ID:', userId); // Log the incoming userId
+    console.log('User ID:', userId); 
 
     if (!userId) {
       return new Response(

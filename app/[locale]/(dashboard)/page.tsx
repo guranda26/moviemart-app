@@ -4,20 +4,29 @@ import Link from "next/link";
 import { Params } from "next/dist/server/request/params";
 import TranslationsProvider from "@/components/TranslationsProvider";
 import initTranslations from "@/utils/i18n";
-import BuyProductButton from "@/components/button/BuyProductButton";
 import SearchInput from "@/components/SearchInput";
 import AddToCartButton from "@/components/button/AddToCartBtn";
 import Image from "next/image";
+import createClient from "@/utils/supabase/server";
+import { checkSubscriptionStatus } from "@/components/SubscriptionStatus";
 
-const MainPage = async ({ params, searchParams }: { params: Params; searchParams?: { q?: string } }) => {
+
+const MainPage = async ({ params, searchParams}: { params: Params; searchParams?: { q?: string }, userId: string | number, productId: string }) => {
+  const supabaseClient = await createClient();
+  const { data: user } = await supabaseClient.auth.getUser();
+  // console.log("Product ID:", params.productId);
+
+  const dataId= user?.user?.id ?? "";
+  const isPremium = dataId && await checkSubscriptionStatus(dataId);
   const query = await searchParams
   const searchQuery = query?.q || "";
   const movies = await FetchMovies(searchQuery);
-
   const i18nNameSpaces = ["common", "products", "home"];
   const { locale } = await params;
   const { t, resources } = await initTranslations(locale, i18nNameSpaces);
   const isKa = locale === "ka";
+
+
 
   const categories = [
     "Animation",
@@ -41,7 +50,6 @@ const MainPage = async ({ params, searchParams }: { params: Params; searchParams
   const filteredMovies = movies.filter((movie) =>
     movie.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
-
   return (
     <TranslationsProvider
       resources={resources}
@@ -113,7 +121,6 @@ const MainPage = async ({ params, searchParams }: { params: Params; searchParams
               category,
               category_ka,
               price,
-              description,
             }) => (
               <li
                 key={id}
@@ -135,19 +142,15 @@ const MainPage = async ({ params, searchParams }: { params: Params; searchParams
                   </p>
                 </Link>
                 <div className="flex sm:flex-col gap-3">
-                <AddToCartButton
+                  {!isPremium && 
+                  <AddToCartButton
+                    userId={dataId}
                     productId={id}
                     productName={title}
                     productPrice={price}
                   />
-                  <BuyProductButton
-                    productId={id}
-                    productName={title}
-                    productImage={imageSrc}
-                    productDescription={description}
-                    productPrice={price}
-                  />
-                </div>
+                }
+                  </div>
               </li>
             )
           )

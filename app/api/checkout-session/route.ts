@@ -10,6 +10,7 @@ export async function POST(request: NextRequest) {
       productPrice,
       productDescription,
       productImage,
+      userId,
     } = await request.json();
 
     const user = await getUser();
@@ -21,29 +22,11 @@ export async function POST(request: NextRequest) {
       );
     }
 
-
-    const supabase = await createClient();
-    const { error } = await supabase
-      .from("orders")
-      .insert({
-        movie_id: productId,
-        user_id: user.id,
-        title: productName,
-        price: productPrice,
-        description: productDescription,
-        images: productImage,
-      })
-      .single();
-
-    if (error) {
-      throw new Error(`Error inserting order: ${error.message}`);
-    }
-
-    if (!productId || !productName || !productPrice) {
+    if (!productId || !userId || !productName || !productPrice) {
       return NextResponse.json(
         {
           error:
-            "Missing required fields: productId, productName, productPrice",
+            "Missing required fields: productId, productName, productPrice, userId",
         },
         { status: 400 }
       );
@@ -72,6 +55,24 @@ export async function POST(request: NextRequest) {
       )}&product_price=${encodeURIComponent(productPrice)}`,
       cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/cancel-checkout`,
     });
+
+    const supabase = await createClient();
+    const { error } = await supabase
+      .from("orders")
+      .insert([
+        {
+          user_id: userId, 
+          movie_id: productId,
+          movie_name: productName,
+          movie_image: productImage,
+          movie_price: productPrice,
+        },
+      ]);
+
+    if (error) {
+      console.error("Error saving order to database:", error);
+      throw error;
+    }
 
     return NextResponse.json({ url: session.url });
   } catch (error: unknown) {

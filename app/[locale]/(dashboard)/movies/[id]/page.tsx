@@ -4,13 +4,25 @@ import initTranslations from "@/utils/i18n";
 import React from "react";
 import TranslationsProvider from "@/components/TranslationsProvider";
 import ReturnLink from "@/components/ReturnLink";
+import createClient from "@/utils/supabase/server";
+import { checkSubscriptionStatus } from "@/components/SubscriptionStatus";
+import MovieComponent from "@/components/MovieWindow";
+import { checkPurchaseStatus } from "@/utils/supabase/checkPurchaseStatus";
+import BuyProductButton from "@/components/button/BuyProductButton";
 
 const MovieDetailsPage = async ({ params }: { params: Params }) => {
+    const supabaseClient = await createClient();
+    const { data: user } = await supabaseClient.auth.getUser();
+  
   const i18nNameSpaces = ["common", "products"];
   const { id, locale } = await params;
-
+  const numericID = Number(id)
   const { t, resources } = await initTranslations(locale, i18nNameSpaces);
 
+  const dataId= user?.user ? user.user.id : null;
+  const safeDataId = JSON.parse(JSON.stringify(dataId));
+
+  const isPremium = dataId ? await checkSubscriptionStatus(dataId) : false;
   if (!id) {
     return <NotFoundPage />;
   }
@@ -24,6 +36,8 @@ const MovieDetailsPage = async ({ params }: { params: Params }) => {
   }
 
   const movie = await response.json();
+
+  const isPurchased = await checkPurchaseStatus(safeDataId, movie.id);
 
   if (!movie || !movie.id) {
     return <NotFoundPage />;
@@ -41,6 +55,8 @@ const MovieDetailsPage = async ({ params }: { params: Params }) => {
     description,
     description_ka,
     year,
+    movie_url,
+    price
   } = movie;
 
   return (
@@ -68,6 +84,16 @@ const MovieDetailsPage = async ({ params }: { params: Params }) => {
             <strong>{t("products:author")}:</strong> {year}
           </p>
           <ReturnLink href={"/"} className="left-0" />
+          {isPurchased || isPremium ? <MovieComponent src={movie_url} /> : (
+          <BuyProductButton
+          userId={safeDataId ? safeDataId : ""}
+          productId={numericID}
+          productName={title}
+          productImage={imageSrc}
+          productDescription={description}
+          productPrice={price}
+        />
+          )}
         </div>
       </section>
     </TranslationsProvider>

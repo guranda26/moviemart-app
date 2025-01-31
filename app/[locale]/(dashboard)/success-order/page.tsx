@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
@@ -7,26 +7,45 @@ import "react-toastify/dist/ReactToastify.css";
 import Loading from "@/components/Loading";
 import { useTranslation } from "react-i18next";
 import ReturnBackButton from "@/components/ReturnBack";
+// import createClient from "@/utils/supabase/server";
 
 export default function OrderSuccess() {
   const router = useRouter();
-
+  // const [userId, setUserId] = useState<string | null>(null);
+  const [redirectTo, setRedirectTo] = useState<string | null>(null); // Track navigation
+  // const supabase = createClient();
   const [status, setStatus] = useState("loading");
   const searchParams = useSearchParams();
   const sessionId = searchParams.get("session_id");
 
-  const {t} = useTranslation()
+  const { t } = useTranslation();
+
+  // useEffect(() => {
+  //   const fetchUser = async () => {
+  //     const { data: { user } } = await supabase.auth.getUser();
+  //     if (user) {
+  //       setUserId(user.id);
+  //     } else {
+  //       setRedirectTo("/sign-in"); // Mark navigation for next render
+  //     }
+  //   };
+
+  //   fetchUser();
+  // }, []);
 
   useEffect(() => {
-    if (sessionId) {
-      saveOrderToSupabase();
-    } else {
+    if (redirectTo) {
+      router.push(redirectTo);
+    }
+  }, [redirectTo, router]);
+
+  const saveOrderToSupabase = useCallback(async () => {
+    if (!sessionId) {
       console.error("No session ID found.");
       setStatus("failed");
+      return;
     }
-  }, [sessionId]);
 
-  async function saveOrderToSupabase() {
     try {
       const response = await fetch(`/api/check-session`, {
         method: "POST",
@@ -36,18 +55,16 @@ export default function OrderSuccess() {
 
       if (!response.ok) throw new Error("Failed to fetch session details.");
 
-      const { session } = await response.json();
+      const { session, productDetails } = await response.json();
 
       if (session.payment_status === "paid") {
         toast.success("Payment Successful!", { position: "bottom-right" });
-
-        const timer = setTimeout(() => {
-          router.push("/movies"); 
-        }, 3000);
-
+        console.log("Saved products:", productDetails);
         setStatus("loaded");
 
-        return () => clearTimeout(timer); 
+        setTimeout(() => {
+          setRedirectTo("/movies"); 
+      }, 3000);
       } else {
         setStatus("failed");
       }
@@ -55,7 +72,17 @@ export default function OrderSuccess() {
       console.error("Error saving order:", error);
       setStatus("failed");
     }
-  }
+  }, [sessionId]);
+
+  useEffect(() => {
+    saveOrderToSupabase();
+  }, [saveOrderToSupabase]);
+
+  useEffect(() => {
+    if (redirectTo) {
+      router.push(redirectTo);
+    }
+  }, [redirectTo, router]);
 
   if (status === "loading") {
     return (
@@ -72,11 +99,9 @@ export default function OrderSuccess() {
       <div className="flex items-center justify-center h-screen bg-red-100">
         <div className="p-6 bg-white rounded shadow-md">
           <h1 className="text-2xl font-bold text-red-600">
-            {t('checkout:error_txt')}
+            {t("checkout:error_txt")}
           </h1>
-          <p className="mt-4 text-gray-600">
-          {t('checkout:error_msg')}
-          </p>
+          <p className="mt-4 text-gray-600">{t("checkout:error_msg")}</p>
         </div>
       </div>
     );
@@ -84,10 +109,10 @@ export default function OrderSuccess() {
 
   return (
     <div className="flex items-center justify-center h-screen bg-background">
-        <div className="p-6 flex flex-col bg-white rounded shadow-md gap-3 max-w-[400px]">
+      <div className="p-6 flex flex-col bg-white rounded shadow-md gap-3 max-w-[400px]">
         <h1 className="text-3xl font-bold text-[#136F63] mb-4">{t("checkout:success_msg")}</h1>
-        <ReturnBackButton className="bg-purpleButton" />      
-    </div>
+        <ReturnBackButton className="bg-purpleButton" />
+      </div>
     </div>
   );
 }

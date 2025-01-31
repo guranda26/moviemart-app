@@ -148,7 +148,7 @@ const Contact: React.FC = () => {
           </div>
           <div className="mb-4">
             <label className="block text-sm font-medium mb-2" htmlFor="email">
-              {t("contact:email")}
+              {t("common:email")}
             </label>
             <Input
               type="email"
@@ -211,7 +211,7 @@ const Contact: React.FC = () => {
         <ul className="list-none space-y-2">
           <li>📍 {t("contact:address")}</li>
           <li>📞 {t("contact:phone")} +1 (123) 456-7890</li>
-          <li>📧 {t("contact:email_static")} contact@moviestream.com</li>
+          <li>📧 {t("common:email")} contact@moviestream.com</li>
         </ul>
       </div>
       <ToastContainer className={"absolute top-10"} />

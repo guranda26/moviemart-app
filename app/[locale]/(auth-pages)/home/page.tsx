@@ -10,7 +10,7 @@ import { LocaleParams } from "@/Interfaces/Locale";
 const HomePage = async ({ params }: LocaleParams) => {
   const { locale } = await params;
 
-  const i18nNameSpace = ["home"];
+  const i18nNameSpace = ["home", "auth"];
   const { t, resources } = await initTranslations(locale, i18nNameSpace);
 
   return (
@@ -48,7 +48,7 @@ const HomePage = async ({ params }: LocaleParams) => {
                 className="rounded-lg border border-solid border-transparent transition-colors flex items-center justify-center bg-redButton text-textCol gap-2 hover:bg-hoverRedBtn text-sm sm:text-base h-10 sm:h-12 px-4 xs:px-8 sm:px-10 w-full text-white"
                 rel="noopener noreferrer"
               >
-                {t("home:login_btn")}
+                {t("auth:login")}
               </Link>
               <Link
                 href="/subscribe"

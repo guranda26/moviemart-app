@@ -6,7 +6,6 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 export const checkSubscriptionStatus = async (userId: string) => {
   const supabaseClient = await createClient();
 
-  // Fetch user's Stripe customer ID from Supabase
   const { data: user, error: userError } = await supabaseClient
     .from("profile")
     .select("stripe_customer_id")
@@ -17,7 +16,6 @@ export const checkSubscriptionStatus = async (userId: string) => {
     throw new Error("User or Stripe customer ID not found");
   }
 
-  // Fetch subscriptions from Stripe
   const subscriptions = await stripe.subscriptions.list({
     customer: user.stripe_customer_id,
     status: "all",

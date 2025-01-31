@@ -1,7 +1,6 @@
 import { stripe } from "@/utils/supabase/lib/stripe";
 import { NextRequest, NextResponse } from "next/server";
 import createClient from "@/utils/supabase/server";
-
 interface Product {
   movie_id: number | null; 
   name: string | null;      
@@ -23,7 +22,6 @@ export async function POST(request: NextRequest) {
         price: item.amount_total / 100,
       })) || [];
 
-      // Map each product to its corresponding movie_id
       const productWithMovieIds = await Promise.all(
         productDetails.map(async (product): Promise<Product | null> => {
           const supabase = await createClient();
@@ -45,8 +43,8 @@ export async function POST(request: NextRequest) {
       );
 
       const validProducts = productWithMovieIds.filter(Boolean);
-
-
+      console.log('validProducts', validProducts);
+      
 
       const supabase = await createClient();
       const { error } = await supabase.from("orders").insert(
@@ -56,6 +54,7 @@ export async function POST(request: NextRequest) {
           movie_id: product?.movie_id,  
           movie_name: product?.name,    
           quantity: product?.quantity,
+          user_id: session?.metadata?.userId,
         }))
       );
 

@@ -19,7 +19,7 @@ const CheckoutButton: React.FC<CheckoutButtonProps> = ({ cart }) => {
           },
           unit_amount: Math.round(item.movies.price * 100),
         },
-        quantity: 1,
+        quantity: 1
       };
     });
 
@@ -41,7 +41,13 @@ const CheckoutButton: React.FC<CheckoutButtonProps> = ({ cart }) => {
     const res = await fetch("/api/cart-checkout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ lineItems }),
+      body: JSON.stringify({
+        lineItems,
+        metadata: cart.map((item) => ({
+          productId: item.movie_id,
+          userId: item.user_id,
+        })),
+      }),
     });
 
     if (!res.ok) {

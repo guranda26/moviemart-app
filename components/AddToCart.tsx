@@ -15,6 +15,9 @@ export const addToCart = async (
   const user = await supabase.auth.getUser();
   const userId = user.data.user?.id;
 
+  console.log("Retrieved userId:", userId);
+
+
   if (!userId) {
     return { message: "You need to log in to add items to the cart.", error: true };
   }
@@ -32,6 +35,9 @@ export const addToCart = async (
   }
 
   if (existingCartItem) {
+    if (existingCartItem.purchased) {
+      return { message: "This product has already been purchased.", error: true };
+    }
     return { message: "This product is already in your cart.", error: true };
   }
 

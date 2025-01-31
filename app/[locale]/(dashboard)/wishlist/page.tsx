@@ -93,7 +93,7 @@ const MoviesInWishlistPage = () => {
       <h2 className="text-2xl xs:text-4xl font-bold text-center mb-8 break-all">{t("wishlist:wishlist_txt")}</h2>
       {posts.length > 0 && (
         <div className="text-center my-10">
-          <p className="text-lg xs:text-xl text-gray-600 mb-4">
+          <p className="text-lg xs:text-xl text-[#1c1c1c94] mb-4">
             {t("wishlist:add_movies")}
           </p>
           <Link

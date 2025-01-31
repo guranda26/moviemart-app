@@ -3,19 +3,24 @@
 import { useActionState, useEffect } from "react";
 import { addToCart } from "../addToCart";
 import { toast, ToastContainer } from "react-toastify";
+// import { checkPurchaseStatus } from "@/utils/supabase/checkPurchaseStatus";
+import { usePurchaseStatus } from "@/app/[locale]/(dashboard)/hooks/usePurchaseStatus";
 
-interface AddToCartButtonProps {
+export interface AddToCartButtonProps {
+  userId: string;
   productId: number;
   productName: string;
   productPrice: number;
 }
 
-const AddToCartButton = ({ productId, productName, productPrice }: AddToCartButtonProps) => {
-  const [state, formAction, pending] = useActionState(addToCart, {
+const AddToCartButton = ({ userId, productId, productName, productPrice }: AddToCartButtonProps) => {
+const [state, formAction, pending] = useActionState(addToCart, {
     message: "",
     error: false,
     success: false,
   });
+
+  const { isPurchased, isLoading } = usePurchaseStatus(userId, productId);
 
   useEffect(() => {
     if (state?.message) {
@@ -30,6 +35,7 @@ const AddToCartButton = ({ productId, productName, productPrice }: AddToCartButt
   return (
     <>
       <ToastContainer />
+      { !isPurchased ? (
       <form action={formAction}>
         <input type="hidden" name="productId" value={productId} />
         <input type="hidden" name="productName" value={productName} />
@@ -37,12 +43,14 @@ const AddToCartButton = ({ productId, productName, productPrice }: AddToCartButt
         <button
           className="py-2 px-3 bg-teal-600 hover:bg-teal-800 transition-colors hover:scale-105 rounded-md text-white w-[110px]"
           type="submit"
-          disabled={pending}
+          disabled={pending} 
           data-cy="add-to-cart-btn"
         >
-          {pending ? "Adding..." : "Add to Cart"}
+       {isLoading ? 'Loading...' : 'Add to Cart'}
         </button>
-      </form>
+      </form>) :
+      <button className="py-2 px-3 bg-gray-500 rounded-md text-white">Purchased</button>
+      }
     </>
   );
 };

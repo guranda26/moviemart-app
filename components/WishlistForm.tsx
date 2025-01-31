@@ -29,8 +29,8 @@ const wishlistFormSchema = z.object({
       const yearNumber = parseInt(year, 10);
       return yearNumber >= 1900 && yearNumber <= 2026;
     }, "Year must be between 1900 and 2026."),
-  comment: z.string().max(500, "Comment must be 500 characters or less.").optional(),
-  comment_ka: z.string().max(500, "Comment must be 500 characters or less.").optional(),
+  comment: z.string().max(250, "Comment must be 250 characters or less.").optional(),
+  comment_ka: z.string().max(250, "Comment must be 250 characters or less.").optional(),
   image_src: z.string().optional(),
 });
 
@@ -238,7 +238,7 @@ const WishlistForm = ({ userId }: { userId: string }) => {
             onChange={handleChange}
             className="w-full p-3 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
           ></textarea>
-          {formErrors.comment && <p className="text-red-500">{formErrors.comment}</p>}
+          {locale === 'ka' ? formData.comment_ka : formData.comment && <p className="text-red-500">{locale === 'ka' ? formData.comment_ka : formData.comment}</p>}
         </div>
         <button
           type="submit"
