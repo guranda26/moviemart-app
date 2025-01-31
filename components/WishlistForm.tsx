@@ -5,6 +5,7 @@ import Input from "@/components/Input";
 import {toast, ToastContainer} from "react-toastify"
 import "react-toastify/dist/ReactToastify.css";
 import { z } from "zod";
+import Link from "next/link";
 
 const wishlistFormSchema = z.object({
   email: z
@@ -27,6 +28,7 @@ const wishlistFormSchema = z.object({
       return yearNumber >= 1900 && yearNumber <= 2026;
     }, "Year must be between 1900 and 2026."),
   comment: z.string().optional(),
+  image_src: z.string().optional(),
 });
 
 const WishlistForm = ({ userId }: { userId: string }) => {
@@ -37,6 +39,7 @@ const WishlistForm = ({ userId }: { userId: string }) => {
     language: "",
     year: "",
     comment: "",
+    image_src: "",
   });
 
   const [status, setStatus] = useState("");
@@ -90,14 +93,14 @@ const WishlistForm = ({ userId }: { userId: string }) => {
       setIsSubscribed(true);
       setStatus("Submitting...");
 
-      const { email, name, type, language, year, comment } = formData;
+      const { email, name, type, language, year, comment, image_src } = formData;
 
       const formResponse = await fetch("/api/wishlist-form", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, name, type, language, year, comment }),
+        body: JSON.stringify({ email, name, type, language, year, comment, image_src }),
       });
 
       if (formResponse.ok) {
@@ -128,6 +131,7 @@ const WishlistForm = ({ userId }: { userId: string }) => {
       language: "",
       year: "",
       comment: "",
+      image_src: "",
     });
   };
 
@@ -136,9 +140,10 @@ const WishlistForm = ({ userId }: { userId: string }) => {
     <section className="max-w-4xl mx-auto px-6 py-12 bg-background text-textCol">
       <h2 className="text-3xl font-bold text-center mb-6">Wishlist Form</h2>
       <p className="text-lg text-center mb-4">Only for the subscribed users</p>
-      <h3 className="text-xl mb-8 text-center">
+      <h3 className="text-xl mb-4 text-center">
         Do you want to see your favorite movie, an upcoming release, or have any movie translated into your preferred language on our platform? Fill out the form, and we will reach out to you!
       </h3>
+      <p className="text-md text-center mb-6">Or Check your <Link href={'/wishlist'} className="text-blue-700 hover:underline">wishlist page</Link></p>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
           <Input
@@ -207,11 +212,21 @@ const WishlistForm = ({ userId }: { userId: string }) => {
           />
           {formErrors.year && <p className="text-red-500">{formErrors.year}</p>}
         </div>
+        <div><Input
+            type="text"
+            id="image_src"
+            name="image_src"
+            placeholder="Enter movie image link... (Optional)"
+            value={formData.image_src}
+            onChange={handleChange}
+            className="w-full p-3 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          {formErrors.image_src && <p className="text-red-500">{formErrors.image_src}</p>}</div>
         <div>
           <textarea
             name="comment"
             id="comment"
-            placeholder="Additional Comment"
+            placeholder="Additional Comment (Optional)"
             value={formData.comment}
             onChange={handleChange}
             className="w-full p-3 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"

@@ -50,14 +50,18 @@ const Header = () => {
               </Link>
             </li>
             <li>
-              <Link href={"/wishlist-form"} className="text-2xl">
-                <Image width={20} height={20} src="/assets/wishlist.png" alt="wishlist" className="w-5" />
-              </Link>
+              <div className="text-2xl relative group">
+                <Link href={"/wishlist-form"}><Image width={20} height={20} src="/assets/wishlist.png" alt="wishlist" className="w-5" />
+                </Link>
+                <Link href={"/wishlist"}><span className="hidden md:inline-block absolute left-1/2 -translate-x-1/2 top-10 bg-gray-800 text-sm py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white">
+                  Wishlist
+                </span></Link>
+              </div>
             </li>
             <li className="relative group">
-              <Link href="/profile" className="text-2xl relative">
+              <Link href="/profile" className="text-2xl relative group">
                 <LuCircleUserRound />
-                <span className="hidden md:inline-block absolute left-1/2 -translate-x-1/2 -top-10 bg-gray-800 text-sm py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white">
+                <span className="hidden md:inline-block absolute left-1/2 -translate-x-1/2 top-10 bg-gray-800 text-sm py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white">
                   Profile
                 </span>
               </Link>

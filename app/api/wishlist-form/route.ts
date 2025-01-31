@@ -3,7 +3,7 @@ import { NextRequest } from "next/server"
 
 export async function POST(req: NextRequest) {
   try {
-    const { email, name, type, language, year, comment } = await req.json()
+    const { email, name, type, language, year, comment, image_src } = await req.json()
 
     if (!email || !name || !type || !language || !year) {
       return new Response(
@@ -21,6 +21,7 @@ export async function POST(req: NextRequest) {
         language,
         year,
         comment,
+        image_src
       },
     ])
 
