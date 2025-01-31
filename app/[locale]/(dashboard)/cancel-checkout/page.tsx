@@ -1,13 +1,14 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReturnBackButton from "@/components/ReturnBack";
+import Loading from "@/components/Loading";
 
-export default function OrderCancel() {
+function OrderCancelContent() {  
   const {t} = useTranslation("checkout")
   const router = useRouter();
 
@@ -16,22 +17,26 @@ export default function OrderCancel() {
 
 
   console.log('productName', sessionId);
-  
-  const PushRoute = () => {
-    router.push("/cart");
-  };
 
 
   useEffect(() => {
+    if (!sessionId) {
+      router.push("/");
+      return;
+    }
+
+
     toast.error("Payment canceled !", {
       position: "bottom-right",
       autoClose: 4000
     });
-    setTimeout(() => {
-      PushRoute();
+
+    const timeout = setTimeout(() => {
+      router.push("/cart");
     }, 5000);
-  }, []);
-  
+
+    return () => clearTimeout(timeout); 
+  }, [router, sessionId]);
 
   if (!sessionId) {
     router.push("/");
@@ -54,5 +59,13 @@ export default function OrderCancel() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function OrderCancel() {
+  return (
+    <Suspense fallback={<Loading />}>
+      <OrderCancelContent />
+    </Suspense>
   );
 }

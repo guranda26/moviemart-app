@@ -1,15 +1,14 @@
 "use client";
-import { useCallback, useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useCallback, useEffect, useState, Suspense } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
 import "react-toastify/dist/ReactToastify.css";
 import Loading from "@/components/Loading";
 import { useTranslation } from "react-i18next";
 import ReturnBackButton from "@/components/ReturnBack";
 // import createClient from "@/utils/supabase/server";
 
-export default function OrderSuccess() {
+function OrderSuccessContent() {
   const router = useRouter();
   // const [userId, setUserId] = useState<string | null>(null);
   const [redirectTo, setRedirectTo] = useState<string | null>(null); // Track navigation
@@ -20,18 +19,6 @@ export default function OrderSuccess() {
 
   const { t } = useTranslation();
 
-  // useEffect(() => {
-  //   const fetchUser = async () => {
-  //     const { data: { user } } = await supabase.auth.getUser();
-  //     if (user) {
-  //       setUserId(user.id);
-  //     } else {
-  //       setRedirectTo("/sign-in"); // Mark navigation for next render
-  //     }
-  //   };
-
-  //   fetchUser();
-  // }, []);
 
   useEffect(() => {
     if (redirectTo) {
@@ -114,5 +101,13 @@ export default function OrderSuccess() {
         <ReturnBackButton className="bg-purpleButton" />
       </div>
     </div>
+  );
+}
+
+export default function OrderSuccess() {
+  return (
+    <Suspense fallback={<Loading />}>
+      <OrderSuccessContent />
+    </Suspense>
   );
 }

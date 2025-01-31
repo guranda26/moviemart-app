@@ -1,7 +1,9 @@
-import { Params } from "next/dist/server/request/params";
 import MainPage from "../page";
 
-const MoviePage = async ({ params }: { params: Params }) => {
+type MovieParams = Promise<{ locale: string; productId?: string }>;
+
+
+const MoviePage = async ({ params }: { params: MovieParams }) => {
   return <MainPage params={params} />;
 };
 

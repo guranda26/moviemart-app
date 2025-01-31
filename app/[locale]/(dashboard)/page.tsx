@@ -1,7 +1,6 @@
 import React from "react";
 import FetchMovies from "@/utils/supabase/lib/FetchMovies";
 import Link from "next/link";
-import { Params } from "next/dist/server/request/params";
 import TranslationsProvider from "@/components/TranslationsProvider";
 import initTranslations from "@/utils/i18n";
 import SearchInput from "@/components/SearchInput";
@@ -10,23 +9,23 @@ import Image from "next/image";
 import createClient from "@/utils/supabase/server";
 import { checkSubscriptionStatus } from "@/components/SubscriptionStatus";
 
+type Params = Promise<{ locale: string; productId?: string }>;
 
-const MainPage = async ({ params, searchParams}: { params: Params; searchParams?: { q?: string }, userId: string | number, productId: string }) => {
+
+const MainPage = async ({ params, searchParams}: { params: Params; searchParams?: Promise<{ q?: string }> }) => {
+  const { locale } = await params;
+  const resolvedSearchParams = await searchParams;
+  const searchQuery = resolvedSearchParams?.q || "";
+ 
   const supabaseClient = await createClient();
   const { data: user } = await supabaseClient.auth.getUser();
-  // console.log("Product ID:", params.productId);
 
-  const dataId= user?.user?.id ?? "";
-  const isPremium = dataId && await checkSubscriptionStatus(dataId);
-  const query = await searchParams
-  const searchQuery = query?.q || "";
+  const userId= user?.user?.id ?? "";
+  const isPremium = userId && await checkSubscriptionStatus(userId);
   const movies = await FetchMovies(searchQuery);
   const i18nNameSpaces = ["common", "products", "home"];
-  const { locale } = await params;
   const { t, resources } = await initTranslations(locale, i18nNameSpaces);
   const isKa = locale === "ka";
-
-
 
   const categories = [
     "Animation",
@@ -145,7 +144,7 @@ const MainPage = async ({ params, searchParams}: { params: Params; searchParams?
                 <div className="flex sm:flex-col gap-3">
                   {!isPremium && 
                   <AddToCartButton
-                    userId={dataId}
+                    userId={userId}
                     productId={id}
                     productName={title}
                     productPrice={price}

@@ -16,12 +16,14 @@ export type ErrorMsgProp = {
 };
 
 export default async function ResetPassword({
-  params: { locale },
+  params,
   searchParams,
 }: {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
   searchParams: Promise<Message>;
 }) {
+
+  const { locale } = await params;
   const searchParamsResolved = await searchParams;
 
   const successMsg = (searchParamsResolved as SuccessMsgProp).success;
@@ -35,14 +37,6 @@ export default async function ResetPassword({
       redirect("/");
     }, 0);
   }
-  // const handlePasswordSubmit = async (
-  //   event: React.FormEvent<HTMLFormElement>
-  // ) => {
-  //   event.preventDefault();
-  //   const response = await resetPasswordAction(new FormData(event.target));
-  //   return response;
-  // };
-  // Use zod schema to validate the password and confirmPassword  }
 
   return (
     <TranslationsProvider

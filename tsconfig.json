@@ -34,10 +34,8 @@
     ".next/types/**/*.ts",
     "public/assets/*.mp4",
     "public/assets/*",
-    "app/api/blogs/blogsData.jaon",
-    "public/blogsData.jaon",
     "/utils/i18n.js",
     "/app/not-found.tsx"
   ],
-  "exclude": ["node_modules"]
+"exclude": ["node_modules", "supabase", "stripe"],
 }

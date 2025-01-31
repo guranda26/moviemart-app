@@ -52,7 +52,7 @@ const HomePage = async ({ params }: LocaleParams) => {
                 {t("auth:login")}
               </Link>
               <Link
-                href="/signup"
+                href="/sign-up"
                 className="rounded-lg border border-solid border-redButton transition-colors flex items-center justify-center bg-darkBtn text-textCol gap-2 hover:bg-hoverDarkBtn text-sm sm:text-base h-10 sm:h-12 px-4 xs:px-8 sm:px-10 w-full text-white"
                 data-cy="register-btn"
               > 

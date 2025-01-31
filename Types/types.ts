@@ -19,3 +19,5 @@ export type LinkProps = {
   href: string;
   className?: string;
 };
+
+export type MovieParams = Promise<{ [key: string]: string }>;

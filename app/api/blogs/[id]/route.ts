@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export const GET = async (
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) => {
   try {
     const { id } = await params;
@@ -20,12 +20,11 @@ export const GET = async (
     .eq("id", id)
     .single();
     
-    const session = supabase.auth.getSession();
+    const session = await supabase.auth.getSession();
 
     if (!session) {
       return new Response("User not logged in", { status: 401 });
     }
-
 
 
     if (error) {

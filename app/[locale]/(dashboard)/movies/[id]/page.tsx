@@ -1,5 +1,4 @@
 import NotFoundPage from "@/app/[locale]/not-found";
-import { Params } from "next/dist/server/request/params";
 import initTranslations from "@/utils/i18n";
 import React from "react";
 import TranslationsProvider from "@/components/TranslationsProvider";
@@ -9,8 +8,9 @@ import { checkSubscriptionStatus } from "@/components/SubscriptionStatus";
 import MovieComponent from "@/components/MovieWindow";
 import { checkPurchaseStatus } from "@/utils/supabase/checkPurchaseStatus";
 import BuyProductButton from "@/components/button/BuyProductButton";
+import { BlogParams } from "@/Types/types";
 
-const MovieDetailsPage = async ({ params }: { params: Params }) => {
+const MovieDetailsPage = async ({ params }: { params: BlogParams }) => {
     const supabaseClient = await createClient();
     const { data: user } = await supabaseClient.auth.getUser();
   
