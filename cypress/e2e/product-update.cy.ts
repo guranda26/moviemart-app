@@ -15,8 +15,7 @@ describe("Products modifification", () => {
     cy.wait(2000);
 
     cy.url().should("include", "/");
-
-    cy.get("[data-cy='wishlist-url']", { timeout: 10000 }).should("be.visible");
+    cy.wait(5000);
 
     cy.get("[data-cy='wishlist-url']").click();
     cy.wait(3000);
