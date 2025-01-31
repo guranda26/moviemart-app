@@ -17,3 +17,20 @@ export interface Movies {
 export interface MovieData {
   movies: Movies[];
 }
+
+  export interface MoviesInWishlist {
+    id: number;
+    name: string;
+    type: string;
+    language: string;
+    year: number;
+    comment?: string;
+    comment_ka?: string;
+    image_src?: string
+  }
+
+  export interface EditMovieFormProps {
+    movie: MoviesInWishlist;
+    onClose: () => void;
+    onUpdate: (formData: MoviesInWishlist) => Promise<void>;
+  }

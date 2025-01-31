@@ -147,7 +147,11 @@ textarea {
   outline: none;
 }
 
-input#search::placeholder{
+input::placeholder{
+  color: #fff;
+}
+
+.search-placeholder::placeholder{
   color: black;
 }
 

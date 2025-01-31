@@ -56,7 +56,10 @@ export default async function DashboardLayout({
     "auth",
     "common",
     "checkout",
-    "subscription"
+    "subscription",
+    "wishlist",
+    "common_placeholder",
+    "edit_form"
   ]);
   return (
     <html lang={locale} dir={dir(locale)} suppressHydrationWarning>

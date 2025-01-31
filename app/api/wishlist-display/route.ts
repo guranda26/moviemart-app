@@ -19,6 +19,7 @@ export async function GET() {
       .select("*");
 
     if (moviesError) {
+      console.error("Supabase error:", moviesError);
       return NextResponse.json(
         { error: "Movies are not found in the wishlist", status: 404 },
         { status: 404 }

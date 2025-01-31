@@ -4,8 +4,10 @@ import React, { useState } from "react";
 import Input from "@/components/Input";
 import {toast, ToastContainer} from "react-toastify"
 import "react-toastify/dist/ReactToastify.css";
+import { useTranslation } from "react-i18next";
 import { z } from "zod";
 import Link from "next/link";
+import useLocaleFromPath from "@/components/UsePath";
 
 const wishlistFormSchema = z.object({
   email: z
@@ -28,10 +30,12 @@ const wishlistFormSchema = z.object({
       return yearNumber >= 1900 && yearNumber <= 2026;
     }, "Year must be between 1900 and 2026."),
   comment: z.string().optional(),
+  comment_ka: z.string().optional(),
   image_src: z.string().optional(),
 });
 
 const WishlistForm = ({ userId }: { userId: string }) => {
+  const locale = useLocaleFromPath();
   const [formData, setFormData] = useState({
     email: "",
     name: "",
@@ -39,6 +43,7 @@ const WishlistForm = ({ userId }: { userId: string }) => {
     language: "",
     year: "",
     comment: "",
+    comment_ka: "",
     image_src: "",
   });
 
@@ -46,6 +51,7 @@ const WishlistForm = ({ userId }: { userId: string }) => {
   const [isSubscribed, setIsSubscribed] = useState(true);
   const [formErrors, setFormErrors] = useState<Partial<Record<keyof typeof formData, string>>>({}); 
   const [showStatus, setShowStatus] = useState(true)
+  const {t} = useTranslation()
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -93,14 +99,14 @@ const WishlistForm = ({ userId }: { userId: string }) => {
       setIsSubscribed(true);
       setStatus("Submitting...");
 
-      const { email, name, type, language, year, comment, image_src } = formData;
+      const { email, name, type, language, year, comment, comment_ka, image_src } = formData;
 
       const formResponse = await fetch("/api/wishlist-form", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, name, type, language, year, comment, image_src }),
+        body: JSON.stringify({ email, name, type, language, year, comment, comment_ka, image_src }),
       });
 
       if (formResponse.ok) {
@@ -131,6 +137,7 @@ const WishlistForm = ({ userId }: { userId: string }) => {
       language: "",
       year: "",
       comment: "",
+      comment_ka: "",
       image_src: "",
     });
   };
@@ -138,19 +145,19 @@ const WishlistForm = ({ userId }: { userId: string }) => {
 
   return (
     <section className="max-w-4xl mx-auto px-6 py-12 bg-background text-textCol">
-      <h2 className="text-3xl font-bold text-center mb-6">Wishlist Form</h2>
-      <p className="text-lg text-center mb-4">Only for the subscribed users</p>
+      <h2 className="text-3xl font-bold text-center mb-6">{t("wishlist:form_txt")}</h2>
+      <p className="text-lg text-center mb-4">{t("wishlist:form_restriction")}</p>
       <h3 className="text-xl mb-4 text-center">
-        Do you want to see your favorite movie, an upcoming release, or have any movie translated into your preferred language on our platform? Fill out the form, and we will reach out to you!
+        {t("wishlist:form_request")}
       </h3>
-      <p className="text-md text-center mb-6">Or Check your <Link href={'/wishlist'} className="text-blue-700 hover:underline">wishlist page</Link></p>
+      <p className="text-md text-center mb-6">{t("wishlist:check_txt")}&nbsp;<Link href={'/wishlist'} className="text-blue-700 hover:underline">{t("wishlist:check_link")}</Link></p>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
           <Input
             type="email"
             id="email"
             name="email"
-            placeholder="Enter Your Email"
+            placeholder={t("common_placeholder:enter_email")}
             value={formData.email}
             onChange={handleChange}
             className="w-full p-3 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -162,7 +169,7 @@ const WishlistForm = ({ userId }: { userId: string }) => {
             type="text"
             id="name"
             name="name"
-            placeholder="Enter Movie Name"
+            placeholder={t("common_placeholder:enter_email")}
             value={formData.name}
             onChange={handleChange}
             className="w-full p-3 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -177,9 +184,9 @@ const WishlistForm = ({ userId }: { userId: string }) => {
             onChange={handleChange}
             className="w-full p-3 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option value="Movie">Movie</option>
-            <option value="TV series">TV series</option>
-            <option value="Animation">Animation</option>
+            <option value="Movie">{t("wishlist:type_movie")}</option>
+            <option value="TV series">{t("wishlist:type_series")}</option>
+            <option value="Animation">{t("wishlist:type_animation")}</option>
           </select>
           {formErrors.type && <p className="text-red-500">{formErrors.type}</p>}
         </div>
@@ -191,12 +198,12 @@ const WishlistForm = ({ userId }: { userId: string }) => {
             onChange={handleChange}
             className="w-full p-3 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option value="">Select Language</option>
-            <option value="Georgian">Georgian</option>
-            <option value="English">English</option>
-            <option value="Russian">Russian</option>
-            <option value="Spanish">Spanish</option>
-            <option value="German">German</option>
+            <option value="">{t("wishlist:select_lang")}</option>
+            <option value="Georgian">{t("wishlist:lang_geo")}</option>
+            <option value="English">{t("wishlist:lang_en")}</option>
+            <option value="Russian">{t("wishlist:lang_rus")}</option>
+            <option value="Spanish">{t("wishlist:lang_sp")}</option>
+            <option value="German">{t("wishlist:lang_ger")}</option>
           </select>
           {formErrors.language && <p className="text-red-500">{formErrors.language}</p>}
         </div>
@@ -205,7 +212,7 @@ const WishlistForm = ({ userId }: { userId: string }) => {
             type="text"
             id="year"
             name="year"
-            placeholder="Enter Released Year"
+            placeholder={t("common_placeholder:enter_released_year")}
             value={formData.year}
             onChange={handleChange}
             className="w-full p-3 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -216,7 +223,7 @@ const WishlistForm = ({ userId }: { userId: string }) => {
             type="text"
             id="image_src"
             name="image_src"
-            placeholder="Enter movie image link... (Optional)"
+            placeholder={t("common_placeholder:enter_url")}
             value={formData.image_src}
             onChange={handleChange}
             className="w-full p-3 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -224,10 +231,10 @@ const WishlistForm = ({ userId }: { userId: string }) => {
           {formErrors.image_src && <p className="text-red-500">{formErrors.image_src}</p>}</div>
         <div>
           <textarea
-            name="comment"
+            name={locale === 'ka' ? 'comment_ka' : 'comment'}
             id="comment"
             placeholder="Additional Comment (Optional)"
-            value={formData.comment}
+            value={locale === 'ka' ? formData.comment_ka : formData.comment}
             onChange={handleChange}
             className="w-full p-3 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
           ></textarea>
@@ -237,7 +244,7 @@ const WishlistForm = ({ userId }: { userId: string }) => {
           type="submit"
           className="w-full py-3 px-6 bg-redButton text-white rounded-md hover:bg-hoverRedBtn transition"
         >
-          Submit Form
+          {t("common_placeholder:submit")}
         </button>
       </form>
 

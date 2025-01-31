@@ -45,7 +45,7 @@ const SearchInput = ({ initialSearchQuery }: { initialSearchQuery: string }) => 
           value={searchQuery}
           onChange={handleSearchChange}
           onClick={handleClearSearch}
-          className="w-[400px] p-2 pl-10 border border-redButton rounded shadow-sm md:bg-[#e8ceb595] text-black"
+          className="w-[400px] p-2 pl-10 border border-redButton rounded shadow-sm md:bg-[#e8ceb595] text-black search-placeholder"
         />
         {searchQuery && searchPage ? (
           <button

@@ -1,4 +1,4 @@
-import { supabase } from "@/utils/supabase/lib/supabase";
+import createClient from "@/utils/supabase/server";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -9,6 +9,7 @@ export async function POST(req: Request) {
 
     const { id, username, email, password, age } = response;
 
+    const supabase = await createClient()
     const { error } = await supabase.from("profile").insert([
       {
         id,

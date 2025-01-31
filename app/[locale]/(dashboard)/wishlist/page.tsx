@@ -1,4 +1,3 @@
-
 'use client'
 
 import FetchMovies from '@/components/FetchWishlistMovies';
@@ -6,30 +5,25 @@ import Loading from '@/components/Loading';
 import Image from 'next/image';
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
-import { RiDeleteBin5Fill } from "react-icons/ri";
+import EditMovieForm from '@/components/EditMovieForm';
+import { RiDeleteBin5Fill, RiEdit2Fill } from "react-icons/ri";
+import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
+import { MoviesInWishlist } from '@/Interfaces/Movies';
+import useLocaleFromPath from '@/components/UsePath';
 
-const MoviesInWishlist = () => {
-
-  interface MoviesInWishlist {
-    id: number;
-    name: string;
-    type: string;
-    language: string;
-    year: number;
-    comment?: string;
-    image_src?: string
-  }
-
+const MoviesInWishlistPage = () => {
   const [posts, setPosts] = useState<MoviesInWishlist[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [editingMovie, setEditingMovie] = useState<MoviesInWishlist | null>(null);
+  const {t} = useTranslation()
+  const locale = useLocaleFromPath();
 
   useEffect(() => {
     const wishlistMovies = async () => {
       try {
         const posts = await FetchMovies();
-        // console.log("posts", posts);
         setPosts(posts);
-
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching posts:", error);
@@ -40,9 +34,7 @@ const MoviesInWishlist = () => {
     wishlistMovies();
   }, []);
 
-  const onDelete = async (movieId: number) => {
-    console.log('deleting productId', movieId);
-    
+  const onDelete = async (movieId: number) => {    
     if (!confirm("Are you sure you want to delete this item?")) return;
 
     try {
@@ -56,56 +48,80 @@ const MoviesInWishlist = () => {
           body: JSON.stringify({ movieId }),
         }
       );
-
       setPosts((prevPosts) => prevPosts.filter((post) => post.id !== movieId));
-
-
       if (!response.ok) {
         throw new Error("Failed to delete the item from the cart");
       }
-
       await FetchMovies();
-
-      console.log('posts', posts);
-
-      
-
     } catch (error) {
       console.error("Error deleting item:", error);
       alert("There was an error deleting the item. Please try again.");
     }
   };
 
+  const onUpdate = async (updatedMovie: MoviesInWishlist) => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/wishlist-update`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedMovie),
+        }
+      )
+
+      if (!response.ok) {
+        throw new Error("Failed to update the movie");
+      }
+
+      const updatedPosts = await FetchMovies();
+      setPosts(updatedPosts);
+      setEditingMovie(null)
+      toast.success("Movie updated successfully!");
+    } catch (error) {
+      console.error("Error updating movie:", error);
+      toast.error("There was an error updating the movie. Please try again.");
+    }
+  }
+
   if(isLoading) return <Loading />
 
   return (
-    <section className="max-w-6xl mx-auto px-6 py-12 bg-background text-textCol">
-      <h2 className="text-4xl font-bold text-center mb-8">Wishlist Movies</h2>
+    <section className="max-w-6xl mx-auto px-2 xs:px-6 py-12 bg-background text-textCol">
+      <h2 className="text-2xl xs:text-4xl font-bold text-center mb-8 break-all">{t("wishlist:wishlist_txt")}</h2>
       {posts.length > 0 && (
         <div className="text-center my-10">
-          <p className="text-xl text-gray-600 mb-4">
-            Want to add more movies to the wishlist?
+          <p className="text-lg xs:text-xl text-gray-600 mb-4">
+            {t("wishlist:add_movies")}
           </p>
           <Link
             href="/wishlist-form"
-            className="inline-block bg-redButton text-white px-6 py-3 rounded-lg hover:bg-hoverRedBtn transition-colors duration-300"
+            className="inline-block bg-redButton text-white px-6 py-3 rounded-lg hover:bg-hoverRedBtn transition-colors duration-300 break-all"
           >
-            Fill the Form
+          {t("wishlist:fill_form_txt")}
           </Link>
         </div>
       )}
       {posts.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {posts.map(({ id, name, type, language, year, comment, image_src }) => (
+        <div className="max-w-[1400px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 m-auto pt-4 sm:pt-2">
+          {posts.map(({ id, name, type, language, year, comment, comment_ka, image_src }) => (
             <div
               key={id}
-              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 hover:scale-105"
-            >
-            <div className='w-[100%]'>
+              className="sm:transform sm:transition-transform sm:duration-300 sm:hover:scale-105 sm:hover:shadow-lg animate-fade-in relative"
+              >
+              <div className="relative h-48 w-full">
+              <div className='w-[100%] p-2 flex justify-center flex-1 mt-auto relative top-0 z-40 text-white'>
+              <button
+                  onClick={() => setEditingMovie({ id, name, type, language, year, comment, image_src })}
+                  className="bg-[#00000094] hover:bg-[#38383894] p-2 rounded-md mr-2"
+                >
+                  <RiEdit2Fill />
+                </button>
               <button onClick={() => onDelete(id)} className='bg-redButton hover:bg-hoverRedBtn p-2 rounded-md ml-auto'><RiDeleteBin5Fill />
               </button>
             </div>
-              <div className="relative h-48 w-full">
                 <Image
                   src={image_src || '/assets/placeholder.png'}
                   alt={name}
@@ -113,20 +129,25 @@ const MoviesInWishlist = () => {
                   className="object-cover"
                 />
               </div>
-              <div className="p-6">
-                <h3 className="text-2xl font-semibold mb-2 text-gray-800">{name}</h3>
-                <p className="text-lg text-gray-600 mb-1">
-                  <span className="font-medium">Type:</span> {type}
+              <div className="p-6 bg-profileBg min-h-[270px] text-textCol">
+                <h3 className="text-2xl font-semibold mb-2">{name}</h3>
+                <p className="text-lg">
+                  <span className="font-medium">{t("wishlist:type")}</span> {type}
                 </p>
-                <p className="text-lg text-gray-600 mb-1">
-                  <span className="font-medium">Language:</span> {language}
+                <p className="text-lg mb-1">
+                  <span className="font-medium">{t("wishlist:language")}</span> {language}
                 </p>
-                <p className="text-lg text-gray-600 mb-1">
-                  <span className="font-medium">Year:</span> {year}
+                <p className="text-lg mb-1">
+                  <span className="font-medium">{t("wishlist:year")}</span> {year}
                 </p>
-                {comment && (
-                  <p className="text-lg text-gray-600 mb-1">
-                    <span className="font-medium">Comment:</span> {comment}
+                {comment && locale !== 'ka' && (
+                  <p className="text-lg mb-1">
+                    <span className="font-medium">{t("wishlist:comment")}</span> {comment}
+                  </p>
+                )}
+                {comment_ka && locale === 'ka' && (
+                  <p className="text-lg mb-1">
+                    <span className="font-medium">{t("wishlist:comment")}</span> {comment_ka}
                   </p>
                 )}
               </div>
@@ -135,18 +156,24 @@ const MoviesInWishlist = () => {
         </div>
       ) : (
         <div className="text-center py-12">
-          <p className="text-2xl text-gray-600 mb-4">No movies in the wishlist yet.</p>
+          <p className="text-2xl text-gray-600 mb-4">{t("wishlist:no_movies")}</p>
           <Link
             href="/wishlist-form"
             className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors duration-300"
-          >
-            Add a Movie
+          > 
+            {t("wishlist:add_movie")}
           </Link>
         </div>
+      )}
+       {editingMovie && (
+        <EditMovieForm
+          movie={editingMovie}
+          onClose={() => setEditingMovie(null)}
+          onUpdate={onUpdate}
+        />
       )}
     </section>
   );
 };
 
-
-export default MoviesInWishlist
+export default MoviesInWishlistPage
