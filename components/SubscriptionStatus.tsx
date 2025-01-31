@@ -23,7 +23,6 @@ export const checkSubscriptionStatus = async (userId: string) => {
     status: "all",
   });
 
-  // Check if the user has an active subscription
   const hasActiveSubscription = subscriptions.data.some(
     (sub) => sub.status === "active"
   );

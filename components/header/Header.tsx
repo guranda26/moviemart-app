@@ -50,8 +50,8 @@ const Header = () => {
               </Link>
             </li>
             <li>
-              <Link href={"/cart"} className="text-2xl">
-                {t("header:cart")}
+              <Link href={"/wishlist-form"} className="text-2xl">
+                <Image width={20} height={20} src="/assets/wishlist.png" alt="wishlist" className="w-5" />
               </Link>
             </li>
             <li className="relative group">
