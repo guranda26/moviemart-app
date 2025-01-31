@@ -7,7 +7,7 @@ interface Movie {
 
 interface CartItem {
   user_id: string;
-  movie_id?: string;
+  movie_id?: number;
   stripe_price_id: string;
   quantity: number;
   stripe_movie_id: string;

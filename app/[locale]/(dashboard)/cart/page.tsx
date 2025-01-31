@@ -4,7 +4,6 @@ import React from "react";
 import { useCart } from "@/hooks/useCart";
 import { MdDelete } from "react-icons/md";
 import CheckoutButton from "@/components/button/CheckoutBtn";
-// import RedirectToProductBtn from "../../../components/RedirectToProductPage";
 
 const Page = () => {
   const { cart = [], fetchCart } = useCart();
@@ -42,16 +41,6 @@ const Page = () => {
     }
   };
 
-  // const onUpdate = async (productId: number, newQuantity: number) => {
-  //   if (cart) {
-  //     const updatedCart = cart.map((item) =>
-  //       item.movie_id === productId
-  //         ? { ...item, quantity: newQuantity }
-  //         : item
-  //     );
-  //     setCart(updatedCart);
-  //   }
-  // };
 
   const totalAmount = cart
     ? cart.reduce(
@@ -85,22 +74,7 @@ const Page = () => {
                     Price: ${item.movies.price}
                   </p>
                 </div>
-                {/* <form className="flex gap-2">
-                  <input
-                    type="number"
-                    className="w-10 border border-gray-300 rounded-md p-1"
-                    value={item.quantity}
-                    min="1"
-                    // onChange={(e) => {
-                    //   const newQuantity = Number(e.target.value);
-                    //   onUpdate(item.movie_id, newQuantity);
-                    // }}
-                  />
-                </form> */}
                 <div>
-                  {/* <button className="text-red-600">
-                    <MdDelete size={20} />
-                  </button> */}
                   <button
                         className="text-red-600"
                         onClick={() => onDelete(item.movie_id)}
