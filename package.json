@@ -7,6 +7,8 @@
     "build": "i18nexus pull && next build",
     "start": "i18nexus pull && next start",
     "lint": "next lint",
+    "test:e2e": "cypress open",
+    "test:e2e:ci": "cypress run",
     "prepare": "husky"
   },
   "eslintIgnore": [
@@ -46,7 +48,7 @@
     "react-i18next": "^15.4.0",
     "react-icons": "^5.4.0",
     "react-loading-skeleton": "^3.5.0",
-    "react-toastify": "^11.0.6",
+    "react-toastify": "^11.0.3",
     "react-tooltip": "^5.28.0",
     "source-map-loader": "^5.0.0",
     "stripe": "^17.6.0",
@@ -58,7 +60,7 @@
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19",
     "@types/react-toastify": "^4.0.2",
-    "cypress": "^14.0.0",
+    "cypress": "^14.0.1",
     "eslint": "^9",
     "eslint-config-next": "15.1.5",
     "postcss": "^8",

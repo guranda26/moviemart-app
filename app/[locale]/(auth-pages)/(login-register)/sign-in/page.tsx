@@ -97,6 +97,7 @@ const Login: React.FC<LoginProps> = ({ searchParams }) => {
         <button
           type="submit"
           className="xs:w-[100%] py-3 rounded-md bg-redButton hover:bg-hoverRedBtn text-white text-md font-bold"
+          data-cy='sign-in-btn'
         >
           {isLoading ? `${t("auth:logging_in")}` : `${t("auth:sign_in")}`}
         </button>

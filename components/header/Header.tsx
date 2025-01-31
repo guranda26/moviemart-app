@@ -73,6 +73,7 @@ const Header = () => {
                 <button
                   type="submit"
                   className="font-bold flex flex-col items-center"
+                  data-cy='log-out'
                 >
                   <GiExitDoor width={20} className="text-3xl" />
                   <span>{t("header:sign_out")}</span>
