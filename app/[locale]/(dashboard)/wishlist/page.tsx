@@ -6,11 +6,12 @@ import Loading from '@/components/Loading';
 import Image from 'next/image';
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
+import { RiDeleteBin5Fill } from "react-icons/ri";
 
 const MoviesInWishlist = () => {
 
   interface MoviesInWishlist {
-    id: string;
+    id: number;
     name: string;
     type: string;
     language: string;
@@ -39,6 +40,42 @@ const MoviesInWishlist = () => {
     wishlistMovies();
   }, []);
 
+  const onDelete = async (movieId: number) => {
+    console.log('deleting productId', movieId);
+    
+    if (!confirm("Are you sure you want to delete this item?")) return;
+
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/delete-wishlist`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ movieId }),
+        }
+      );
+
+      setPosts((prevPosts) => prevPosts.filter((post) => post.id !== movieId));
+
+
+      if (!response.ok) {
+        throw new Error("Failed to delete the item from the cart");
+      }
+
+      await FetchMovies();
+
+      console.log('posts', posts);
+
+      
+
+    } catch (error) {
+      console.error("Error deleting item:", error);
+      alert("There was an error deleting the item. Please try again.");
+    }
+  };
+
   if(isLoading) return <Loading />
 
   return (
@@ -64,6 +101,10 @@ const MoviesInWishlist = () => {
               key={id}
               className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 hover:scale-105"
             >
+            <div className='w-[100%]'>
+              <button onClick={() => onDelete(id)} className='bg-redButton hover:bg-hoverRedBtn p-2 rounded-md ml-auto'><RiDeleteBin5Fill />
+              </button>
+            </div>
               <div className="relative h-48 w-full">
                 <Image
                   src={image_src || '/assets/placeholder.png'}

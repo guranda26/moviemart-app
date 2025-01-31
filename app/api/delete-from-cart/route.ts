@@ -26,13 +26,13 @@ console.log("Existing data before delete:", existingData, "Error:", fetchError);
 
     
 
-    if (fetchError) {
-      console.error("Error deleting product from cart:", fetchError.message);
-      return new Response(
-        JSON.stringify({ error: fetchError.message }), 
-        { status: 500 }
-      );
-    }
+if (fetchError) {
+  console.error("Error deleting product from cart:", fetchError.message);
+  return new Response(
+    JSON.stringify({ error: fetchError.message }), 
+    { status: 500 }
+  );
+}
     
 
   return new Response(
