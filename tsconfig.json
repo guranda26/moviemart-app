@@ -13,6 +13,11 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "types": [
+      "cypress",
+      "cypress-plugin-stripe-elements",
+      "@testing-library/cypress"
+    ],
     "plugins": [
       {
         "name": "next"

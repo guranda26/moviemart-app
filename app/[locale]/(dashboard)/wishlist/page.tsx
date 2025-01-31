@@ -114,6 +114,7 @@ const MoviesInWishlistPage = () => {
             <div
               key={id}
               className="sm:transform sm:transition-transform sm:duration-300 sm:hover:scale-105 sm:hover:shadow-lg animate-fade-in relative"
+              data-cy="wishlist-movie-item"
               >
               <div className="relative h-48 w-full">
               <div className='w-[100%] p-2 flex justify-center flex-1 mt-auto relative top-0 z-40 text-white'>
@@ -123,7 +124,7 @@ const MoviesInWishlistPage = () => {
                 >
                   <RiEdit2Fill />
                 </button>
-              <button onClick={() => onDelete(id)} className='bg-redButton hover:bg-hoverRedBtn p-2 rounded-md ml-auto'><RiDeleteBin5Fill />
+              <button onClick={() => onDelete(id)} className='bg-redButton hover:bg-hoverRedBtn p-2 rounded-md ml-auto' data-cy='delete-cart-btn'><RiDeleteBin5Fill />
               </button>
             </div>
                 <Image

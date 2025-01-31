@@ -150,7 +150,7 @@ const WishlistForm = ({ userId }: { userId: string }) => {
       <h3 className="text-xl mb-4 text-center">
         {t("wishlist:form_request")}
       </h3>
-      <p className="text-md text-center mb-6">{t("wishlist:check_txt")}&nbsp;<Link href={'/wishlist'} className="text-blue-700 hover:underline">{t("wishlist:check_link")}</Link></p>
+      <p className="text-md text-center mb-6">{t("wishlist:check_txt")}&nbsp;<Link href={'/wishlist'} className="text-blue-700 hover:underline" data-cy='wishlist-page-url'>{t("wishlist:check_link")}</Link></p>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
           <Input
@@ -161,6 +161,7 @@ const WishlistForm = ({ userId }: { userId: string }) => {
             value={formData.email}
             onChange={handleChange}
             className="w-full p-3 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            data-cy="wishlist-email-input"
           />
           {formErrors.email && <p className="text-red-500">{formErrors.email}</p>}
         </div>
@@ -169,10 +170,11 @@ const WishlistForm = ({ userId }: { userId: string }) => {
             type="text"
             id="name"
             name="name"
-            placeholder={t("common_placeholder:enter_email")}
+            placeholder={t("common_placeholder:enter_name")}
             value={formData.name}
             onChange={handleChange}
             className="w-full p-3 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            data-cy="movie-name-input"
           />
           {formErrors.name && <p className="text-red-500">{formErrors.name}</p>}
         </div>
@@ -183,6 +185,7 @@ const WishlistForm = ({ userId }: { userId: string }) => {
             value={formData.type}
             onChange={handleChange}
             className="w-full p-3 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            data-cy="movie-type-select"
           >
             <option value="Movie">{t("wishlist:type_movie")}</option>
             <option value="TV series">{t("wishlist:type_series")}</option>
@@ -197,6 +200,7 @@ const WishlistForm = ({ userId }: { userId: string }) => {
             value={formData.language}
             onChange={handleChange}
             className="w-full p-3 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            data-cy='movie-language-select'
           >
             <option value="">{t("wishlist:select_lang")}</option>
             <option value="Georgian">{t("wishlist:lang_geo")}</option>
@@ -216,10 +220,12 @@ const WishlistForm = ({ userId }: { userId: string }) => {
             value={formData.year}
             onChange={handleChange}
             className="w-full p-3 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            data-cy='movie-released-year'
           />
           {formErrors.year && <p className="text-red-500">{formErrors.year}</p>}
         </div>
-        <div><Input
+        <div>
+          <Input
             type="text"
             id="image_src"
             name="image_src"
@@ -227,6 +233,7 @@ const WishlistForm = ({ userId }: { userId: string }) => {
             value={formData.image_src}
             onChange={handleChange}
             className="w-full p-3 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            data-cy="wishlist-img"
           />
           {formErrors.image_src && <p className="text-red-500">{formErrors.image_src}</p>}</div>
         <div>
@@ -237,12 +244,15 @@ const WishlistForm = ({ userId }: { userId: string }) => {
             value={locale === 'ka' ? formData.comment_ka : formData.comment}
             onChange={handleChange}
             className="w-full p-3 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          ></textarea>
+            data-cy="wishlist-comment"
+          >
+          </textarea>
           {locale === 'ka' ? formData.comment_ka : formData.comment && <p className="text-red-500">{locale === 'ka' ? formData.comment_ka : formData.comment}</p>}
         </div>
         <button
           type="submit"
           className="w-full py-3 px-6 bg-redButton text-white rounded-md hover:bg-hoverRedBtn transition"
+          data-cy='add-product-btn'
         >
           {t("common_placeholder:submit")}
         </button>

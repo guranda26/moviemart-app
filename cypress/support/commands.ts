@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
-// / <reference types="@testing-library/cypress" />
+/// <reference types="@testing-library/cypress" />
 
-// import "@testing-library/cypress/add-commands";
+import "@testing-library/cypress/add-commands";
 // import "cypress-plugin-stripe-elements";
 
 // Cypress.Commands.add("getStripeElement", (fieldName) => {
