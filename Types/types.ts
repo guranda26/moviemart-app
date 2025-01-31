@@ -1,4 +1,4 @@
 export type Props = {
   params: Promise<{ locale: string }>;
-  searchParams: Record<string, string | undefined>;
+  searchParams: Promise<Record<string, string | undefined>>;
 };
