@@ -147,6 +147,10 @@ textarea {
   outline: none;
 }
 
+input#search::placeholder{
+  color: black;
+}
+
 @media only screen and (min-width: 600px) {
   .truncate-with-arrow {
     overflow: hidden;

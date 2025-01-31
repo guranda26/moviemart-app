@@ -49,9 +49,9 @@ const MainPage = async ({ params, searchParams }: { params: Params; searchParams
       namespaces={i18nNameSpaces}
     >
       <section className="min-h-screen p-8">
-        <SearchInput initialSearchQuery={searchQuery} />
 
-        <div className="flex gap-6 mb-8">
+        <div className="flex gap-6 mb-8 relative">
+        <SearchInput initialSearchQuery={searchQuery} />
           {sweetHomeMovie.map((movie) => (
             <div key={movie.id} className="w-screen relative">
               <img

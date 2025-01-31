@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Loading from "./Loading";
+import Image from "next/image";
 
 const SearchInput = ({ initialSearchQuery }: { initialSearchQuery: string }) => {
   const [searchQuery, setSearchQuery] = useState(initialSearchQuery);
@@ -33,8 +34,9 @@ const SearchInput = ({ initialSearchQuery }: { initialSearchQuery: string }) => 
   if (loading) return <Loading />
 
   return (
-    <div className="mb-8">
-      <form onSubmit={handleSearchSubmit} className="w-full max-w-md mx-auto flex items-center gap-2">
+    <div className="absolute top-1/2 left-1/2 translate-x-[-50%] z-40">
+      <form onSubmit={handleSearchSubmit} className="w-auto max-w-md mx-auto flex items-center relative">
+      <Image width={20} height={20} src="/assets/search-icon.svg" alt="search icon" className="absolute left-3" />
         <input
           id="search"
           name="q"
@@ -43,21 +45,20 @@ const SearchInput = ({ initialSearchQuery }: { initialSearchQuery: string }) => 
           value={searchQuery}
           onChange={handleSearchChange}
           onClick={handleClearSearch}
-          className="w-full p-2 pl-10 border rounded shadow-sm bg-[#363636] md:bg-inputCol text-white"
+          className="w-[400px] p-2 pl-10 border border-redButton rounded shadow-sm md:bg-[#e8ceb595] text-black"
         />
-
         {searchQuery && searchPage ? (
           <button
             type="button"
             onClick={handleClearSearch}
-            className="ml-2 bg-red-600 text-white px-4 py-2 rounded"
+            className="ml-2 bg-redButton hover:bg-hoverRedBtn text-white px-4 py-2 rounded"
           >
             Reset
           </button>
         ) : ( 
         <button
           type="submit"
-          className="ml-2 bg-blue-600 text-white px-4 py-2 rounded"
+          className="ml-2 bg-purpleButton hover:bg-hoverPurpleBtn text-white px-4 py-2 rounded"
         >
           Search
         </button>)}
