@@ -51,8 +51,8 @@ const Header = () => {
               </Link>
             </li>
             <li>
-              <div className="text-2xl relative group" data-cy="wishlist-url">
-                <Link href={"/wishlist-form"}
+              <div className="text-2xl relative group">
+                <Link href={"/wishlist-form"} data-cy="wishlist-url"
                 >
                   <Image width={20} height={20} src="/assets/wishlist.png" alt="wishlist" className="w-5" />
                 </Link>
