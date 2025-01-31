@@ -6,19 +6,20 @@ describe("Products modifification", () => {
   });
 
   it("Adds a new movie", () => {
-    cy.wait(3000);
     cy.get("[data-cy='login-btn']").click();
 
     cy.get("[data-cy='email-input']").type("g_lemonjava@cu.edu.ge");
     cy.get("[data-cy='password-input']").type("Hello321.");
 
     cy.get("[data-cy='sign-in-btn']").click();
-
-    cy.url().should("include", "/");
     cy.wait(2000);
 
+    cy.url().should("include", "/");
+
+    cy.get("[data-cy='wishlist-url']", { timeout: 10000 }).should("be.visible");
+
     cy.get("[data-cy='wishlist-url']").click();
-    cy.wait(1000);
+    cy.wait(3000);
 
     cy.url().should("include", "/wishlist-form");
 
