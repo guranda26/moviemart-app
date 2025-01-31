@@ -6,6 +6,7 @@ import { dir } from "i18next";
 import i18nConfig from "../../configs/i18ncofig";
 import "./globals.css";
 import Providers from "@/components/Providers";
+import { Locale } from "@/Types/types";
 
 export const metadata: Metadata = {
   title: "Moviemart Platform",
@@ -24,10 +25,6 @@ const lato = Lato({
   variable: "--font-lato",
 });
 
-export enum Locale {
-  en = "EN",
-  ka = "KA",
-}
 
 type LocaleParams = {
   locale: Locale;

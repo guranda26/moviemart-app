@@ -5,3 +5,9 @@ export type Props = {
   params: Params;
   searchParams: SearchParams;
 };
+
+
+export enum Locale {
+  en = "EN",
+  ka = "KA",
+}

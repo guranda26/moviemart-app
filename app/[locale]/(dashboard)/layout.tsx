@@ -10,10 +10,6 @@ export const metadata: Metadata = {
   description: "Watch movies and series exclusively on Moviemart",
 };
 
-export enum Locale {
-  en = "EN",
-  ka = "KA",
-}
 
 export function generateStaticParams() {
   return i18nConfig.locales.map((locale) => ({ locale }));
