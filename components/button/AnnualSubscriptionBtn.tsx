@@ -2,9 +2,12 @@
 
 import { createAnnualSubscriptionAction } from "@/app/actions/stripe/createAnnualSubscriptionAction";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const AnnualSubscriptionBtn = ({ userId }: { userId: string }) => {
   const [loading, setLoading] = useState(false);
+
+  const {t} = useTranslation()
 
   const handleSubscribe = async () => {
     setLoading(true);
@@ -24,7 +27,7 @@ const AnnualSubscriptionBtn = ({ userId }: { userId: string }) => {
         disabled={loading}
         className="w-full bg-redButton hover:bg-hoverRedBtn text-white font-semibold py-2 px-4 rounded"
       >
-        {loading ? "Redirecting..." : "Subscribe Now"}
+        {loading ? `${t("subscription:redirecting")}` : `${t("subscription:btn_txt")}`}
       </button>
     </form>
   );

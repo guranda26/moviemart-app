@@ -7,9 +7,11 @@ import initTranslations from "@/utils/i18n";
 import BuyProductButton from "@/components/button/BuyProductButton";
 import SearchInput from "@/components/SearchInput";
 import AddToCartButton from "@/components/button/AddToCartBtn";
+import Image from "next/image";
 
 const MainPage = async ({ params, searchParams }: { params: Params; searchParams?: { q?: string } }) => {
-  const searchQuery = await searchParams?.q || "";
+  const query = await searchParams
+  const searchQuery = query?.q || "";
   const movies = await FetchMovies(searchQuery);
 
   const i18nNameSpaces = ["common", "products", "home"];
@@ -118,9 +120,11 @@ const MainPage = async ({ params, searchParams }: { params: Params; searchParams
                 className="border border-gray-300 rounded-lg p-4 shadow-md hover:shadow-lg transition"
               >
                 <Link href={`/movies/${id}`} className="flex flex-col gap-2">
-                  <img
+                  <Image
                     src={imageSrc}
                     alt={title}
+                    width={300}
+                    height={200}
                     className="w-full h-[200px] object-cover rounded-md"
                   />
                   <h3 className="text-black font-bold">{isKa ? title_ka : title}</h3>

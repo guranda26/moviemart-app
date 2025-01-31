@@ -8,7 +8,7 @@ const SearchInput = ({ initialSearchQuery }: { initialSearchQuery: string }) => 
   const [searchQuery, setSearchQuery] = useState(initialSearchQuery);
   const [loading, setLoading] = useState(false)
   const [searchPage, setSearchPage] = useState(false)
-  const router = useRouter();
+  const router = useRouter()
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -25,6 +25,7 @@ const SearchInput = ({ initialSearchQuery }: { initialSearchQuery: string }) => 
   const handleClearSearch = () => {
     setLoading(true);
     setSearchQuery("");
+    setSearchPage(false)
     router.push("/"); 
     setLoading(false);
   };
@@ -60,17 +61,6 @@ const SearchInput = ({ initialSearchQuery }: { initialSearchQuery: string }) => 
         >
           Search
         </button>)}
-
-
-        {/* {searchQuery && (
-          <button
-            type="button"
-            onClick={handleClearSearch}
-            className="ml-2 text-white bg-transparent hover:text-gray-400"
-          >
-            X
-          </button>
-        )} */}
       </form>
     </div>
   );
