@@ -40,6 +40,15 @@ export async function POST(req: NextRequest) {
       },
     });
 
+    const {error: clearCartErr} = await supabase
+      .from("cart")
+      .delete()
+      .eq("user_id", data.user.id)
+
+    if (clearCartErr) {
+      console.error("Error clearing the cart:", clearCartErr);
+    }
+
     return NextResponse.json({ url: session.url });
   } catch (error) {
     console.error("Error in POST /api/cart-checkout", error);

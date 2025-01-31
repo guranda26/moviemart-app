@@ -10,7 +10,7 @@ import { LuCircleUserRound } from "react-icons/lu";
 import { useTranslation } from "react-i18next";
 import ToggleLanguage from "../ToggleLanguage";
 import "react-tooltip/dist/react-tooltip.css";
-// import initTranslations from "@/utils/i18n";
+import { MdOutlineShoppingCartCheckout } from "react-icons/md";
 
 export enum Locale {
   en = "EN",
@@ -46,12 +46,14 @@ const Header = () => {
             </li>
             <li>
               <Link href={"/cart"} className="text-2xl">
-                {t("header:cart")}
+                <MdOutlineShoppingCartCheckout />
+                {/* {t("header:cart")} */}
               </Link>
             </li>
             <li>
               <div className="text-2xl relative group">
-                <Link href={"/wishlist-form"}><Image width={20} height={20} src="/assets/wishlist.png" alt="wishlist" className="w-5" />
+                <Link href={"/wishlist-form"}>
+                <Image width={20} height={20} src="/assets/wishlist.png" alt="wishlist" className="w-5" />
                 </Link>
                 <Link href={"/wishlist"}><span className="hidden md:inline-block absolute left-1/2 -translate-x-1/2 top-10 bg-gray-800 text-sm py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white">
                   Wishlist

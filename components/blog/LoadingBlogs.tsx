@@ -14,15 +14,6 @@ export default function LoadingBlogs() {
             width="100%"
             className="flex flex-col gap-3 py-4 px-6"
           />
-          {/* <div className="mt-3">
-            <Skeleton width="30%" height={20} className="mb-2" />
-            <Skeleton width="60%" height={20} className="mb-4 xs:h-7" />
-            <Skeleton
-              width="100%"
-              height={120}
-              className="m-auto justify-self-end self-end"
-            />
-          </div> */}
         </div>
       </div>
 

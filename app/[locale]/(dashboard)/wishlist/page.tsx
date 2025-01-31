@@ -1,7 +1,6 @@
 'use client'
 
 import FetchMovies from '@/components/FetchWishlistMovies';
-import Loading from '@/components/Loading';
 import Image from 'next/image';
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
@@ -11,6 +10,7 @@ import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { MoviesInWishlist } from '@/Interfaces/Movies';
 import useLocaleFromPath from '@/components/UsePath';
+import LoadingWishlist from '@/components/LoadingWishlist';
 
 const MoviesInWishlistPage = () => {
   const [posts, setPosts] = useState<MoviesInWishlist[]>([]);
@@ -86,14 +86,18 @@ const MoviesInWishlistPage = () => {
     }
   }
 
-  if(isLoading) return <Loading />
+
+  if(isLoading) return (
+      <LoadingWishlist /> 
+   
+  )
 
   return (
     <section className="max-w-6xl mx-auto px-2 xs:px-6 py-12 bg-background text-textCol">
       <h2 className="text-2xl xs:text-4xl font-bold text-center mb-8 break-all">{t("wishlist:wishlist_txt")}</h2>
       {posts.length > 0 && (
         <div className="text-center my-10">
-          <p className="text-lg xs:text-xl text-[#1c1c1c94] mb-4">
+          <p className="text-lg xs:text-xl text-textCol mb-4">
             {t("wishlist:add_movies")}
           </p>
           <Link

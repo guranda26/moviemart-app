@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import "react-loading-skeleton/dist/skeleton.css";
 import FetchPosts from "@/components/blog/BlogData";
 import BlogList from "@/components/blog/BlogList";
-import LoadingBlogs from "@/components/blog/BlogcardLoader";
+import LoadingBlogs from "@/components/blog/LoadingBlogs";
 
 export default function SkeletonLoading() {
   const [isLoading, setIsLoading] = useState(true);
