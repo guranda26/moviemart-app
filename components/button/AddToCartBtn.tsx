@@ -1,10 +1,9 @@
 "use client";
 
 import { useActionState, useEffect } from "react";
-import { addToCart } from "../addToCart";
 import { toast, ToastContainer } from "react-toastify";
-// import { checkPurchaseStatus } from "@/utils/supabase/checkPurchaseStatus";
 import { usePurchaseStatus } from "@/app/[locale]/(dashboard)/hooks/usePurchaseStatus";
+import { addToCart } from "@/app/actions/addToCartAction";
 
 export interface AddToCartButtonProps {
   userId: string;

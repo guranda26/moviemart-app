@@ -19,7 +19,7 @@ export const addToCart = async (
 
 
   if (!userId) {
-    return { message: "You need to log in to add items to the cart.", error: true };
+    return { message: "You need to log in to add items to the cart.", error: true, success: false };
   }
 
   const { data: existingCartItem, error: fetchError } = await supabase
@@ -31,14 +31,14 @@ export const addToCart = async (
 
   if (fetchError && fetchError.code !== "PGRST116") {
     console.error("Error fetching cart item:", fetchError);
-    return { message: "Failed to check the cart. Please try again.", error: true };
+    return { message: "Failed to check the cart. Please try again.", error: true, success: false };
   }
 
   if (existingCartItem) {
     if (existingCartItem.purchased) {
-      return { message: "This product has already been purchased.", error: true };
+      return { message: "This product has already been purchased.", error: true, success: false };
     }
-    return { message: "This product is already in your cart.", error: true };
+    return { message: "This product is already in your cart.", error: true, success: false };
   }
 
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
@@ -59,8 +59,8 @@ export const addToCart = async (
 
   if (insertError) {
     console.error("Error inserting new item:", insertError);
-    return { message: "There was an error adding the product to your cart.", error: true };
+    return { message: "There was an error adding the product to your cart.", error: true, success: false};
   }
 
-  return { message: "Product added to cart successfully!", success: true };
+  return { message: "Product added to cart successfully!", success: true, error: false };
 };
