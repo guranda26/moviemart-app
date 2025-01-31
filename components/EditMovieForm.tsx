@@ -60,7 +60,7 @@ const EditMovieForm: React.FC<EditMovieFormProps> = ({ movie, onClose, onUpdate 
             id="language"
             value={formData.language}
             onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="w-full p-2 border border-gray-300 rounded" data-cy="edit-language-input"
             >
             <option value="">{t("wishlist:select_lang")}</option>
             <option value="Georgian">{t("wishlist:lang_geo")}</option>
@@ -111,6 +111,7 @@ const EditMovieForm: React.FC<EditMovieFormProps> = ({ movie, onClose, onUpdate 
             <button
               type="submit"
               className="bg-redButton hover:bg-hoverRedBtn text-white px-4 py-2 rounded"
+              data-cy='save-cart-btn'
             >
               {t("edit_form:save")}
             </button>

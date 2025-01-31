@@ -122,7 +122,7 @@ const MoviesInWishlistPage = () => {
                   onClick={() => setEditingMovie({ id, name, type, language, year, comment, image_src })}
                   className="bg-[#00000094] hover:bg-[#38383894] p-2 rounded-md mr-2"
                 >
-                  <RiEdit2Fill />
+                  <RiEdit2Fill data-cy='edit-cart-btn' />
                 </button>
               <button onClick={() => onDelete(id)} className='bg-redButton hover:bg-hoverRedBtn p-2 rounded-md ml-auto' data-cy='delete-cart-btn'><RiDeleteBin5Fill />
               </button>
@@ -139,7 +139,7 @@ const MoviesInWishlistPage = () => {
                 <p className="text-lg">
                   <span className="font-medium">{t("wishlist:type")}</span> {type}
                 </p>
-                <p className="text-lg mb-1">
+                <p className="text-lg mb-1" data-cy="wishlist-language">
                   <span className="font-medium">{t("wishlist:language")}</span> {language}
                 </p>
                 <p className="text-lg mb-1">

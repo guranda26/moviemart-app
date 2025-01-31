@@ -52,9 +52,9 @@ const Header = () => {
             </li>
             <li>
               <div className="text-2xl relative group">
-                <Link href={"/wishlist-form"} data-cy="wishlist-url"
+                <Link href={"/wishlist-form"}
                 >
-                  <Image width={20} height={20} src="/assets/wishlist.png" alt="wishlist" className="w-5" />
+                  <Image width={20} height={20} src="/assets/wishlist.png" alt="wishlist" className="w-5" data-cy="wishlist-url" />
                 </Link>
                 <Link href={"/wishlist"}>
                 <span className="hidden md:inline-block absolute left-1/2 -translate-x-1/2 top-10 bg-gray-800 text-sm py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white"
