@@ -2,21 +2,11 @@
 import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import Loading from "@/components/Loading";
+import { useTranslation } from "react-i18next";
+import useLocaleFromPath from "@/components/UsePath";
+import { Order } from "@/Interfaces/Orders";
+import { TiStarFullOutline } from "react-icons/ti";
 
-interface Movie {
-  imageSrc: string;
-  price: number;
-  rating: number;
-  description?: string;
-}
-
-interface Order {
-  id: number;
-  movie_name: string;
-  quantity: number;
-  created_at: string; 
-  movies: Movie;
-}
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -26,12 +16,15 @@ const supabase = createClient(
 export default function Orders() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true)
+  const {t} = useTranslation()
+  const locale = useLocaleFromPath();
+
 
   useEffect(() => {
     async function fetchOrders() {
       const { data, error } = await supabase
         .from("orders")
-        .select("id, movie_name, quantity, created_at, movies(imageSrc, price, rating, description)")
+        .select("id, movie_name, quantity, created_at, movies(imageSrc, price, rating, description, title_ka, description_ka)")
         .order("created_at", { ascending: false });
 
       setLoading(false)
@@ -51,9 +44,9 @@ export default function Orders() {
 
 return (
 <div className="p-6">
-  <h1 className="text-3xl font-bold mb-4">Your Orders</h1>
+  <h2 className="text-3xl font-bold mb-4 text-center text-textCol">{t('checkout:orders_heading')}</h2>
   {orders.length === 0 ? (
-    <p>No orders found.</p>
+    <h3 className="text-center">{t("checkout:empty_orders")}</h3>
   ) : (
     <div className="grid grid-cols-1 gap-4">
       {orders.map((order) => (
@@ -64,10 +57,13 @@ return (
             className="w-auto xs:w-auto h-60 xs:h-40 rounded object-contain"
           />
           <div className="text-center xs:text-left">
-          <h2 className="text-xl font-semibold mt-2 text-[#ccc]"><span className="text-[#ffd2a0]">Movie Name:</span> {order.movie_name}</h2>
-          <p className="text-[#ccc]">Price: ${(order.movies?.price)}</p>
-          <p className="text-[#ccc]">Rating: {(order.movies?.rating)}</p>
-          <p className="text-[#ccc] text-semibold description text-justify xs:text-left">{(order.movies?.description)}</p>
+          <h2 className="text-xl font-semibold mt-2 text-[#ccc]"><span className="text-[#ffd2a0]">{t('products:movie_name')}</span>&nbsp; 
+          {(locale === 'ka' ? order.movies?.title_ka : order.movie_name)}
+          </h2>
+          <p className="text-[#ccc]">💰 ${(order.movies?.price)}</p>
+          <div className="flex items-center gap-1 text-[#ffd2a0]"><TiStarFullOutline /><p className="text-[#ccc]">{(order.movies?.rating)}</p></div>
+          <p className="text-[#ccc] text-semibold description text-justify xs:text-left">
+          🎬 {(locale === 'ka' ? order.movies?.description_ka :order.movies?.description)}</p>
           </div>
         </div>
       ))}

@@ -5,6 +5,8 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import "react-toastify/dist/ReactToastify.css";
 import Loading from "@/components/Loading";
+import { useTranslation } from "react-i18next";
+import ReturnBackButton from "@/components/ReturnBack";
 
 export default function OrderSuccess() {
   const router = useRouter();
@@ -12,6 +14,8 @@ export default function OrderSuccess() {
   const [status, setStatus] = useState("loading");
   const searchParams = useSearchParams();
   const sessionId = searchParams.get("session_id");
+
+  const {t} = useTranslation()
 
   useEffect(() => {
     if (sessionId) {
@@ -68,10 +72,10 @@ export default function OrderSuccess() {
       <div className="flex items-center justify-center h-screen bg-red-100">
         <div className="p-6 bg-white rounded shadow-md">
           <h1 className="text-2xl font-bold text-red-600">
-            Something went wrong
+            {t('checkout:error_txt')}
           </h1>
           <p className="mt-4 text-gray-600">
-            Your operation has failed. Please try again.
+          {t('checkout:error_msg')}
           </p>
         </div>
       </div>
@@ -79,11 +83,11 @@ export default function OrderSuccess() {
   }
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100">
-      <div className="p-6 bg-white rounded shadow-md text-center">
-        <h1 className="text-3xl font-bold text-green-600 mb-4">Payment Successful!</h1>
-        <p className="text-lg text-gray-700">Redirecting to the movies page...</p>
-      </div>
+    <div className="flex items-center justify-center h-screen bg-background">
+        <div className="p-6 flex flex-col bg-white rounded shadow-md gap-3 max-w-[400px]">
+        <h1 className="text-3xl font-bold text-[#136F63] mb-4">{t("checkout:success_msg")}</h1>
+        <ReturnBackButton className="bg-purpleButton" />      
+    </div>
     </div>
   );
 }

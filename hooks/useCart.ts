@@ -1,25 +1,10 @@
 "use client";
 
+import { CartItems } from "@/Interfaces/Cart";
 import { useEffect, useState } from "react";
 
-interface CartItem {
-  id: number;
-  created_at: number;
-  movie_id: number;
-  user_id: string;
-  stripe_movie_id: string;
-  stripe_price_id: string;
-  movies: Movie;
-  quantity: number;
-}
-
-interface Movie {
-  title: string;
-  imageSrc: string;
-  price: number;
-}
 export const useCart = () => {
-  const [cart, setCart] = useState<CartItem[]>([]);
+  const [cart, setCart] = useState<CartItems[]>([]);
 
 
   const fetchCart = async () => {
