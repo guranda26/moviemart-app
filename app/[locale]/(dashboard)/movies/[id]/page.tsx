@@ -14,7 +14,7 @@ const MovieDetailsPage = async ({ params }: { params: BlogParams }) => {
     const supabaseClient = await createClient();
     const { data: user } = await supabaseClient.auth.getUser();
   
-  const i18nNameSpaces = ["common", "products"];
+  const i18nNameSpaces = ["common", "products", "movie_details"];
   const { id, locale } = await params;
   const numericID = Number(id)
   const { t, resources } = await initTranslations(locale, i18nNameSpaces);

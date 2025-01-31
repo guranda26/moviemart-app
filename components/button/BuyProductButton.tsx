@@ -2,6 +2,7 @@
 
 import { usePurchaseStatus } from "@/app/[locale]/(dashboard)/hooks/usePurchaseStatus";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 interface BuyProductButtonProps {
   userId: string;
@@ -22,6 +23,7 @@ const BuyProductButton = ({
 }: BuyProductButtonProps) => {
 
   const {isPurchased, isLoading} = usePurchaseStatus(userId, productId)
+  const {t} = useTranslation()
 
   async function handleBuyProduct() {
     try {
@@ -69,14 +71,14 @@ const BuyProductButton = ({
         onClick={() => handleBuyProduct()}
         data-cy="buy-product-btn"
         >
-       {isLoading ? 'Loading...' : 'Buy Now'}
+       {isLoading ? `${t("movie_details:loading")}` : `${t("movie_details:buy_now")}`}
        </button>
       ) : (
         <button
         className="py-2 px-3 bg-[#e24a4a] hover:bg-[#b43e3e]  transition-all-color hover:scale-105 rounded-md text-white w-[110px]"
         onClick={() => handleBuyProduct()}
         >
-       Purchased
+       {t("movie_details:purchased")}
        </button> 
       )}
     </>

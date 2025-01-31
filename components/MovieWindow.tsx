@@ -1,10 +1,11 @@
 'use client'
 
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const MovieComponent = ({src}: {src:string}) => {
   const [isTrailerVisible, setIsTrailerVisible] = useState(false);
-
+  const {t} = useTranslation()
   const watchTrailer = () => {
     setIsTrailerVisible(true);
   };
@@ -20,7 +21,7 @@ const MovieComponent = ({src}: {src:string}) => {
         onClick={watchTrailer}
         data-cy="buy-product"
       >
-        Watch Now
+        {t('movie_details:watch_now')}
       </button>
 
       {isTrailerVisible && (

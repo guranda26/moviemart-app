@@ -4,13 +4,15 @@ import React from "react";
 import { useCart } from "@/hooks/useCart";
 import { MdDelete } from "react-icons/md";
 import CheckoutButton from "@/components/button/CheckoutBtn";
+import { useTranslation } from "react-i18next";
+import Image from "next/image";
 
 const Page = () => {
   const { cart = [], fetchCart } = useCart();
+  const {t} = useTranslation()
 
   const onDelete = async (productId: number) => {
     console.log('deleting productId', productId);
-    
     if (!confirm("Are you sure you want to delete this item?")) return;
 
     try {
@@ -50,9 +52,9 @@ const Page = () => {
     : 0;
 
   return (
-    <div className="w-full min-h-screen md:w-[75vw] p-3 md:p-6 mx-auto">
-      <h1 className="text-2xl font-bold text-gray-800 mb-6">My Cart</h1>
-      {cart ? (
+    <div className="w-full md:w-[75vw] p-3 md:p-6 mx-auto text-center min-h-screen flex flex-col justify-center">
+      <h1 className="text:2xl xs:text-4xl font-bold text-textCol mb-6 justify-self-start">{t("movie_details:cart")}</h1>
+      {cart && cart.length > 0 ? (
         <>
           <div className="md:hidden">
             {cart.map((item, index) => (
@@ -137,23 +139,26 @@ const Page = () => {
           </div>
         </>
       ) : (
-        <h2 className="text-center text-gray-500 text-base sm:text-lg">
-          Your cart is empty.
+       <div className="flex flex-col items-center justify-center gap-3">
+        <Image width={200} height={200} src={'/assets/shopping-cart.svg'} alt="shopping cart" />
+        <h2 className="text-center text-textCol text-base sm:text-lg">
+          {t("movie_details:empty_cart")}
         </h2>
+       </div>
       )}
+      {cart && cart.length > 0 && (
       <div className="flex flex-col sm:flex-row items-center justify-between p-2">
           <h2 className="md:text-2xl font-semibold flex items-center">
-          Total Amount: {totalAmount}
+          {t("movie_details:sum")}: {totalAmount}
           <span className="mt-1 translate-x-[-3px]">&#xFE69;</span>
         </h2>
         <div className="flex gap-1 md:gap-2 flex-wrap">
-          {cart && cart.length > 0 && (
             <>
               <CheckoutButton cart={cart} />
             </>
-          )}
         </div>
       </div>
+       )}
     </div>
   );
 };

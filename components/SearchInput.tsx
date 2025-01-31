@@ -4,12 +4,14 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Loading from "./Loading";
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 
 const SearchInput = ({ initialSearchQuery }: { initialSearchQuery: string }) => {
   const [searchQuery, setSearchQuery] = useState(initialSearchQuery);
   const [loading, setLoading] = useState(false)
   const [searchPage, setSearchPage] = useState(false)
   const router = useRouter()
+  const {t} = useTranslation()
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -41,7 +43,7 @@ const SearchInput = ({ initialSearchQuery }: { initialSearchQuery: string }) => 
           id="search"
           name="q"
           type="search"
-          placeholder="Search movies by title"
+          placeholder={t("common_placeholder:search_movie")}
           value={searchQuery}
           onChange={handleSearchChange}
           onClick={handleClearSearch}
@@ -53,14 +55,14 @@ const SearchInput = ({ initialSearchQuery }: { initialSearchQuery: string }) => 
             onClick={handleClearSearch}
             className="ml-2 bg-redButton hover:bg-hoverRedBtn text-white px-4 py-2 rounded"
           >
-            Reset
+            {t("common_placeholder:reset")}
           </button>
         ) : ( 
         <button
           type="submit"
           className="ml-2 bg-purpleButton hover:bg-hoverPurpleBtn text-white px-4 py-2 rounded"
         >
-          Search
+          {t("common_placeholder:search")}
         </button>)}
       </form>
     </div>

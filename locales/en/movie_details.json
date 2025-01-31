@@ -1,0 +1,19 @@
+{
+  "explore_type": "Explore by Type", 
+  "explore_genre": "Explore By Genre",
+  "watch": "Watch your favourite movies",
+  "with_us": "With Us",
+  "no_movies": "No movies found with this name",
+  "rights": "All rights reserved",
+  "privacy": "Privacy Policy",
+  "terms": "Terms & Conditions",
+  "about": "About Us",
+  "purchased": "Purchased",
+  "buy_now": "Buy Now",
+  "loading": "Loading...",
+  "add_to_cart": "Add To Cart",
+  "watch_now": "Watch Now",
+  "sum": "Sum",
+  "cart": "Cart",
+  "empty_cart": "Your cart is empty."
+}

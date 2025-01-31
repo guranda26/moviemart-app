@@ -4,6 +4,7 @@ import { useActionState, useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { usePurchaseStatus } from "@/app/[locale]/(dashboard)/hooks/usePurchaseStatus";
 import { addToCart } from "@/app/actions/addToCartAction";
+import { useTranslation } from "react-i18next";
 
 export interface AddToCartButtonProps {
   userId: string;
@@ -19,6 +20,7 @@ const [state, formAction, pending] = useActionState(addToCart, {
     success: false,
   });
 
+  const {t} = useTranslation()
   const { isPurchased, isLoading } = usePurchaseStatus(userId, productId);
 
   useEffect(() => {
@@ -45,10 +47,10 @@ const [state, formAction, pending] = useActionState(addToCart, {
           disabled={pending} 
           data-cy="add-to-cart-btn"
         >
-       {isLoading ? 'Loading...' : 'Add to Cart'}
+       {isLoading ? `${t("movie_details:loading")}` : `${t("movie_details:add_to_cart")}`}
         </button>
       </form>) :
-      <button className="py-2 px-3 bg-gray-500 rounded-md text-white">Purchased</button>
+      <button className="py-2 px-3 bg-gray-500 rounded-md text-white">{t("movie_details:purchased")}</button>
       }
     </>
   );

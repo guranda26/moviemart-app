@@ -23,7 +23,7 @@ const MainPage = async ({ params, searchParams}: { params: Params; searchParams?
   const userId= user?.user?.id ?? "";
   const isPremium = userId && await checkSubscriptionStatus(userId);
   const movies = await FetchMovies(searchQuery);
-  const i18nNameSpaces = ["common", "products", "home"];
+  const i18nNameSpaces = ["common", "products", "home", "movie_details", "common_placeholder"];
   const { t, resources } = await initTranslations(locale, i18nNameSpaces);
   const isKa = locale === "ka";
 
@@ -70,9 +70,8 @@ const MainPage = async ({ params, searchParams}: { params: Params; searchParams?
               <div className="absolute inset-0 flex items-center bg-black bg-opacity-50 p-6 text-white text-center">
                 <div className="absolute w-[400px] flex flex-col items-center">
                   <h2 className="text-3xl font-bold mb-4">
-                    Watch your favourite movies <span className="block">With Us</span>
+                    {t("movie_details:watch")} <span className="block">{t("movie_details:with_us")}</span>
                   </h2>
-                  <p className="text-lg mb-6">Discover or</p>
                   <Link
                     href="/subscribe"
                     className="rounded-lg border border-solid border-redButton transition-colors flex items-center justify-center bg-darkBtn text-textCol gap-2 hover:bg-hoverDarkBtn text-sm sm:text-base h-10 sm:h-12 px-4 xs:px-8 sm:px-10 w-full max-w-[200px] text-white"
@@ -87,7 +86,7 @@ const MainPage = async ({ params, searchParams}: { params: Params; searchParams?
 
         <h2 className="text-2xl font-bold mb-6">{t("products:categories")}</h2>
         <div className="flex flex-wrap gap-4 mb-8">
-          <h3>Explore by Genre</h3>
+          <h3>{t("movie_details:explore_genre")}</h3>
           {categories.map((category, index) => (
             <Link key={index} href={`/category/${category.replace(/,/g, "").toLowerCase()}`}>
               <div className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition">
@@ -98,7 +97,7 @@ const MainPage = async ({ params, searchParams}: { params: Params; searchParams?
         </div>
 
         <div className="flex flex-wrap gap-4 mb-8">
-          <h3>Explore by Type</h3>
+          <h3>{t("movie_details:explore_type")}</h3>
           {movieTypes.map((type, index) => (
             <Link key={index} href={`/movie-type/${type.replace(/,/g, "").toLowerCase()}`}>
               <div className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition">
@@ -156,7 +155,7 @@ const MainPage = async ({ params, searchParams}: { params: Params; searchParams?
           )
           :           
           <div className="flex items-center justify-center h-full w-screen">
-            <h2 className="bg-red-800 text-xl p-4">No movies found with this name</h2>
+            <h2 className="bg-red-800 text-xl p-4">{t("movie_details:no_movies")}</h2>
           </div> 
           }
         </ul>
