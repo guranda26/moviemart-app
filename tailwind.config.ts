@@ -34,6 +34,7 @@ export default {
         btnCol: "var(--btn-col)",
         footerBg: "var(--footer-bg)",
         bgAuth: "var(--bg-auth)",
+        bgOrder: "var(--bg-order)",
         articleBg: "var(--article-bg)",
         authForm: "var(--auth-form)",
       },

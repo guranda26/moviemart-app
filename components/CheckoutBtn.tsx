@@ -1,23 +1,7 @@
 "use client";
 
+import { CheckoutButtonProps } from "@/Interfaces/Cart";
 import React from "react";
-
-interface Movie {
-  title: string;
-  price: number;
-  imageSrc?: string;
-}
-
-interface CartItem {
-  stripe_price_id: string;
-  quantity: number;
-  stripe_movie_id: string;
-  movies: Movie;
-}
-
-interface CheckoutButtonProps {
-  cart: CartItem[];
-}
 
 const CheckoutButton: React.FC<CheckoutButtonProps> = ({ cart }) => {
   const transformCartToLineItems = () =>

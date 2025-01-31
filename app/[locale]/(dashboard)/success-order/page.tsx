@@ -1,74 +1,54 @@
 "use client";
-
-import React, { useEffect, useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
-
-import { ToastContainer, toast } from "react-toastify";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 import "react-toastify/dist/ReactToastify.css";
 import Loading from "@/components/Loading";
 
 export default function OrderSuccess() {
-  const [status, setStatus] = useState("loading");
-  const [, setCustomerEmail] = useState("");
-  const searchParams = useSearchParams();
-  const sessionId = searchParams.get("session_id");
-  const productName = decodeURIComponent(
-    searchParams.get("product_name") || ""
-  );
-  const productPrice = decodeURIComponent(
-    searchParams.get("product_price") || ""
-  );
-
   const router = useRouter();
 
-  const PushRoute = () => {
-    router.push("/movies");
-  };
+  const [status, setStatus] = useState("loading");
+  const searchParams = useSearchParams();
+  const sessionId = searchParams.get("session_id");
 
   useEffect(() => {
     if (sessionId) {
-      fetchSessionStatus();
+      saveOrderToSupabase();
     } else {
-      console.error("No session ID provided in URL.");
+      console.error("No session ID found.");
       setStatus("failed");
     }
   }, [sessionId]);
 
-  async function fetchSessionStatus() {
+  async function saveOrderToSupabase() {
     try {
       const response = await fetch(`/api/check-session`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ sessionId }),
       });
 
-      if (!response.ok) {
-        throw new Error("Failed to fetch session details.");
-      }
+      if (!response.ok) throw new Error("Failed to fetch session details.");
 
       const { session } = await response.json();
 
-      if (session.payment_status) {
-        setStatus(session.payment_status);
+      if (session.payment_status === "paid") {
+        toast.success("Payment Successful!", { position: "bottom-right" });
 
-        setCustomerEmail(
-          session.customer_details?.email || "No email provided"
-        );
-        if (session.payment_status === "paid") {
-          toast.success("Payment Successful!", {
-            position: "bottom-right",
-          });
-          setTimeout(() => {
-            router.push("/movies");
-          }, 5000);
-        }
+        const timer = setTimeout(() => {
+          router.push("/movies"); 
+        }, 3000);
+
+        setStatus("loaded");
+
+        return () => clearTimeout(timer); 
       } else {
-        throw new Error("Missing required session details.");
+        setStatus("failed");
       }
     } catch (error) {
-      console.error("Error fetching session:", error);
+      console.error("Error saving order:", error);
       setStatus("failed");
     }
   }
@@ -99,47 +79,10 @@ export default function OrderSuccess() {
   }
 
   return (
-    <div className=" h-screen  px-6 flex items-center justify-center bg-green-200">
-      <div className="flex items-center justify-center bg-green-400">
-        <div className="p-6 flex flex-col bg-white   rounded shadow-md ">
-          <h1 className="text-3xl font-bold text-green-600">
-            Payment Successful!
-          </h1>
-          <p className="mt-4 text-gray-700">
-            The payment was processed successfully.
-            <br />
-          </p>
-          {productName && (
-            <p className="mt-4 text-gray-700">
-              Your purchased product:
-              <span
-                className="font-semibold text-blue-600 hover:underline"
-                data-cy="purchased-product"
-              >
-                {productName}
-              </span>{" "}
-            </p>
-          )}
-          {productPrice && (
-            <p className="mt-4 text-gray-700">
-              for{" "}
-              <span className="font-semibold text-blue-600 hover:underline">
-                ${productPrice}
-              </span>{" "}
-              has been confirmed.
-            </p>
-          )}
-          <button
-            type="button"
-            className=" mt-4 bg-cyan-500 text-white  px-4 py-3 rounded-lg  font-medium hover:bg-blue-700 transition-colors"
-            onClick={() => PushRoute()}
-            data-cy="return-btn"
-          >
-            Go Back
-          </button>
-        </div>
-
-        <ToastContainer />
+    <div className="flex items-center justify-center h-screen bg-gray-100">
+      <div className="p-6 bg-white rounded shadow-md text-center">
+        <h1 className="text-3xl font-bold text-green-600 mb-4">Payment Successful!</h1>
+        <p className="text-lg text-gray-700">Redirecting to the movies page...</p>
       </div>
     </div>
   );

@@ -35,11 +35,13 @@
   --inner-box-shadow: inset 0px 5px 4px 0px rgba(26, 26, 26, 0.24);
 
   --user-card: #36303b;
+  --main-light-bg: #f8ede3;
+  --main-dark-bg: #161616;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #161616;
+    --background: var(--main-dark-bg);
     --foreground: #ededed;
   }
 }
@@ -52,19 +54,20 @@
 }
 
 .light {
-  --foreground: #f8ede3;
+  --foreground: var(--main-light-bg);
   --header-bg: #e5d0ac;
-  --text-main: #161616;
-  --background: #f8ede3;
+  --text-main: var(--main-dark-bg);
+  --background: var(--main-light-bg);
   --profile-bg: #bf3131;
   --input: #7d7d7d;
   --input-col: rgba(136, 98, 143, 0.469);
   --btn-bg: #f8ede3;
-  --btn-col: #161616;
+  --btn-col: var(--main-dark-bg);
   --footer-bg: #e4e0e1;
   --hover-dark-btn: #ccc;
   --main-button: #af1918;
   --bg-auth: #b99470;
+  --bg-order: #bf3131;;
   --auth-form: #795757;
   --dark-btn: #282828;
   --article-bg: #f5f5f5;
@@ -73,7 +76,7 @@
 .dark {
   --header-bg: #cba35c;
   --text-main: #fff;
-  --background: #161616;
+  --background: var(--main-dark-bg);
   --profile-bg: #540c0c;
   --btn-bg: #161616;
   --hover-dark-btn: #444444;
@@ -81,8 +84,9 @@
   --hover-dark-btn: #212121;
   --main-button: #8c1515;
   --bg-auth: #1f1f1f;
+  --bg-order: var(--profile-bg);
   --auth-form: #181818;
-  --dark-btn: #161616;
+  --dark-btn: var(--main-dark-bg);
   --article-bg: #fff5e4;
 }
 
@@ -110,7 +114,7 @@ h3,
 h4,
 h5,
 h6,
-a {
+a, .description {
   font-family: var(--font-playfair), Arial, Helvetica, sans-serif;
   font-weight: 700;
 }

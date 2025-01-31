@@ -21,7 +21,6 @@ export async function POST(req: NextRequest) {
       success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/success-order?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/cancel-checkout`,
     });
-
     return NextResponse.json({ url: session.url });
   } catch (error) {
     console.error("Error in POST /api/cart-checkout", error);

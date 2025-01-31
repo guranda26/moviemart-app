@@ -7,7 +7,7 @@ import CheckoutButton from "@/components/CheckoutBtn";
 // import RedirectToProductBtn from "../../../components/RedirectToProductPage";
 
 const Page = () => {
-  const { cart = [], setCart, fetchCart } = useCart();
+  const { cart = [], fetchCart } = useCart();
 
   const onDelete = async (productId: number) => {
     console.log('deleting productId', productId);
