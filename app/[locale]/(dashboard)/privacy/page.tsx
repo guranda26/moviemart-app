@@ -1,10 +1,10 @@
 import PrivacyPageComponent from '@/components/PrivacyPage'
 import React from 'react'
 
-const page = () => {
+const Privacy = () => {
   return (
-   <PrivacyPageComponent />
+    <PrivacyPageComponent />
   )
 }
 
-export default page
+export default Privacy
