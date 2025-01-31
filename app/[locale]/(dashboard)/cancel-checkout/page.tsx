@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -9,12 +9,18 @@ import ReturnBackButton from "@/components/ReturnBack";
 
 export default function OrderCancel() {
   const {t} = useTranslation("checkout")
-
   const router = useRouter();
 
+  const searchParams = useSearchParams();
+  const sessionId = searchParams.get("session_id");
+
+
+  console.log('productName', sessionId);
+  
   const PushRoute = () => {
     router.push("/cart");
   };
+
 
   useEffect(() => {
     toast.error("Payment canceled !", {
@@ -25,6 +31,13 @@ export default function OrderCancel() {
       PushRoute();
     }, 5000);
   }, []);
+  
+
+  if (!sessionId) {
+    router.push("/");
+    return null;
+  }
+
   
 
   return (

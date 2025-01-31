@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
       line_items: lineItems,
       mode: "payment",
       success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/success-order?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/cancel-checkout`,
+      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/cancel-checkout?session_id={CHECKOUT_SESSION_ID}`,
     });
     return NextResponse.json({ url: session.url });
   } catch (error) {

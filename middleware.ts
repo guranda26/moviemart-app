@@ -11,9 +11,6 @@ export async function middleware(request: NextRequest) {
   const { redirect } = await protectRoute(normalizedPathname);
 
   if (redirect) {
-    // if (pathname === redirect) {
-    //   return NextResponse.next();
-    // }
     return NextResponse.redirect(new URL(redirect, request.url));
   }
 
