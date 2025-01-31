@@ -6,6 +6,7 @@ describe("Products modifification", () => {
   });
 
   it("Adds a new movie", () => {
+    cy.wait(3000);
     cy.get("[data-cy='login-btn']").click();
 
     cy.get("[data-cy='email-input']").type("g_lemonjava@cu.edu.ge");
@@ -33,12 +34,12 @@ describe("Products modifification", () => {
     cy.get("[data-cy='add-product-btn']").click();
 
     cy.findAllByText("Thank you for your submission!").should("be.visible");
-    cy.wait(8000);
+    cy.wait(5000);
 
     cy.get("[data-cy='wishlist-page-url']").click();
-    cy.url().should("include", "/wishlist");
-
     cy.wait(5000);
+
+    cy.url().should("include", "/wishlist");
 
     cy.get("[data-cy='wishlist-movie-item']").last().findByText("My Neighbor Totoro");
   });
@@ -71,7 +72,10 @@ describe("Products modifification", () => {
     cy.get("[data-cy='edit-language-input']").select("English").should('be.visible')
     cy.get("[data-cy='save-cart-btn']").click()
     cy.wait(500);
-    cy.get("[data-cy='wishlist-language']").last().findByText("English").should("be.visible");
+    cy.get("[data-cy='wishlist-language']")
+    .last()
+    .contains("English")
+    .should("be.visible");  
   });
   it("Deletes movie from the wishlist", () => {
     cy.wait(3000);
