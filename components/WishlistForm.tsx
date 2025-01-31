@@ -29,8 +29,8 @@ const wishlistFormSchema = z.object({
       const yearNumber = parseInt(year, 10);
       return yearNumber >= 1900 && yearNumber <= 2026;
     }, "Year must be between 1900 and 2026."),
-  comment: z.string().optional(),
-  comment_ka: z.string().optional(),
+  comment: z.string().max(500, "Comment must be 500 characters or less.").optional(),
+  comment_ka: z.string().max(500, "Comment must be 500 characters or less.").optional(),
   image_src: z.string().optional(),
 });
 
