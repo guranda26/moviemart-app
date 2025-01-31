@@ -3,11 +3,11 @@ import FetchMovies from "@/utils/supabase/lib/FetchMovies";
 import Link from "next/link";
 import TranslationsProvider from "@/components/TranslationsProvider";
 import initTranslations from "@/utils/i18n";
-import { CategoryParams } from "@/Interfaces/Params";
+type CategoryParams = Promise<{category: string; locale?: string;}>
 
 export default async function CategoryPage({ params }: {params: CategoryParams}) {
-  const { category } = params; 
-  const { locale } = params;
+  const { category } = await params; 
+  const { locale } = await params;
 
   const movies = await FetchMovies();
 
