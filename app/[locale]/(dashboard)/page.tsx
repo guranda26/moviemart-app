@@ -4,9 +4,9 @@ import Link from "next/link";
 import { Params } from "next/dist/server/request/params";
 import TranslationsProvider from "@/components/TranslationsProvider";
 import initTranslations from "@/utils/i18n";
-import BuyProductButton from "@/components/BuyProductButton";
+import BuyProductButton from "@/components/button/BuyProductButton";
 import SearchInput from "@/components/SearchInput";
-import AddToCartButton from "@/components/AddToCartBtn";
+import AddToCartButton from "@/components/button/AddToCartBtn";
 
 const MainPage = async ({ params, searchParams }: { params: Params; searchParams?: { q?: string } }) => {
   const searchQuery = await searchParams?.q || "";

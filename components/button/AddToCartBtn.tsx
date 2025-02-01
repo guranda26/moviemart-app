@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState, useEffect } from "react";
-import { addToCart } from "./addToCart";
+import { addToCart } from "../addToCart";
 import { toast, ToastContainer } from "react-toastify";
 
 interface AddToCartButtonProps {

@@ -4,6 +4,7 @@ import { encodedRedirect, returnError } from "@/utils/utils";
 import createClient from "@/utils/supabase/server";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { stripe } from "./utils/supabase/lib/stripe";
 
 export const signUpAction = async (formData: FormData) => {
   const username = formData.get("username")?.toString();
@@ -41,9 +42,17 @@ export const signUpAction = async (formData: FormData) => {
     };
   }
 
+  const customer = await stripe.customers.create({
+    email,
+    name: username,
+    metadata: {
+      supabase_user_id: user.id,
+    },
+  });
+
   const { error: profileError } = await supabase
     .from("profile")
-    .upsert({ id: user.id, username, email, age });
+    .upsert({ id: user.id, username, email, age, stripe_customer_id: customer.id });
 
   if (profileError) {
     console.error("Error inserting profile data:", profileError.message);

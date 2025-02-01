@@ -4,7 +4,7 @@ import { signOutAction } from "@/actions";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import ThemeButton from "../ThemeButton";
+import ThemeButton from "../button/ThemeButton";
 import { GiExitDoor } from "react-icons/gi";
 import { LuCircleUserRound } from "react-icons/lu";
 import { useTranslation } from "react-i18next";

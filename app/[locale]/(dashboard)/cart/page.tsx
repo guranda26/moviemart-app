@@ -3,7 +3,7 @@
 import React from "react";
 import { useCart } from "@/hooks/useCart";
 import { MdDelete } from "react-icons/md";
-import CheckoutButton from "@/components/CheckoutBtn";
+import CheckoutButton from "@/components/button/CheckoutBtn";
 // import RedirectToProductBtn from "../../../components/RedirectToProductPage";
 
 const Page = () => {

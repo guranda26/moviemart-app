@@ -1,5 +1,5 @@
 import React from "react";
-import ThemeButton from "../ThemeButton";
+import ThemeButton from "../button/ThemeButton";
 import ToggleLanguage from "../ToggleLanguage";
 
 const AuthHeader = () => {
