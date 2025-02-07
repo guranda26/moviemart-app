@@ -50,7 +50,7 @@ const Header = () => {
                 data-cy="wishlist-url"
                 >
                   <FaHeartCirclePlus className="text-2xl" />
-                  <span>Wishlist</span>
+                  <span>{t("common_placeholder:wishlist")}</span>
                 </Link>
                 <Link href={"/wishlist"}>
                 </Link>
@@ -66,7 +66,7 @@ const Header = () => {
               <div className="relative z-50">
                 <Link href="/profile" className="flex items-center flex flex-col items-center">
                   <LuCircleUserRound className="text-2xl" />
-                  <span className="hidden md:inline-block">Profile</span>
+                  <span className="hidden md:inline-block">{t("common_placeholder:profile")}</span>
                 </Link>             
                 <ul className="absolute left-0 mt-2 w-40 bg-gray-800 text-white rounded-md shadow-lg opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-300">
                 <li>
@@ -74,7 +74,7 @@ const Header = () => {
                       href="/profile"
                       className="block px-4 py-2 hover:bg-gray-700"
                     >
-                      Profile
+                      {t("common_placeholder:profile")}
                     </Link>
                   </li>
                   <li>
@@ -82,7 +82,7 @@ const Header = () => {
                       href="/movies"
                       className="block px-4 py-2 hover:bg-gray-700"
                     >
-                      Movies
+                      {t("common_placeholder:movies")}
                     </Link>
                   </li>
                   <li>
@@ -90,7 +90,7 @@ const Header = () => {
                       href="/orders"
                       className="block px-4 py-2 hover:bg-gray-700"
                     >
-                      Orders
+                      {t("common_placeholder:orders")}
                     </Link>
                   </li>
                   <li>
@@ -98,7 +98,7 @@ const Header = () => {
                       href="/subscribe"
                       className="block px-4 py-2 hover:bg-gray-700"
                     >
-                      Subscribe
+                      {t("common_placeholder:subscription")}
                     </Link>
                   </li>
                 </ul>
@@ -107,7 +107,7 @@ const Header = () => {
             <li>
               <Link href={"/cart"} className="flex flex-col items-center">
                 <MdOutlineShoppingCartCheckout className="text-2xl" />
-                <span className="hidden md:inline-block">Cart</span>
+                <span className="hidden md:inline-block">{t("common_placeholder:cart")}</span>
                 {/* {t("header:cart")} */}
               </Link>
             </li>

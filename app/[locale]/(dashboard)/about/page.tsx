@@ -1,48 +1,46 @@
+'use client'
+
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const AboutUsPage = () => {
+
+  const {t} = useTranslation()
+
   return (
     <section className="px-6 py-12 bg-background text-textCol max-w-4xl mx-auto">
       <h2 className="text-4xl font-extrabold text-center mb-8">
-        About Us
+        {t("about_us:about")}
       </h2>
       <p className="mb-6 text-lg leading-relaxed text-textCol">
-        Welcome to <span className="font-semibold">MovieMart</span>, a platform designed to bring you the best movie
-        experiences! We are committed to providing high-quality entertainment options and a seamless browsing experience.
+      {t("about_us:welcome")} <span className="font-semibold">MovieMart</span>, {t("about_us:platform")}
       </p>
       <p className="mb-8 text-lg leading-relaxed text-textCol">
-        Our mission is to help movie lovers discover their next favorite film. Whether you enjoy the latest blockbusters
-        or timeless classics, we’ve got something for everyone.
+      {t("about_us:mission")}
       </p>
-
       <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
-        <h3 className="mb-3 text-xl font-semibold text-white inline-block">Our Story</h3>
+        <h3 className="mb-3 text-xl font-semibold text-white inline-block">{t("about_us:our_story")}
+        </h3>
         <p className="leading-relaxed text-gray-300">
-          MovieMart was founded by a group of passionate movie enthusiasts with a shared goal: to create a user-friendly
-          platform that helps people find movies they will love. With years of experience in the entertainment industry, we
-          have built MovieMart into a one-stop shop for movie discovery.
+          {t("about_us:story")}
         </p>
 
-        <h3 className="mt-6 mb-3 text-xl font-semibold text-white inline-block">Our Vision</h3>
+        <h3 className="mt-6 mb-3 text-xl font-semibold text-white inline-block"> {t("about_us:our_vision")} </h3>
         <p className="leading-relaxed text-gray-300">
-          Our vision is to revolutionize the way people discover and enjoy films by offering personalized recommendations,
-          movie reviews, and a wide range of films from every genre and region. We aim to connect movie lovers across the
-          globe and provide them with a space to share their love for cinema.
+          {t("about_us:vision")}
         </p>
 
-        <h3 className="mt-6 mb-3 text-xl font-semibold text-white inline-block">Our Values</h3>
+        <h3 className="mt-6 mb-3 text-xl font-semibold text-white inline-block">{t("about_us:our_values")}</h3>
         <ul className="list-disc list-inside pl-6 mt-3 space-y-2 text-gray-400">
-          <li>Passion for films and entertainment.</li>
-          <li>Commitment to user satisfaction and experience.</li>
-          <li>Innovation in providing movie recommendations and reviews.</li>
-          <li>Respect for diversity in cinema, embracing all cultures and genres.</li>
+          <li>{t("about_us:first_value")}</li>
+          <li>{t("about_us:second_value")}</li>
+          <li>{t("about_us:third_value")}</li>
+          <li>{t("about_us:forth_value")}</li>
         </ul>
 
-        <h3 className="mt-6 mb-3 text-xl font-semibold text-white inline-block">Get Involved</h3>
+        <h3 className="mt-6 mb-3 text-xl font-semibold text-white inline-block">{t("about_us:get_involved")}</h3>
         <p className="leading-relaxed text-gray-300">
-          If you are as passionate about movies as we are and would like to be part of our community, feel free to reach out
-          to us! We&apos;re always excited to connect with movie enthusiasts and welcome new ideas. Join us and help make MovieMart
-          the best place for discovering films.
+         {t("about_us:vision")}
         </p>
       </div>
     </section>

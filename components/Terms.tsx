@@ -1,85 +1,69 @@
+'use client'
+
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const TermsAndConditionsPage = () => {
+  const {t} = useTranslation()
+
   return (
     <section className="px-6 py-12 bg-background text-textCol max-w-4xl mx-auto">
       <h2 className="text-4xl font-extrabold text-center mb-8">
-        Terms and Conditions
+        {t("terms_conditions:terms_and_conditions")}
       </h2>
       <p className="mb-6 text-lg leading-relaxed text-textCol">
-        Welcome to <span className="font-semibold">MovieMart</span>! These Terms and Conditions outline the rules and
-        regulations for the use of our website and services.
+      {t("terms_conditions:welcome")} <span className="font-semibold">MovieMart</span>! {t("terms_conditions:regulations")}
       </p>
       <p className="mb-8 text-lg leading-relaxed text-textCol">
-        By accessing this website, we assume you accept these Terms and
-        Conditions in full. Do not continue to use <span className="font-semibold">MovieMart</span>&apos;s website if
-        you do not agree to all the terms stated on this page.
+      {t("terms_conditions:acceptance")} <span className="font-semibold">MovieMart</span>
+        {t("terms_conditions:reject")}
       </p>
-
       <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
         <ol className="list-decimal text-white list-inside space-y-8 text-lg">
           <li>
-            <h3 className="mb-3 text-xl font-semibold text-white inline-block">Use of the Website</h3>
+            <h3 className="mb-3 text-xl font-semibold text-white inline-block">{t("terms_conditions:use")}</h3>
             <p className="leading-relaxed text-gray-300">
-              You must be at least 18 years old to use our services. By accessing
-              or using the website, you agree to comply with these Terms and all
-              applicable laws and regulations.
+            {t("terms_conditions:agree")}
             </p>
           </li>
           <li>
-            <h3 className="mb-3 text-xl font-semibold text-white inline-block">Intellectual Property Rights</h3>
+            <h3 className="mb-3 text-xl font-semibold text-white inline-block">{t("terms_conditions:property")}</h3>
             <p className="leading-relaxed text-gray-300">
-              Unless otherwise stated, <span className="font-semibold">MovieMart</span> and/or its licensors own the
-              intellectual property rights for all material on the website. All
-              rights are reserved. You may access material from <span className="font-semibold">MovieMart</span> for your
-              personal use, subject to restrictions set in these terms.
+            {t("terms_conditions:pre_text")} <span className="font-semibold">MovieMart</span> {t("terms_conditions:intellectual_property")} <span className="font-semibold">MovieMart</span> {t("terms_conditions:usage")}
             </p>
           </li>
           <li>
-            <h3 className="mb-3 text-xl font-semibold text-white inline-block">Prohibited Activities</h3>
-            <p className="leading-relaxed text-gray-300">You are prohibited from:</p>
+            <h3 className="mb-3 text-xl font-semibold text-white inline-block">{t("terms_conditions:restrictions")} </h3>
+            <p className="leading-relaxed text-gray-300">{t("terms_conditions:restrict-text")}</p>
             <ul className="list-disc list-inside pl-6 mt-3 space-y-2 text-gray-400">
-              <li>Republishing, selling, or sub-licensing website content.</li>
-              <li>
-                Using the website in any way that damages the website or impairs
-                its accessibility.
-              </li>
-              <li>
-                Using the website for unlawful activities or violating
-                regulations.
-              </li>
+              <li>{t("terms_conditions:first_restriction")}</li>
+              <li>{t("terms_conditions:second_restriction")}</li>
+              <li>{t("terms_conditions:third-restriction")}</li>
             </ul>
           </li>
           <li>
-            <h3 className="mb-3 text-xl font-semibold text-white inline-block">Limitation of Liability</h3>
+            <h3 className="mb-3 text-xl font-semibold text-white inline-block">{t("terms_conditions:limitations")}</h3>
             <p className="leading-relaxed text-gray-300">
-              <span className="font-semibold">MovieMart</span> will not be held liable for any damages arising from your
-              use of the website, including but not limited to indirect or
-              consequential damages, loss of data, or loss of profit.
+              <span className="font-semibold">MovieMart</span> {t("terms_conditions:limitation-text")}
             </p>
           </li>
           <li>
-            <h3 className="mb-3 text-xl font-semibold text-white inline-block">Termination</h3>
+            <h3 className="mb-3 text-xl font-semibold text-white inline-block">{t("terms_conditions:termination")}</h3>
             <p className="leading-relaxed text-gray-300">
-              We reserve the right to terminate or suspend your access to our
-              website at our discretion, without prior notice, for any reason
-              including breach of these Terms.
+              {t("terms_conditions:termination-text")}            
             </p>
           </li>
           <li>
-            <h3 className="mb-3 text-xl font-semibold text-white inline-block">Changes to Terms</h3>
+            <h3 className="mb-3 text-xl font-semibold text-white inline-block">{t("terms_conditions:changes")}</h3>
             <p className="leading-relaxed text-gray-300">
-              <span className="font-semibold">MovieMart</span> reserves the right to update these Terms and Conditions at
-              any time. Continued use of the website after any changes signifies
-              your agreement to the new terms.
+              <span className="font-semibold">MovieMart</span> {t("terms_conditions:changes_text")}
             </p>
           </li>
           <li>
-            <h3 className="mb-3 text-xl font-semibold text-white inline-block">Contact Information</h3>
+            <h3 className="mb-3 text-xl font-semibold text-white inline-block">{t("terms_conditions:contact")}</h3>
             <p className="leading-relaxed text-gray-300">
-              If you have any questions about these Terms and Conditions, please
-              contact us at{" "}
-              <a
+            {t("terms_conditions:contact_text")}              
+            <a
                 href="mailto:moviemart@mail.com"
                 className="text-blue-400 underline hover:text-blue-500 transition"
               >

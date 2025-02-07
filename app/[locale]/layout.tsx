@@ -56,7 +56,10 @@ export default async function DashboardLayout({
     "wishlist",
     "common_placeholder",
     "edit_form",
-    "movie_details"
+    "movie_details",
+    "about_us",
+    "privacy_policy",
+    "terms_conditions",
   ]);
   return (
     <html lang={locale} dir={dir(locale)} suppressHydrationWarning>
