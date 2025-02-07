@@ -15,5 +15,6 @@
   "watch_now": "Watch Now",
   "sum": "Sum",
   "cart": "Cart",
-  "empty_cart": "Your cart is empty."
+  "empty_cart": "Your cart is empty.",
+  "movie_list": "Movie List"
 }

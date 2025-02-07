@@ -37,6 +37,9 @@ export default {
         bgOrder: "var(--bg-order)",
         articleBg: "var(--article-bg)",
         authForm: "var(--auth-form)",
+        bannerbg: "var(--banner-bg)",
+        categoryBg: "var(--category-bg)",
+        hoverCategory: "var(--hover-category)",
       },
       boxShadow: {
         "custom-inner": "var(--inner-box-shadow)",

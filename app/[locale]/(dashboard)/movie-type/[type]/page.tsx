@@ -4,21 +4,22 @@ import Link from "next/link";
 import TranslationsProvider from "@/components/TranslationsProvider";
 import initTranslations from "@/utils/i18n";
 import { MovieTypeParams } from "@/Types/types";
+import Image from "next/image";
 
 export default async function MovieType({ params }: {params: MovieTypeParams}) {
   const { type } = await params; 
   const { locale } = await params;
+  const isKa = locale === "ka";
 
   const movies = await FetchMovies();
-
+  const upperType = type.toUpperCase();
   const filteredMovies = movies.filter((movie) => {
     const movieType = movie?.type?.toLowerCase();
-    console.log('movieType', movieType);
-
-    if(movieType)     return movieType.includes(type.toLowerCase());
-
-    
+        if(movieType) return movieType.includes(type.toLowerCase());
   })
+
+  const movieKa = movies.find((movie) => movie.type && movie.type.toLowerCase() === type.toLowerCase())?.type_ka || type;
+  const displayType = isKa ? movieKa : upperType;
 
   const i18nNameSpaces = ["common", "products", "home"];
   const { t, resources } = await initTranslations(locale, i18nNameSpaces);
@@ -30,9 +31,12 @@ export default async function MovieType({ params }: {params: MovieTypeParams}) {
       namespaces={i18nNameSpaces}
     >
       <section className="min-h-screen p-8">
-        <h1 className="text-3xl font-bold mb-8">
-          {t("home:movies_in_type", { type })}
+      <div className="flex items-center justify-center gap-4 mb-8">
+      <Image src={"/assets/popcorn-movie.svg"} alt="popcorn img" width={50} height={50} className="text-white" />
+        <h1 className="text-4xl font-bold">
+          { displayType }
         </h1>
+      </div>
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredMovies.map(
             ({

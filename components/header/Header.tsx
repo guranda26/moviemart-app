@@ -11,6 +11,9 @@ import { useTranslation } from "react-i18next";
 import ToggleLanguage from "../ToggleLanguage";
 import "react-tooltip/dist/react-tooltip.css";
 import { MdOutlineShoppingCartCheckout } from "react-icons/md";
+import { FaNewspaper } from "react-icons/fa6";
+import { FaHeartCirclePlus } from "react-icons/fa6";
+import { AiFillMessage } from "react-icons/ai";
 
 export enum Locale {
   en = "EN",
@@ -35,42 +38,77 @@ const Header = () => {
               </Link>
             </li>
             <li>
-              <Link href={"/blogs"} className="text-2xl">
+              <Link href={"/blogs"} className="flex flex-col items-center">
+                <FaNewspaper className="text-2xl" />
                 {t("header:blog")}
               </Link>
             </li>
             <li>
-              <Link href={"/contact"} className="text-2xl">
-                {t("header:contact")}
-              </Link>
-            </li>
-            <li>
-              <Link href={"/cart"} className="text-2xl">
-                <MdOutlineShoppingCartCheckout />
-                {/* {t("header:cart")} */}
-              </Link>
-            </li>
-            <li>
-              <div className="text-2xl relative group">
+              <div className="relative group">
                 <Link href={"/wishlist-form"}
+                className="flex flex-col items-center"
                 data-cy="wishlist-url"
                 >
-                  <Image width={20} height={20} src="/assets/wishlist.png" alt="wishlist" className="w-5" />
+                  <FaHeartCirclePlus className="text-2xl" />
+                  <span>Wishlist</span>
                 </Link>
                 <Link href={"/wishlist"}>
-                <span className="hidden md:inline-block absolute left-1/2 -translate-x-1/2 top-10 bg-gray-800 text-sm py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white"
-                >
-                  Wishlist
-                </span>
                 </Link>
               </div>
             </li>
+            <li>
+              <Link href={"/contact"} className="flex flex-col items-center">
+              <AiFillMessage className="text-2xl" />
+                <span>{t("header:contact")}</span>
+              </Link>
+            </li>
             <li className="relative group">
-              <Link href="/profile" className="text-2xl relative group">
-                <LuCircleUserRound />
-                <span className="hidden md:inline-block absolute left-1/2 -translate-x-1/2 top-10 bg-gray-800 text-sm py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white">
-                  Profile
-                </span>
+              <div className="relative z-50">
+                <Link href="/profile" className="flex items-center flex flex-col items-center">
+                  <LuCircleUserRound className="text-2xl" />
+                  <span className="hidden md:inline-block">Profile</span>
+                </Link>             
+                <ul className="absolute left-0 mt-2 w-40 bg-gray-800 text-white rounded-md shadow-lg opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-300">
+                <li>
+                    <Link
+                      href="/profile"
+                      className="block px-4 py-2 hover:bg-gray-700"
+                    >
+                      Profile
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/movies"
+                      className="block px-4 py-2 hover:bg-gray-700"
+                    >
+                      Movies
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/orders"
+                      className="block px-4 py-2 hover:bg-gray-700"
+                    >
+                      Orders
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/subscribe"
+                      className="block px-4 py-2 hover:bg-gray-700"
+                    >
+                      Subscribe
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li>
+              <Link href={"/cart"} className="flex flex-col items-center">
+                <MdOutlineShoppingCartCheckout className="text-2xl" />
+                <span className="hidden md:inline-block">Cart</span>
+                {/* {t("header:cart")} */}
               </Link>
             </li>
             <li>
@@ -80,7 +118,7 @@ const Header = () => {
                   className="font-bold flex flex-col items-center"
                   data-cy='log-out'
                 >
-                  <GiExitDoor width={20} className="text-3xl" />
+                  <GiExitDoor width={20} className="text-2xl" />
                   <span>{t("header:sign_out")}</span>
                 </button>
               </form>

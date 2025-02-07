@@ -18,6 +18,26 @@ export default async function CategoryPage({ params }: {params: CategoryParams})
     return movieCategories.includes(category.toLowerCase());
   })
 
+  const categoryToUpperCase = category.charAt(0).toUpperCase() + category.slice(1);
+
+  const isKa = locale === "ka";
+
+  const categoryKa = movies
+  .flatMap((movie) => {
+    const categories = movie.category.split(",").map((cat) => cat.trim().toLowerCase());
+    const index = categories.indexOf(category.toLowerCase());
+
+    if (index !== -1 && movie.category_ka) {
+      const categoriesKa = movie.category_ka.split(",").map((catKa) => catKa.trim());
+      return categoriesKa[index];
+    }
+
+    return null;
+  })
+  .filter((catKa) => catKa !== null)[0] || categoryToUpperCase;
+
+const displayCategory = isKa ? categoryKa : categoryToUpperCase;
+
   const i18nNameSpaces = ["common", "products", "home"];
   const { t, resources } = await initTranslations(locale, i18nNameSpaces);
 
@@ -28,8 +48,8 @@ export default async function CategoryPage({ params }: {params: CategoryParams})
       namespaces={i18nNameSpaces}
     >
       <section className="min-h-screen p-8">
-        <h1 className="text-3xl font-bold mb-8">
-          {t("home:movies_in_category", { category })}
+        <h1 className="text-3xl font-bold mb-8 text-center">
+          {displayCategory}
         </h1>
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredMovies.map(

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Loading from "./Loading";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
+import { IoClose } from "react-icons/io5";
 
 const SearchInput = ({ initialSearchQuery }: { initialSearchQuery: string }) => {
   const [searchQuery, setSearchQuery] = useState(initialSearchQuery);
@@ -37,7 +38,7 @@ const SearchInput = ({ initialSearchQuery }: { initialSearchQuery: string }) => 
 
   return (
     <div className="z-40 search-input">
-      <form onSubmit={handleSearchSubmit} className="w-auto max-w-[600px] sm:max-w-md mx-auto flex flex-wrap items-center relative">
+      <form onSubmit={handleSearchSubmit} className="w-auto max-w-[600px] sm:max-w-md mx-auto flex items-center relative">
       <Image width={20} height={20} src="/assets/search-icon.svg" alt="search icon" className="absolute left-3 search-icon__hide" />
         <input
           id="search"
@@ -47,7 +48,7 @@ const SearchInput = ({ initialSearchQuery }: { initialSearchQuery: string }) => 
           value={searchQuery}
           onChange={handleSearchChange}
           onClick={handleClearSearch}
-          className="w-max-content sm:w-[250px] md:w-[300px] sm:max-w-full lg:w-[300px] p-2 pl-10 border border-redButton rounded shadow-sm md:bg-[#e8ceb595] text-black search-placeholder"
+          className="w-auto sm:w-[250px] md:w-[300px] sm:max-w-full lg:w-[300px] p-2 pl-10 border border-redButton rounded shadow-sm bg-[#e8ceb595] text-black search-placeholder"
         />
         {searchQuery && searchPage ? (
           <button
@@ -58,7 +59,7 @@ const SearchInput = ({ initialSearchQuery }: { initialSearchQuery: string }) => 
             <span className="search-text">
               {t("common_placeholder:reset")}
             </span>
-            <Image width={20} height={20} src="/assets/search-icon.svg" alt="search icon" className="hidden search-img" />
+            <IoClose className="hidden search-img w-5 h-5" />
           </button>
         ) : ( 
         <button
