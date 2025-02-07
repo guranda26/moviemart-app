@@ -35,7 +35,7 @@
     "public/assets/*.mp4",
     "public/assets/*",
     "/utils/i18n.js",
-    "/app/not-found.tsx"
+    // "/app/not-found.tsx"
   ],
 "exclude": ["node_modules", "supabase", "stripe"],
 }
