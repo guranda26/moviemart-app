@@ -138,6 +138,36 @@ a, .description {
   }
 }
 
+@keyframes fadeInCircle {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scaleInCircle {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-circle {
+  animation: scaleIn 2s ease-in-out forwards;
+}
+
 .fade-in {
   animation: fadeIn 1s ease-in-out;
 }
@@ -228,7 +258,20 @@ input::placeholder{
     overflow-x: hidden;
   }
 
-  .category-cart a {
-    /* max-height: 150px; */
+}
+
+
+@media only screen and (max-width: 200px) {
+  .hide-circle {
+    display: none;
+  }
+
+  .break-text {
+    word-break: break-all;
+    font-size: 16px;
+  }
+
+  .font-small {
+    font-size: 14px;
   }
 }

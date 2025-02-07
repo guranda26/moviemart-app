@@ -2,8 +2,10 @@
 
 import { CheckoutButtonProps } from "@/Interfaces/Cart";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const CheckoutButton: React.FC<CheckoutButtonProps> = ({ cart }) => {
+  const {t} = useTranslation()
   const transformCartToLineItems = () =>
     cart.map((item) => {
       if (!item.movies.title || !item.movies.title) {
@@ -22,6 +24,7 @@ const CheckoutButton: React.FC<CheckoutButtonProps> = ({ cart }) => {
         quantity: 1
       };
     });
+
 
   const handleCheckout = async () => {
     const lineItems = transformCartToLineItems();
@@ -67,9 +70,9 @@ const CheckoutButton: React.FC<CheckoutButtonProps> = ({ cart }) => {
   return (
     <button
       onClick={handleCheckout}
-      className="p-3 md:p-4 bg-lime-600 rounded-lg hover:bg-lime-400 transition-colors text-white"
-    >
-      Checkout
+      className="py-2 px-3 bg-[#e24a4a] hover:bg-[#b43e3e]  transition-all-color hover:scale-105 rounded-md text-white w-[110px]"
+      >
+      {t("movie_details:checkout")}
     </button>
   );
 };

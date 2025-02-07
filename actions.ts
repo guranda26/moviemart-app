@@ -31,7 +31,14 @@ export const signUpAction = async (formData: FormData) => {
     },
   });
 
-  const user = data.user;
+  if (!data || !data.user) {
+    return {
+      success: false,
+      message: "User creation failed",
+    };
+  }  
+
+  const user = data?.user;
 
   if (error || !user) {
     console.error(error?.message || "Unknown error during sign-up");
@@ -41,17 +48,29 @@ export const signUpAction = async (formData: FormData) => {
     };
   }
 
-  const customer = await stripe.customers.create({
-    email,
-    name: username,
-    metadata: {
-      supabase_user_id: user.id,
-    },
-  });
+  let customerId = null;
+
+  try {
+    const customer = await stripe.customers.create({
+      email,
+      name: username,
+      metadata: {
+        supabase_user_id: user.id,
+      },
+    });
+    customerId = customer.id    
+  } catch (error) {
+    console.error("Stripe customer creation failed:", error);
+    return {
+      success: false,
+      message: "Failed to create Stripe customer",
+    };    
+  }
+
 
   const { error: profileError } = await supabase
     .from("profile")
-    .upsert({ id: user.id, username, email, age, stripe_customer_id: customer.id });
+    .upsert({ id: user.id, username, email, age, stripe_customer_id: customerId });
 
   if (profileError) {
     console.error("Error inserting profile data:", profileError.message);

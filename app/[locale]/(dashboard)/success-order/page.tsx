@@ -6,13 +6,10 @@ import "react-toastify/dist/ReactToastify.css";
 import Loading from "@/components/Loading";
 import { useTranslation } from "react-i18next";
 import ReturnBackButton from "@/components/ReturnBack";
-// import createClient from "@/utils/supabase/server";
 
 function OrderSuccessContent() {
   const router = useRouter();
-  // const [userId, setUserId] = useState<string | null>(null);
   const [redirectTo, setRedirectTo] = useState<string | null>(null); // Track navigation
-  // const supabase = createClient();
   const [status, setStatus] = useState("loading");
   const searchParams = useSearchParams();
   const sessionId = searchParams.get("session_id");

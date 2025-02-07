@@ -67,7 +67,7 @@ const Login: React.FC<LoginProps> = ({ searchParams }) => {
 
   return (
     <>
-      <h2 className="xs:text-2xl text-xl font-semibold text-[#e3e2e2]">
+      <h2 className="xs:text-2xl text-xl font-semibold text-[#e3e2e2] break-word break-text">
         {t("auth:login_heading")}
       </h2>
       <p className="text-[#c6c6c6] text-sm mb-4 mt-1 font-semibold">

@@ -31,7 +31,7 @@ const ForgotPassword = async ({ params, searchParams }: Props) => {
       locale={locale}
       namespaces={i18nNameSpaces}
     >
-      <h2 className="sm:text-2xl xs:text-xl text-md font-semibold text-[#e3e2e2]">
+      <h2 className="sm:text-2xl xs:text-xl text-md font-semibold text-[#e3e2e2] break-all">
         {t("auth:forgot_pass")}
       </h2>
       <p className="text-[#c6c6c6] text-sm mb-2 mt-1 font-semibold">
@@ -48,7 +48,7 @@ const ForgotPassword = async ({ params, searchParams }: Props) => {
         />
         <button
           type="submit"
-          className="xs:w-[100%] py-3 rounded-md bg-purpleButton hover:bg-hoverPurpleBtn text-white text-md font-bold"
+          className="xs:w-[100%] py-3 px-1 rounded-md bg-purpleButton hover:bg-hoverPurpleBtn text-white text-sm xs:text-md font-bold break-all"
           formAction={forgotPasswordAction}
         >
           {t("auth:reset_pass")}

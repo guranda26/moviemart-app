@@ -20,7 +20,7 @@ const ThemeButton = () => {
   if (!mounted) return null;
 
   return (
-    <div className="flex space-x-4 items-center ml-auto">
+    <div className="flex space-x-2 items-center ml-auto max-w-[50px]">
       <button
         onClick={() => handleThemeChange("light")}
         className={`cursor-pointer p-2 rounded-full ${
@@ -29,7 +29,7 @@ const ThemeButton = () => {
             : "bg-transparent"
         }`}
       >
-        <MdLightMode />
+        <MdLightMode className="max-w-5 max-h-5" />
       </button>
       <button
         onClick={() => handleThemeChange("dark")}
@@ -37,7 +37,7 @@ const ThemeButton = () => {
           resolvedTheme === "dark" ? "bg-gray-700 text-white" : "bg-transparent"
         }`}
       >
-        <FaMoon />
+        <FaMoon className="max-w-5 max-h-5" />
       </button>
       <button
         onClick={() => handleThemeChange("system")}
@@ -45,7 +45,7 @@ const ThemeButton = () => {
           theme === "system" ? "bg-gray-500 text-white" : "bg-transparent"
         }`}
       >
-        <BsLaptop />
+        <BsLaptop className="max-w-5 max-h-5" />
       </button>
     </div>
   );

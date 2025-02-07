@@ -114,7 +114,7 @@ const Register: React.FC<RegisterProps> = ({ searchParams }) => {
 
   return (
     <>
-      <h2 className="xs:text-2xl text-xl font-semibold text-[#e3e2e2]">
+      <h2 className="xs:text-2xl text-xl font-semibold text-[#e3e2e2] break-all">
         {t("auth:sign_up_heading")}
       </h2>
       <p className="text-[#c6c6c6] text-sm mb-4 mt-1 font-semibold">
@@ -160,7 +160,7 @@ const Register: React.FC<RegisterProps> = ({ searchParams }) => {
         {errors.password && <p className="text-red-500">{errors.password}</p>}
         <button
           type="submit"
-          className="xs:w-[100%] py-3 rounded-md bg-purpleButton hover:bg-hoverPurpleBtn text-white text-md font-bold"
+          className="xs:w-[100%] py-3 rounded-md bg-purpleButton hover:bg-hoverPurpleBtn text-white text-md font-bold font-small break-all"
         >
           {t("auth:sign_up")}
         </button>

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Lato } from "next/font/google";
-import { dir } from "i18next";
 import "./[locale]/globals.css";
 import { Locale } from "@/Types/types";
 import i18nConfig from "@/configs/i18ncofig";
@@ -43,7 +42,7 @@ export default async function DashboardLayout({
   const { locale } = resolvedParams;
 
   return (
-    <html lang={locale} dir={dir(locale)} suppressHydrationWarning>
+    <html lang={locale} dir="ltr" suppressHydrationWarning>
       <body
         className={`${playfair.variable} ${lato.variable} flex flex-col`}
       >

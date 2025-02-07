@@ -13,13 +13,13 @@ const Footer = () => {
       <div className="container mx-auto px-4 text-center">
         <p className="text-sm">&copy; {new Date().getFullYear()} MovieApp. {t("movie_details:rights")}.</p>
         <nav className="mt-2">
-          <ul className="flex justify-center space-x-6 text-xs md:text-sm">
+          <ul className="flex justify-center space-x-6 text-xs md:text-sm flex-wrap">
             <li>
               <Link href="/about" className="hover:underline">
                 {t("movie_details:about")}
               </Link>
             </li>
-            <li>
+            <li className="break-all">
               <Link href="/privacy" className="hover:underline">
                 {t("movie_details:privacy")}
               </Link>
