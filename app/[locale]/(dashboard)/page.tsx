@@ -8,7 +8,6 @@ import AddToCartButton from "@/components/button/AddToCartBtn";
 import Image from "next/image";
 import createClient from "@/utils/supabase/server";
 import { checkSubscriptionStatus } from "@/components/SubscriptionStatus";
-import { redirect } from "next/dist/server/api-utils";
 
 type Params = Promise<{ locale: string; productId?: string }>;
 
@@ -98,9 +97,9 @@ const MainPage = async ({ params, searchParams}: { params: Params; searchParams?
               />
 
             <div className="flex">
-              <div className="absolute inset-0 flex sm:items-baseline justify-between pb-20 sm:pb-0 sm:justify-evenly md:justify-center lg:justify-normal gap-5 lg:items-center lg:flex-row flex-col-reverse lg:gap-5 bg-opacity-50 p-6 text-white text-center bg-bannerbg">
-                  <div className="max-w-[200px] sm:w-[300px] sm:max-w-full flex flex-col items-start sm:items-center gap-3">
-                    <h2 className="text-2xl lg:text-3xl font-bold lg:mb-4 sm:leading-[3rem] lg:leading-[4rem]">
+              <div className="absolute inset-0 flex sm:items-baseline justify-between pb-20 sm:pb-0 sm:justify-evenly md:justify-center lg:justify-normal gap-8 lg:items-center lg:flex-row flex-col-reverse lg:gap-5 bg-opacity-50 p-6 text-white text-center bg-bannerbg">
+                  <div className="max-w-[250px] sm:w-[300px] md:w-[350px] sm:max-w-full flex flex-col items-start sm:items-center gap-3 md:mr-8">
+                    <h2 className="text-2xl lg:text-3xl font-bold lg:mb-4 leading-[2.5rem] sm:leading-[3rem] lg:leading-[4rem]">
                       {t("movie_details:watch")} <span className="block text-[#af1918]">{t("movie_details:with_us")}</span>
                     </h2>
                     <Link
