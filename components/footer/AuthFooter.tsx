@@ -9,11 +9,11 @@ const AuthFooter = () => {
 
   return (
     <footer className="text-textCol text-xs flex flex-col sm:flex-row h-full gap-2 justify-center items-center text-center">
-      <Link className="hover:text-[#444444]" href={"/privacy-policy"}>
+      <Link className="hover:text-detailsCol" href={"/privacy-policy"}>
         {t("home:privacy_policy")}
       </Link>
       <span className="sm:inline-block hidden">|</span>
-      <Link className="hover:text-[#444444]" href={"/terms-and-conditions"}>
+      <Link className="hover:text-detailsCol" href={"/terms-and-conditions"}>
         {t("home:terms_and_conditions")}
       </Link>
     </footer>

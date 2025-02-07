@@ -89,7 +89,7 @@ const MainPage = async ({ params, searchParams}: { params: Params; searchParams?
             <SearchInput initialSearchQuery={searchQuery} /> 
           ) : null}
           {sweetHomeMovie.map((movie) => (
-            <div key={movie.id} className="w-screen relative">
+            <div key={movie.id} className="w-screen relative animate-slide-in">
               <img
                 src={movie.bannerImg}
                 alt={movie.title}
@@ -98,7 +98,7 @@ const MainPage = async ({ params, searchParams}: { params: Params; searchParams?
 
             <div className="flex justify-center">
               <div className="absolute inset-0 flex sm:items-baseline justify-between pb-5 xs:pb-20 sm:pb-0 sm:justify-evenly md:justify-center lg:justify-normal gap-8 lg:items-center lg:flex-row flex-col-reverse lg:gap-5 bg-opacity-50 p-6 text-white text-center bg-bannerbg">
-                  <div className="max-w-[250px] sm:w-[300px] md:w-[350px] sm:max-w-full flex flex-col items-start sm:items-center gap-3 md:mr-8">
+                  <div className="max-w-[250px] sm:w-[300px] md:w-[350px] sm:max-w-full flex flex-col items-start sm:items-center gap-3 md:mr-8 fade-in">
                     <h2 className="text-2xl lg:text-3xl font-bold lg:mb-4 leading-[2.5rem] leading-normal xs:leading-[3rem] lg:leading-[4rem] break-all xs:break-normal">
                       {t("movie_details:watch")} <span className="block text-[#af1918]">{t("movie_details:with_us")}</span>
                     </h2>
@@ -116,13 +116,13 @@ const MainPage = async ({ params, searchParams}: { params: Params; searchParams?
           ))}
         </div>
         <div className="flex flex-wrap gap-4 mb-8">
-          <h2 className="text-2xl ">{t("movie_details:explore_genre")}</h2>
+          <h2 className="text-2xl fade-in">{t("movie_details:explore_genre")}</h2>
           <div className="w-full p-4">
           <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-4 break-all overflox-hidden category-cart">
             {categories.map((category, index) => (
               <Link key={index} href={`/category/${category.replace(/,/g, "").toLowerCase()}`}>
-                <div className="bg-categoryBg border rounded-md aspect-square flex flex-col items-center justify-center hover:bg-hoverCategory hover:scale-105 transition">
-                  <div className="w-1/2 h-1/2 rounded-full bg-[#f8ede3] flex items-center justify-center mb-2 p-1">
+                <div className="bg-categoryBg border rounded-md aspect-square flex flex-col items-center justify-center hover:bg-hoverCategory hover:scale-105 transition animate-circle">
+                  <div className="w-1/2 h-1/2 rounded-full bg-[#f8ede3] flex items-center justify-center mb-2 p-1 animate-circle">
                     <Image
                       src={`/assets/categories/category-${index+1}.svg`}
                       alt={category}
@@ -138,11 +138,11 @@ const MainPage = async ({ params, searchParams}: { params: Params; searchParams?
           </div>
             </div>
               <div className="gap-4 mb-12">
-                <h3 className="mb-5 text-xl mb-6">{t("movie_details:explore_type")}</h3>
+                <h3 className="mb-5 text-xl mb-6 fade-in">{t("movie_details:explore_type")}</h3>
                 <div className="flex flex-wrap items-center gap-4 p-4 w-max-content">
                 {movieTypes.map((type, index) => (
                   <Link key={index} href={`/movie-type/${type.replace(/,/g, "").toLowerCase()}`}>
-                      <div className="w-[100px] xs:w-[120px] max-h-auto bg-black border rounded-md aspect-square flex flex-col items-center justify-center hover:bg-hoverCategory hover:scale-105 transition">
+                      <div className="w-[100px] xs:w-[120px] max-h-auto bg-black border rounded-md aspect-square flex flex-col items-center justify-center hover:bg-hoverCategory hover:scale-105 transition fade-in-circle">
                         <div className="w-1/2 h-1/2 rounded-full bg-[#f8ede3] flex items-center justify-center mb-2">
                           <Image
                             src={`/assets/movie-types/type-${index+1}.svg`}
@@ -162,7 +162,7 @@ const MainPage = async ({ params, searchParams}: { params: Params; searchParams?
               <ul className="px-4 grid grid-cols-2 movie-card md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
                 {filteredMovies.length > 0 ? (
                   filteredMovies.map(({ id, imageSrc, title, title_ka, rating, price }) => (
-                    <li key={id} className="border border-gray-300 rounded-lg shadow-md hover:shadow-lg transition relative overflow-hidden hover:scale-105">
+                    <li key={id} className="border border-gray-300 rounded-lg shadow-md hover:shadow-lg transition relative overflow-hidden hover:scale-105 fade-in">
                       <Link href={`/movies/${id}`} className="block relative group">
                         <div className="relative">
                           <Image src={imageSrc} alt={title} width={300} height={200} className="w-full h-[350px] object-cover rounded-md" />
@@ -183,7 +183,7 @@ const MainPage = async ({ params, searchParams}: { params: Params; searchParams?
                     </li>
                   ))
                 ) : (
-                  <div className="flex items-center justify-center h-full w-screen">
+                  <div className="flex items-center justify-center h-full w-screen fade-in">
                     <h2 className="bg-red-800 text-xl p-4">{t("movie_details:no_movies")}</h2>
                   </div>
                 )}

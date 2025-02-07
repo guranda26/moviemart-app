@@ -5,7 +5,8 @@ import { ReturnBackButtonProps } from "../Interfaces/ReturnBack";
 
 const ReturnBackButton: React.FC<ReturnBackButtonProps> = ({
   fallbackRoute = "/",
-  className
+  className,
+  returnBackTxt = "Return Back",
 }) => {
   const path = usePathname();
   const router = useRouter();
@@ -25,7 +26,7 @@ const ReturnBackButton: React.FC<ReturnBackButtonProps> = ({
       className={`bg-redButton hover:bg-hoverRedBtn border border-[#7e1313] text-white px-4 py-2 rounded-lg transition ${className}`}
       onClick={returnBack}
     >
-      Return back
+      {returnBackTxt}
     </button>
   );
 };

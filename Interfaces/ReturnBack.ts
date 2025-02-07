@@ -1,4 +1,5 @@
 export interface ReturnBackButtonProps {
   fallbackRoute?: string;
-  className?: string
+  className?: string;
+  returnBackTxt?: string;
 }

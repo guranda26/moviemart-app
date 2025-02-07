@@ -8,7 +8,7 @@ const PrivacyPageComponent= () => {
 
   return (
     <section className="px-6 py-12 bg-background text-textCol max-w-4xl mx-auto">
-      <h2 className="text-4xl font-extrabold text-center mb-8">
+      <h2 className="text-4xl font-extrabold text-center mb-8 mt-5 lg:mt-auto">
         {t("privacy_policy:privacy_policy")}
       </h2>
       <p className="mb-6 text-lg leading-relaxed text-textCol">

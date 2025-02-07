@@ -1,10 +1,20 @@
-import PrivacyPageComponent from '@/components/PrivacyPage'
-import React from 'react'
+'use client'
 
-const page = () => {
+import PrivacyPageComponent from '@/components/PrivacyPage'
+import ReturnBackButton from '@/components/ReturnBack'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
+
+const Privacy = () => {
+  const { t } = useTranslation()
   return (
-   <PrivacyPageComponent />
+    <div className='relative'>
+      <div className="fixed top-6 left-8">
+        <ReturnBackButton returnBackTxt={t("common:return")} />
+      </div>
+      <PrivacyPageComponent />
+    </div>
   )
 }
 
-export default page
+export default Privacy

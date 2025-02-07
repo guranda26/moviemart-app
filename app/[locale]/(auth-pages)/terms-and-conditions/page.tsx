@@ -1,10 +1,20 @@
+'use client'
+
+import ReturnBackButton from '@/components/ReturnBack'
 import TermsAndConditionsPage from '@/components/Terms'
+import { useTranslation } from 'react-i18next'
 import React from 'react'
 
-const page = () => {
+const TermsPage = () => {
+  const { t } = useTranslation()
   return (
-   <TermsAndConditionsPage />
+   <div className='relative'>
+    <div className="fixed top-6 left-8">
+      <ReturnBackButton returnBackTxt={t("common:return")} />
+    </div>
+    <TermsAndConditionsPage />
+ </div>
   )
 }
 
-export default page
+export default TermsPage

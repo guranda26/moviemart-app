@@ -165,11 +165,15 @@ a, .description {
 }
 
 .animate-circle {
-  animation: scaleIn 2s ease-in-out forwards;
+  animation: scaleInCircle 2s ease-in-out forwards;
 }
 
 .fade-in {
   animation: fadeIn 1s ease-in-out;
+}
+
+.fade-in-circle {
+  animation: fadeInCircle 1s ease-in-out;
 }
 
 .animated-image {

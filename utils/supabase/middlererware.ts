@@ -4,13 +4,6 @@ import { protectRoute } from "@/utils/supabase/server";
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
-  // const normalizedPathname = pathname.replace(/^\/(ka|en)(?=\/|$)/, "");
-  // console.log("Normalized Pathname:", normalizedPathname);
-
-  // if (pathname.startsWith("/api/")) {
-  //   return NextResponse.next();
-  // }
-
   const { redirect } = await protectRoute(pathname);
 
   if (redirect) {
