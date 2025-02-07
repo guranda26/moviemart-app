@@ -84,7 +84,7 @@ const Page = () => {
                   className="w-16 h-16 rounded-md object-cover mr-4"
                 />
                 <div className="flex-1">
-                  <h2 className="text-md xs:text-lg font-medium text-gray-700">
+                  <h2 className="text-md xs:text-lg font-medium text-gray-700 font-semibold">
                     {item.movies.title}
                   </h2>
                   <p className="text-sm text-gray-600">
