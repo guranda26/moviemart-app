@@ -218,3 +218,15 @@ input::placeholder{
     display: none;
   }
 }
+
+@media only screen and (max-width: 320px) {
+  .category-cart {
+    grid-template-columns: 1fr;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  .category-cart a {
+    /* max-height: 150px; */
+  }
+}

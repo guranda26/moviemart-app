@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { FaPlay } from "react-icons/fa6";
 
 const MovieComponent = ({src}: {src:string}) => {
   const [isTrailerVisible, setIsTrailerVisible] = useState(false);
@@ -21,6 +22,7 @@ const MovieComponent = ({src}: {src:string}) => {
         onClick={watchTrailer}
         data-cy="buy-product"
       >
+        <FaPlay />
         {t('movie_details:watch_now')}
       </button>
 

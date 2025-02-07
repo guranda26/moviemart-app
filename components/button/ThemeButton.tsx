@@ -20,12 +20,12 @@ const ThemeButton = () => {
   if (!mounted) return null;
 
   return (
-    <div className="flex space-x-4 items-center ml-auto mr-10">
+    <div className="flex space-x-4 items-center ml-auto">
       <button
         onClick={() => handleThemeChange("light")}
         className={`cursor-pointer p-2 rounded-full ${
           resolvedTheme === "light"
-            ? "bg-gray-300 text-gray-800"
+            ? "bg-white text-gray-800"
             : "bg-transparent"
         }`}
       >

@@ -96,10 +96,10 @@ const MainPage = async ({ params, searchParams}: { params: Params; searchParams?
                 className="w-full rounded-lg sm:h-auto h-[400px] sm:max-h-[500px] overflow-hidden sm:object-cover"
               />
 
-            <div className="flex">
-              <div className="absolute inset-0 flex sm:items-baseline justify-between pb-20 sm:pb-0 sm:justify-evenly md:justify-center lg:justify-normal gap-8 lg:items-center lg:flex-row flex-col-reverse lg:gap-5 bg-opacity-50 p-6 text-white text-center bg-bannerbg">
+            <div className="flex justify-center">
+              <div className="absolute inset-0 flex sm:items-baseline justify-between pb-5 xs:pb-20 sm:pb-0 sm:justify-evenly md:justify-center lg:justify-normal gap-8 lg:items-center lg:flex-row flex-col-reverse lg:gap-5 bg-opacity-50 p-6 text-white text-center bg-bannerbg">
                   <div className="max-w-[250px] sm:w-[300px] md:w-[350px] sm:max-w-full flex flex-col items-start sm:items-center gap-3 md:mr-8">
-                    <h2 className="text-2xl lg:text-3xl font-bold lg:mb-4 leading-[2.5rem] sm:leading-[3rem] lg:leading-[4rem]">
+                    <h2 className="text-2xl lg:text-3xl font-bold lg:mb-4 leading-[2.5rem] leading-normal xs:leading-[3rem] lg:leading-[4rem] break-all xs:break-normal">
                       {t("movie_details:watch")} <span className="block text-[#af1918]">{t("movie_details:with_us")}</span>
                     </h2>
                     <Link
@@ -118,11 +118,11 @@ const MainPage = async ({ params, searchParams}: { params: Params; searchParams?
         <div className="flex flex-wrap gap-4 mb-8">
           <h2 className="text-2xl ">{t("movie_details:explore_genre")}</h2>
           <div className="w-full p-4">
-          <div className="grid grid-cols-3 xs:grid-cols-4 md:grid-cols-5 lg:grid-cols-8 gap-4">
+          <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-4 break-all overflox-hidden category-cart">
             {categories.map((category, index) => (
               <Link key={index} href={`/category/${category.replace(/,/g, "").toLowerCase()}`}>
                 <div className="bg-categoryBg border rounded-md aspect-square flex flex-col items-center justify-center hover:bg-hoverCategory hover:scale-105 transition">
-                  <div className="w-1/2 h-1/2 rounded-full bg-[#f8ede3] flex items-center justify-center mb-2">
+                  <div className="w-1/2 h-1/2 rounded-full bg-[#f8ede3] flex items-center justify-center mb-2 p-1">
                     <Image
                       src={`/assets/categories/category-${index+1}.svg`}
                       alt={category}
@@ -139,10 +139,10 @@ const MainPage = async ({ params, searchParams}: { params: Params; searchParams?
             </div>
               <div className="gap-4 mb-12">
                 <h3 className="mb-5 text-xl mb-6">{t("movie_details:explore_type")}</h3>
-                <div className="flex gap-4">
+                <div className="flex flex-wrap items-center gap-4 p-4 w-max-content">
                 {movieTypes.map((type, index) => (
                   <Link key={index} href={`/movie-type/${type.replace(/,/g, "").toLowerCase()}`}>
-                      <div className="max-w-[120px] sm:w-[120px] max-h-auto bg-black border rounded-md aspect-square flex flex-col items-center justify-center hover:bg-hoverCategory hover:scale-105 transition">
+                      <div className="w-[100px] xs:w-[120px] max-h-auto bg-black border rounded-md aspect-square flex flex-col items-center justify-center hover:bg-hoverCategory hover:scale-105 transition">
                         <div className="w-1/2 h-1/2 rounded-full bg-[#f8ede3] flex items-center justify-center mb-2">
                           <Image
                             src={`/assets/movie-types/type-${index+1}.svg`}

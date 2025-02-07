@@ -33,7 +33,7 @@ export default function LanguageChanger() {
   };
 
   return (
-    <select onChange={handleChange} value={currentLocale}>
+    <select onChange={handleChange} value={currentLocale} className="text-sm lg:text-md p-1 lg:p-2 rounded-full bg-white text-black">
       <option value="en">En</option>
       <option value="ka">Ge</option>
     </select>
