@@ -113,7 +113,7 @@ const Header = () => {
                 <span>{t("common_placeholder:cart")}</span>
               </Link>
             </li>
-            <li>
+            <li className="order-hide">
               <Link href="/orders" className="flex flex-col items-center lg:hidden">
                 <IoBagCheckOutline className="text-2xl" />
                 <span>{t("common_placeholder:orders")}</span>
