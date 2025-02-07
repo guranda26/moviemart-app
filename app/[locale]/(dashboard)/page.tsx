@@ -158,58 +158,36 @@ const MainPage = async ({ params, searchParams}: { params: Params; searchParams?
                 </div>
               </div>
 
-        <h3 className="text-xl font-semibold mb-8">{t("movie_details:movie_list")}</h3>
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredMovies.length > 0 ? filteredMovies.map(
-            ({
-              id,
-              imageSrc,
-              title,
-              title_ka,
-              rating,
-              category,
-              category_ka,
-              price,
-            }) => (
-              <li
-                key={id}
-                className="border border-gray-300 rounded-lg p-4 shadow-md hover:shadow-lg transition"
-              >
-                <Link href={`/movies/${id}`} className="flex flex-col gap-2" data-cy='product-item'
-                >
-                  <Image
-                    src={imageSrc}
-                    alt={title}
-                    width={300}
-                    height={200}
-                    className="w-full h-[200px] object-cover rounded-md"
-                  />
-                  <h3 className="text-black font-bold">{isKa ? title_ka : title}</h3>
-                  <h4 className="text-gray-600">{rating}</h4>
-                  <p className="text-gray-500">{price}</p>
-                  <p className="text-gray-500">
-                    {t("products:genre")} {isKa ? category_ka : category}
-                  </p>
-                </Link>
-                <div className="flex sm:flex-col gap-3">
-                  {!isPremium && 
-                  <AddToCartButton
-                    userId={userId}
-                    productId={id}
-                    productName={title}
-                    productPrice={price}
-                  />
-                }
+              <h3 className="text-xl font-semibold mb-8">{t("movie_details:movie_list")}</h3>
+              <ul className="px-4 grid grid-cols-2 movie-card md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+                {filteredMovies.length > 0 ? (
+                  filteredMovies.map(({ id, imageSrc, title, title_ka, rating, price }) => (
+                    <li key={id} className="border border-gray-300 rounded-lg shadow-md hover:shadow-lg transition relative overflow-hidden hover:scale-105">
+                      <Link href={`/movies/${id}`} className="block relative group">
+                        <div className="relative">
+                          <Image src={imageSrc} alt={title} width={300} height={200} className="w-full h-[350px] object-cover rounded-md" />
+                          <div className="absolute top-2 right-2 bg-black bg-opacity-70 text-white text-sm px-3 py-1 rounded-lg flex items-center gap-1">
+                            ⭐ {rating}
+                          </div>
+                          <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black to-transparent p-4">
+                            <h3 className="text-white font-bold text-center text-md xs:text-xl">{isKa ? title_ka : title}</h3>
+                          </div>
+                        </div>
+                      </Link>
+                      <div className="p-4 text-center text-textCol">
+                        <p className="font-semibold my-2">💰 {price}</p>
+                        {!isPremium && (
+                          <AddToCartButton userId={userId} productId={id} productName={title} productPrice={price} />
+                        )}
+                      </div>
+                    </li>
+                  ))
+                ) : (
+                  <div className="flex items-center justify-center h-full w-screen">
+                    <h2 className="bg-red-800 text-xl p-4">{t("movie_details:no_movies")}</h2>
                   </div>
-              </li>
-            )
-          )
-          :           
-          <div className="flex items-center justify-center h-full w-screen">
-            <h2 className="bg-red-800 text-xl p-4">{t("movie_details:no_movies")}</h2>
-          </div> 
-          }
-        </ul>
+                )}
+              </ul>
       </section>
     </TranslationsProvider>
   );

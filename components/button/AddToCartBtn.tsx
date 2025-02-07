@@ -51,25 +51,22 @@ const [state, formAction, pending] = useActionState(addToCart, {
           data-cy="add-to-cart-btn"
         >
        {isLoading ? 
-       <>
-       <CgSearchLoading />
-       <span className="absolute left-1/2 ml-2 opacity-0 group-hover:opacity-100 transition-opacity text-xs text-textCol break-none w-12">{t("movie_details:loading")}</span>
-       </>
+       <div className="flex gap-2">
+       <CgSearchLoading className="text-textCol" />
+       <span className="absolute left-1/2 ml-2 opacity-0 group-hover:opacity-100 transition-opacity text-xs break-none w-12 text-textCol">{t("movie_details:loading")}</span>
+       </div>
       : 
-       <>
-       <TbShoppingCartShare />
-       <span className="text-sm block">{t("movie_details:add_to_cart")}</span>
-       </>
+       <div className="flex gap-2">
+       <TbShoppingCartShare className="text-textCol" />
+       <span className="text-sm block text-textCol">{t("movie_details:add_to_cart")}</span>
+       </div>
        }
         </button>
       </form>) :
-      <div>
+      <div className="flex gap-2">
         <MdCloudDone />
-        <span className="text-sm">{t("movie_details:purchased")}</span>
+        <span className="text-sm text-textCol">{t("movie_details:purchased")}</span>
       </div>
-      // <button className="py-2 px-3 bg-gray-500 rounded-md text-white">
-        // {t("movie_details:purchased")}
-        // </button>
       }
     </>
   );
