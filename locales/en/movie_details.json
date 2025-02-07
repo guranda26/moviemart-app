@@ -16,5 +16,11 @@
   "sum": "Sum",
   "cart": "Cart",
   "empty_cart": "Your cart is empty.",
-  "movie_list": "Movie List"
+  "movie_list": "Movie List",
+  "director": "Director",
+  "actors": "Actors",
+  "writers": "Writers",
+  "language": "Language",
+  "awards": "Awards",
+  "runtime": "Runtime"
 }

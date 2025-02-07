@@ -74,6 +74,7 @@
   --banner-bg: #b49a5541;
   --category-bg: #f7D8BA;
   --hover-category: #f8e1ca;
+  --details-color: #211406;
 }
 
 .dark {
@@ -94,6 +95,7 @@
   --banner-bg: #16161667;
   --category-bg: #540c0c;
   --hover-category: #7a1212;
+  --details-color: #ffd2a0;
 }
 
 .custom-gradient {

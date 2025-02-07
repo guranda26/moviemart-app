@@ -16,7 +16,7 @@ const MovieComponent = ({src}: {src:string}) => {
   };
 
   return (
-    <div className="absolute top-0 right-1/2">
+    <div className="absolute top-0 right-0">
       <button
         className="rounded-lg border border-solid border-transparent transition-colors flex items-center justify-center bg-redButton text-textCol gap-2 hover:bg-hoverRedBtn text-sm sm:text-base h-10 sm:h-12 px-4 xs:px-8 sm:px-10 w-full text-white"
         onClick={watchTrailer}

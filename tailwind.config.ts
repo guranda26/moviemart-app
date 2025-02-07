@@ -40,6 +40,7 @@ export default {
         bannerbg: "var(--banner-bg)",
         categoryBg: "var(--category-bg)",
         hoverCategory: "var(--hover-category)",
+        detailsCol: "var(--details-color)",
       },
       boxShadow: {
         "custom-inner": "var(--inner-box-shadow)",
