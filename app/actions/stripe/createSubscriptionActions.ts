@@ -59,8 +59,8 @@ export const createSubscriptionAction = async (userId: string) => {
       },
     ],
     mode: "subscription",
-    success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/movies?success=true`,
-    cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/cancel-checkout?canceled=true`,
+    success_url: `${process.env.SITE_URL}/movies?success=true`,
+    cancel_url: `${process.env.SITE_URL}/cancel-checkout?canceled=true`,
     client_reference_id: userId,
     customer: customerId,
   });
