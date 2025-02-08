@@ -22,7 +22,7 @@ export default async function MovieType({ params }: {params: MovieTypeParams}) {
   const displayType = isKa ? movieKa : upperType;
 
   const i18nNameSpaces = ["common", "products", "home"];
-  const { t, resources } = await initTranslations(locale, i18nNameSpaces);
+  const { resources } = await initTranslations(locale, i18nNameSpaces);
 
   return (
     <TranslationsProvider
@@ -37,37 +37,31 @@ export default async function MovieType({ params }: {params: MovieTypeParams}) {
           { displayType }
         </h1>
       </div>
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredMovies.map(
+      <ul className="px-4 grid grid-cols-2 movie-card md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+        {filteredMovies.map(
             ({
               id,
               imageSrc,
               title,
               title_ka,
               rating,
-              type: movieType,
-              type_ka,
-              price,
             }) => (
               <li
                 key={id}
-                className="border border-gray-300 rounded-lg p-4 shadow-md hover:shadow-lg transition"
+                className="border border-gray-300 rounded-lg shadow-md hover:shadow-lg transition relative overflow-hidden hover:scale-105 fade-in min-h-[300px]"
               >
-                <Link href={`/movies/${id}`} className="flex flex-col gap-2">
+              <Link href={`/movies/${id}`} className="block relative group">
                   <img
                     src={imageSrc}
                     alt={title}
-                    className="w-full h-[200px] object-cover rounded-md"
-                  />
-                  <h3 className="text-black font-bold">
-                    {locale === "ka" ? title_ka : title}
-                  </h3>
-                  <h4 className="text-gray-600">{rating}</h4>
-                  <p className="text-gray-500">{price}</p>
-                  <p className="text-gray-500">
-                    {t("products:genre")}:{" "}
-                    {locale === "ka" ? type_ka : movieType}
-                  </p>
+                    className="w-full h-[300px] object-cover rounded-md"
+                  />                    
+                  <div className="absolute top-2 right-2 bg-black bg-opacity-70 text-white text-sm px-3 py-1 rounded-lg flex items-center gap-1">
+                      ⭐ {rating}
+                    </div>
+                    <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black to-transparent p-4">
+                      <h3 className="text-white font-bold text-center text-md xs:text-xl">{isKa ? title_ka : title}</h3>
+                    </div>
                 </Link>
               </li>
             )
