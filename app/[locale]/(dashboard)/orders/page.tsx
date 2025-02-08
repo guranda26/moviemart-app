@@ -63,12 +63,12 @@ return (
           alt={order.movie_name}
           className="w-full sm:w-[180px] h-60 xs:h-40 rounded object-contain mx-0 card-img"
         />
-          <div className="text-left text-center">
+          <div className="text-left text-center sm:text-left">
           <h2 className="text-xl font-semibold mt-2 text-[#ccc]"><span className="text-[#ffd2a0] split-text">{t('products:movie_name')}</span>&nbsp; 
           {(locale === 'ka' ? order.movies?.title_ka : order.movie_name)}
           </h2>
           <p className="text-[#ccc]">💰 ${(order.movies?.price)}</p>
-          <div className="flex items-center gap-1 text-[#ffd2a0]"><TiStarFullOutline /><p className="text-[#ccc] text-center">{(order.movies?.rating)}</p></div>
+          <div className="flex items-center gap-1 text-[#ffd2a0] text-center"><TiStarFullOutline /><p className="text-[#ccc] text-center">{(order.movies?.rating)}</p></div>
           <p className="text-[#ccc] text-semibold description text-justify xs:text-left break-words">
           🎬 {(locale === 'ka' ? order.movies?.description_ka :order.movies?.description)}</p>
           </div>
