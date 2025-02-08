@@ -6,25 +6,11 @@ export async function GET() {
   try {
     const user = await getUser();
 
-    if (!user) {
-      return new NextResponse(
-        JSON.stringify({ error: "User not logged in", status: 401 }),
-        {
-          status: 401,
-          headers: {
-            "Access-Control-Allow-Origin": "*", 
-            "Access-Control-Allow-Methods": "GET, OPTIONS",
-            "Access-Control-Allow-Headers": "Content-Type, Authorization",
-          },
-        }
-      );
-    }
-
     const supabase = await createClient();
     const { data: movies, error: moviesError } = await supabase
       .from("wishlist")
       .select("*")
-      .eq("user_id", user.id);
+      .eq("user_id", user?.id);
 
       if (moviesError) {
         console.error("Supabase error:", moviesError);
