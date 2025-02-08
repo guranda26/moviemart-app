@@ -30,8 +30,8 @@ export default async function handler(
         },
       ],
       mode: "payment",
-      success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/order-success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/checkout-cancel`,
+      success_url: `${process.env.SITE_URL}/order-success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.SITE_URL}/checkout-cancel`,
     });
 
     return res.status(200).json({ url: session.url });

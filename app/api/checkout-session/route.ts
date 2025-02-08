@@ -49,11 +49,11 @@ export async function POST(request: NextRequest) {
       ],
       mode: "payment",
       success_url: `${
-        process.env.NEXT_PUBLIC_BASE_URL
+        process.env.SITE_URL
       }/success-order?session_id={CHECKOUT_SESSION_ID}&product_name=${encodeURIComponent(
         productName
       )}&product_price=${encodeURIComponent(productPrice)}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/cancel-checkout`,
+      cancel_url: `${process.env.SITE_URL}/cancel-checkout`,
     });
 
     const supabase = await createClient();

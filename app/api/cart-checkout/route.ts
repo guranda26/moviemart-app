@@ -29,8 +29,8 @@ export async function POST(req: NextRequest) {
       payment_method_types: ["card"],
       line_items: lineItems,
       mode: "payment",
-      success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/success-order?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/cancel-checkout?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${process.env.SITE_URL}/success-order?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.SITE_URL}/cancel-checkout?session_id={CHECKOUT_SESSION_ID}`,
       metadata: {
         userId: data.user.id,
         products: JSON.stringify(metadata.map((item: {productId: number, userId: string}) => ({
