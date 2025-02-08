@@ -12,7 +12,7 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
         {
-            source: `${process.env.NEXT_PUBLIC_BASE_URL}/api/:path*`,
+            source: "/api/:path*",
             headers: [
                 { key: "Access-Control-Allow-Credentials", value: "true" },
                 { key: "Access-Control-Allow-Origin", value: "*" },
