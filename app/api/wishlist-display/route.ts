@@ -7,9 +7,16 @@ export async function GET() {
     const user = await getUser();
 
     if (!user) {
-      return NextResponse.json(
-        { error: "User not logged in", status: 401 },
-        { status: 401 }
+      return new NextResponse(
+        JSON.stringify({ error: "User not logged in", status: 401 }),
+        {
+          status: 401,
+          headers: {
+            "Access-Control-Allow-Origin": "*", 
+            "Access-Control-Allow-Methods": "GET, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type, Authorization",
+          },
+        }
       );
     }
 
@@ -19,20 +26,41 @@ export async function GET() {
       .select("*")
       .eq("user_id", user.id);
 
-    if (moviesError) {
-      console.error("Supabase error:", moviesError);
-      return NextResponse.json(
-        { error: "Movies are not found in the wishlist", status: 404 },
-        { status: 404 }
-      );
-    }
+      if (moviesError) {
+        console.error("Supabase error:", moviesError);
+        return new NextResponse(
+          JSON.stringify({ error: "Movies are not found in the wishlist", status: 404 }),
+          {
+            status: 404,
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Access-Control-Allow-Methods": "GET, OPTIONS",
+              "Access-Control-Allow-Headers": "Content-Type, Authorization",
+            },
+          }
+        );
+      }
 
-    return new Response(JSON.stringify(movies), { status: 200 });
+    return new NextResponse(JSON.stringify(movies), {
+      status: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      },
+    })
   } catch (error) {
     console.error("Error in fetch movies:", error);
-    return NextResponse.json(
-      { error: "Internal Server Error", status: 500 },
-      { status: 500 }
+    return new NextResponse(
+      JSON.stringify({ error: "Internal Server Error", status: 500 }),
+      {
+        status: 500,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type, Authorization",
+        },
+      }
     );
   }
 }
