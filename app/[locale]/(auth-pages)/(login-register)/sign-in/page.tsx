@@ -35,6 +35,8 @@ const Login: React.FC<LoginProps> = ({ searchParams }) => {
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
+    setErrorMessage("");
+    
     const formData = new FormData(event.currentTarget);
     const result = await signInAction(formData);
 

@@ -13,6 +13,7 @@ import Loading from "@/components/Loading";
 import { useTranslation } from "react-i18next";
 import { FormElements } from "@/Interfaces/Forms";
 import { ApiResponse, Message, RegisterProps } from "@/Interfaces/Auth";
+import { useRouter } from "next/navigation";
 
 const passwordRegex = new RegExp(
   "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&.])[A-Za-z\\d@$!%*?&.]{8,20}$"
@@ -47,6 +48,7 @@ const Register: React.FC<RegisterProps> = ({ searchParams }) => {
   const [message, setMessage] = useState<Message | null>(null);
   const [loading, setLoading] = useState(true);
   const [errors, setErrors] = useState<FormElements>({});
+  const router = useRouter();
 
   const { t } = useTranslation();
 
@@ -91,7 +93,7 @@ const Register: React.FC<RegisterProps> = ({ searchParams }) => {
       );
       setErrors(newErrors);
       return;
-    }
+    } 
 
     const response: ApiResponse | string = await signUpAction(
       new FormData(event.target)
@@ -99,13 +101,14 @@ const Register: React.FC<RegisterProps> = ({ searchParams }) => {
 
     if (typeof response === "string") {
       setMessage({ type: "error", content: response });
-    } else if (!response.success) {
-      setMessage({ type: "error", content: response.message });
-      setFormData({ username: "", email: "", age: "", password: "" });
     } else if (response.success) {
       setMessage({ type: "success", content: response.message });
       setFormData({ username: "", email: "", age: "", password: "" });
-    }
+      router.push("/");
+    } else if (!response.success) {
+      setMessage({ type: "error", content: response.message });
+      setFormData({ username: "", email: "", age: "", password: "" });
+    } 
   };
 
   if (loading) {

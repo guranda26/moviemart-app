@@ -53,31 +53,7 @@ export default async function ResetPassword({
             <p className="text-sm text-foreground/60">{t("auth:reset_msg")}</p>
           </div>
           <form className="flex flex-col w-full max-w-md p-4 gap-2 [&>input]:mb-4 relative">
-            {/* <Input
-          type="password"
-          name="password"
-          id="password"
-          onChange={handlePasswordChange}
-          value={password}
-          placeholder="New password"
-          className="relative w-[100%] bg-[#363636] mx-auto p-3 border rounded border-white sm:text-sm md:text-base text-white mb-2"
-        /> */}
             <ValidatePassword />
-            {/* <Input
-          type="password"
-          name="confirmPassword"
-          id="confirmPassword"
-          placeholder="Confirm password"
-          className="relative w-[100%] bg-[#363636] mx-auto p-3 border rounded border-white sm:text-sm md:text-base text-white mb-2"
-        />
-        <button
-          formAction={resetPasswordAction}
-          type="submit"
-          className="xs:w-[100%] py-3 rounded-md bg-purpleButton hover:bg-hoverPurpleBtn text-white text-md font-bold mb-20 xs:mb-5"
-        >
-          Reset password
-        </button> */}
-            {/* <FormMessage message={searchParams} /> */}
           </form>
         </div>
         {successMsg && <SuccessMsg msg={successMsg} />}
