@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import useLocaleFromPath from "@/components/UsePath";
 import { Order } from "@/Interfaces/Orders";
 import { TiStarFullOutline } from "react-icons/ti";
+import { getUser } from "@/utils/supabase/server";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -19,11 +20,18 @@ export default function Orders() {
   const locale = useLocaleFromPath();
 
 
+
   useEffect(() => {
     async function fetchOrders() {
+        const user = await getUser();
+    if (!user) {
+      console.log('no user');
+      return
+    }
       const { data, error } = await supabase
         .from("orders")
-        .select("id, movie_name, quantity, created_at, movies(imageSrc, price, rating, description, title_ka, description_ka)")
+        .select("id, movie_name, quantity, user_id, created_at, movies(imageSrc, price, rating, description, title_ka, description_ka)")
+        .eq("user_id", user.id)
         .order("created_at", { ascending: false });
 
       setLoading(false)
@@ -60,7 +68,7 @@ return (
           {(locale === 'ka' ? order.movies?.title_ka : order.movie_name)}
           </h2>
           <p className="text-[#ccc]">💰 ${(order.movies?.price)}</p>
-          <div className="flex items-center gap-1 text-[#ffd2a0] text-center"><TiStarFullOutline /><p className="text-[#ccc] text-center">{(order.movies?.rating)}</p></div>
+          <div className="flex items-center gap-1 text-[#ffd2a0]"><TiStarFullOutline /><p className="text-[#ccc] text-center">{(order.movies?.rating)}</p></div>
           <p className="text-[#ccc] text-semibold description text-justify xs:text-left break-words">
           🎬 {(locale === 'ka' ? order.movies?.description_ka :order.movies?.description)}</p>
           </div>

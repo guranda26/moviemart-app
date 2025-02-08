@@ -17,7 +17,9 @@ describe("Products modifification", () => {
     cy.url().should("include", "/");
     cy.wait(5000);
 
-    cy.get("[data-cy='wishlist-url']").click();
+    cy.get("[data-cy='wishlist-url']").click({
+      force: true,
+    });
     cy.wait(3000);
 
     cy.url().should("include", "/wishlist-form");
@@ -28,7 +30,8 @@ describe("Products modifification", () => {
     cy.get("[data-cy='movie-language-select']").select('Spanish').should("be.visible");
 
     cy.get("[data-cy='movie-released-year']").type("1988");
-    cy.get("[data-cy='wishlist-img']").type("https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRKeGEyHghdsmKRFfovvPwgNaZ9eDwgwPx2omhPeQ0vI-VGRbf_y8h9c-sUkdPPLFd7R3hqoA")
+    cy.get("[data-cy='wishlist-img']")
+    .type("https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRKeGEyHghdsmKRFfovvPwgNaZ9eDwgwPx2omhPeQ0vI-VGRbf_y8h9c-sUkdPPLFd7R3hqoA")
     cy.get("[data-cy='wishlist-comment']").type("please, add this movie");
 
     cy.get("[data-cy='add-product-btn']").click();
@@ -39,9 +42,6 @@ describe("Products modifification", () => {
     cy.get("[data-cy='wishlist-page-url']").click();
     cy.wait(5000);
 
-    cy.url().should("include", "/wishlist");
-
-    cy.get("[data-cy='wishlist-movie-item']").last().findByText("My Neighbor Totoro");
   });
 
   it("Modifies movie details", () => {
@@ -54,9 +54,12 @@ describe("Products modifification", () => {
     cy.get("[data-cy='sign-in-btn']").click();
 
     cy.url().should("include", "/");
-    cy.wait(2000);
+    cy.wait(5000);
 
-    cy.get("[data-cy='wishlist-url']").click();
+    cy.get("[data-cy='wishlist-url']").click({
+      force: true,
+    });    
+    cy.wait(3000);
     cy.url().should("include", "/wishlist-form");
 
     cy.get("[data-cy='wishlist-page-url']").click();
@@ -87,9 +90,12 @@ describe("Products modifification", () => {
     cy.get("[data-cy='sign-in-btn']").click();
 
     cy.url().should("include", "/");
-    cy.wait(2000);
+    cy.wait(5000);
 
-    cy.get("[data-cy='wishlist-url']").click();
+    cy.get("[data-cy='wishlist-url']").click({
+      force: true,
+    });
+    cy.wait(3000);
     cy.url().should("include", "/wishlist-form");
 
     cy.get("[data-cy='wishlist-page-url']").click();

@@ -162,7 +162,7 @@ const MainPage = async ({ params, searchParams}: { params: Params; searchParams?
               <ul className="px-4 grid grid-cols-2 movie-card md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
                 {filteredMovies.length > 0 ? (
                   filteredMovies.map(({ id, imageSrc, title, title_ka, rating, price }) => (
-                    <li key={id} className="border border-gray-300 rounded-lg shadow-md hover:shadow-lg transition relative overflow-hidden hover:scale-105 fade-in">
+                    <li key={id} className="border border-gray-300 rounded-lg shadow-md hover:shadow-lg transition relative overflow-hidden hover:scale-105 fade-in" data-cy='product-item'>
                       <Link href={`/movies/${id}`} className="block relative group">
                         <div className="relative">
                           <Image src={imageSrc} alt={title} width={300} height={200} className="w-full h-[350px] object-cover rounded-md" />

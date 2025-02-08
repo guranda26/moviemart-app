@@ -2,7 +2,7 @@ describe("Auth", () => {
   beforeEach(() => {
     cy.visit("/home");
   });
-  xit("Logs in successfully", () => {
+  it("Logs in successfully", () => {
     cy.get("[data-cy='login-btn']").click();
 
     cy.get("[data-cy='email-input']").type("g_lemonjava@cu.edu.ge");
@@ -14,7 +14,7 @@ describe("Auth", () => {
     cy.wait(1000);
   });
 
-  xit("Logs out users", () => {
+  it("Logs out users", () => {
     cy.get("[data-cy='login-btn']").click();
 
     cy.get("[data-cy='email-input']").type("g_lemonjava@cu.edu.ge");
@@ -25,7 +25,9 @@ describe("Auth", () => {
     cy.url().should("include", "/");
     cy.wait(3000);
 
-    cy.get("[data-cy='log-out']").click();
+    cy.get("[data-cy='log-out']").click({
+      force: true,
+    });
 
     cy.url().should("include", "/home");
   });

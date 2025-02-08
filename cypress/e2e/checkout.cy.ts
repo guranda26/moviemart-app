@@ -18,8 +18,8 @@ describe("Product purchase", () => {
   it("Can complete a product purchase", () => {
     cy.get("[data-cy='login-btn']").click();
 
-    cy.get("[data-cy='email-input']").type("g_lemonjava@cu.edu.ge");
-    cy.get("[data-cy='password-input']").type("Hello321.");
+    cy.get("[data-cy='email-input']").type("guranda.lemonjava584@sps.tsu.edu.ge");
+    cy.get("[data-cy='password-input']").type("Hello123.");
 
     cy.get("[data-cy='sign-in-btn']").click();
     cy.wait(3000);

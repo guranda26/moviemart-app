@@ -66,7 +66,7 @@ const Header = () => {
               </Link>
             </li>
             <li>
-              <Link href="/wishlist-form" className="flex flex-col items-center">
+              <Link href="/wishlist-form" className="flex flex-col items-center" data-cy="wishlist-url">
                 <FaHeartCirclePlus className="text-2xl" />
                 {t("common_placeholder:wishlist")}
               </Link>
@@ -121,7 +121,7 @@ const Header = () => {
             </li>
             <li>
               <form action={signOutAction}>
-                <button type="submit" className="font-bold flex flex-col items-center justify-center mx-auto">
+                <button type="submit" className="font-bold flex flex-col items-center justify-center mx-auto" data-cy="log-out">
                   <GiExitDoor className="text-2xl" />
                   <span>{t("header:sign_out")}</span>
                 </button>
