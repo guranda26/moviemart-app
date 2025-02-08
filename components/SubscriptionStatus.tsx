@@ -12,9 +12,10 @@ export const checkSubscriptionStatus = async (userId: string) => {
     .eq("id", userId)
     .single();
 
-  if (userError || !user?.stripe_customer_id) {
-    throw new Error("User or Stripe customer ID not found");
-  }
+    if (userError || !user?.stripe_customer_id) {
+      console.warn("User or Stripe customer ID not found");
+      return false;
+    }
 
   const subscriptions = await stripe.subscriptions.list({
     customer: user.stripe_customer_id,

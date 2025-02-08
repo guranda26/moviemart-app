@@ -184,12 +184,6 @@ export const resetPasswordAction = async (formData: FormData) => {
     encodedRedirect("error", "/protected/reset-password", error.message);
   }
 
-  // if (error) {
-  //   return {
-  //     success: false,
-  //     message: "Password update failed: " + error.message,
-  //   };
-  // }
   encodedRedirect("success", "/protected/reset-password", "Password updated");
 };
 
@@ -207,48 +201,80 @@ type Provider =
   | "linkedin"
   | "apple";
 
-const signInWith = (provider: Provider) => async () => {
-
-  const auth_callback_url = `${process.env.SITE_URL}/auth/callback`;
-  const supabase = await createClient();
-  const { data, error } = await supabase.auth.signInWithOAuth({
-    provider,
-    options: {
-      redirectTo: auth_callback_url,
-    },
-  });
-
-  // console.log("data", data);
-
-  if (error) {
-    console.error("Error during OAuth sign-in:", error);
-  }
-
-  if (data?.url) {
-    redirect(data.url);
-  } else {
-    const user = (await supabase.auth.getUser()).data.user;
-    // console.log("user", user);
-
-    if (user) {
-      const username = user.user_metadata?.user_name || "GitHub User";
-      const email = user.email;
-      const age = "";
-
-      // console.log("user?", user);
-
-      const { error: profileError } = await supabase
-        .from("profile")
-        .upsert({ id: user.id, username, email, age });
-
-      if (profileError) {
-        console.error("Error saving profile data:", profileError);
-      } else {
-        console.log("Profile saved successfully.");
+  const signInWith = (provider: Provider) => async () => {
+    const auth_callback_url = `${process.env.SITE_URL}/auth/callback`;
+    const supabase = await createClient();
+  
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider,
+      options: { redirectTo: auth_callback_url },
+    });
+  
+    if (error) {
+      console.error("Error during OAuth sign-in:", error);
+      return;
+    }
+  
+    if (data?.url) {
+      redirect(data.url);
+      return;
+    }
+  
+    const { data: userData, error: userError } = await supabase.auth.getUser();
+    const user = userData?.user;
+  
+    if (userError || !user) {
+      console.error("Error fetching user:", userError);
+      return;
+    }
+  
+    const email = user.email;
+    const username = user.user_metadata?.user_name || "GitHub User";
+    const age = "";
+  
+    const { data: existingUser, error: fetchError } = await supabase
+      .from("profile")
+      .select("id, stripe_customer_id")
+      .eq("email", email)
+      .single();
+  
+    let customerId = existingUser?.stripe_customer_id || null;
+  
+    if (fetchError && fetchError.code !== "PGRST116") {
+      console.error("Error checking for existing user:", fetchError);
+      return;
+    }
+  
+    if (!customerId) {
+      try {
+        const customer = await stripe.customers.create({
+          email,
+          name: username,
+          metadata: { supabase_user_id: user.id },
+        });
+        customerId = customer.id;
+      } catch (stripeError) {
+        console.error("Stripe customer creation failed:", stripeError);
       }
     }
-  }
-};
+  
+    const { error: profileError } = await supabase
+      .from("profile")
+      .upsert({
+        id: existingUser?.id || user.id, 
+        username,
+        email,
+        age,
+        stripe_customer_id: customerId,
+      });
+  
+    if (profileError) {
+      console.error("Error updating profile:", profileError);
+    } else {
+      console.log("Profile updated successfully.");
+    }
+  };
+  
 
 export const signinWithGithub = signInWith("github");
 export const signinWithGoogle = signInWith("google");
