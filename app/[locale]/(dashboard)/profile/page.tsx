@@ -45,7 +45,7 @@ const ProfilePage = () => {
   const profileImg = "/assets/user.png";
 
   useEffect(() => {
-    fetch(`/api/fetch-user`)
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/fetch-user`)
       .then((res) => res.json())
       .then((data) => {
         if (data.error) {

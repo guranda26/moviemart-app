@@ -27,7 +27,7 @@ const BuyProductButton = ({
 
   async function handleBuyProduct() {
     try {
-      const response = await fetch("/api/checkout-session", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/checkout-session`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ url: session.url });
   } catch (error) {
-    console.error("Error in POST /api/cart-checkout", error);
+    console.error(`Error in POST ${process.env.NEXT_PUBLIC_BASE_URL}/api/cart-checkout`, error);
 
     return NextResponse.json(
       { error: "Internal Server Error. Please try again later." },

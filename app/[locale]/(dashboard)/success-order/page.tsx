@@ -31,7 +31,7 @@ function OrderSuccessContent() {
     }
 
     try {
-      const response = await fetch(`/api/check-session`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/check-session`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ sessionId }),

@@ -80,7 +80,7 @@ const WishlistForm = ({ userId }: { userId: string }) => {
     setShowStatus(true);
 
     try {
-      const response = await fetch("/api/check-subscription", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/check-subscription`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -101,7 +101,7 @@ const WishlistForm = ({ userId }: { userId: string }) => {
 
       const { email, name, type, language, year, comment, comment_ka, image_src } = formData;
 
-      const formResponse = await fetch("/api/wishlist-form", {
+      const formResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/wishlist-form`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

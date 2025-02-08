@@ -4,7 +4,7 @@ describe("Product purchase", () => {
   beforeEach(() => {
     cy.visit("/home");
 
-    cy.intercept("POST", "/api/checkout-session", {
+    cy.intercept("POST", `${process.env.NEXT_PUBLIC_BASE_URL}/api/checkout-session`, {
       fixture: "payment_intent.json",
     }).as("handler");
 

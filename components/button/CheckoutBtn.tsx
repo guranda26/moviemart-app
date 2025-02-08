@@ -41,7 +41,7 @@ const CheckoutButton: React.FC<CheckoutButtonProps> = ({ cart }) => {
 
     console.log("Valid Line Items to Send:", JSON.stringify(lineItems));
 
-    const res = await fetch("/api/cart-checkout", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/cart-checkout`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
