@@ -16,7 +16,8 @@ export async function GET() {
     const supabase = await createClient();
     const { data: movies, error: moviesError } = await supabase
       .from("wishlist")
-      .select("*");
+      .select("*")
+      .eq("user_id", user.id);
 
     if (moviesError) {
       console.error("Supabase error:", moviesError);

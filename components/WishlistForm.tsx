@@ -225,7 +225,7 @@ const WishlistForm = ({ userId }: { userId: string }) => {
           {formErrors.year && <p className="text-red-500">{formErrors.year}</p>}
         </div>
         <div>
-          <Input
+          <input
             type="text"
             id="image_src"
             name="image_src"

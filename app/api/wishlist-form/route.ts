@@ -1,4 +1,4 @@
-import createClient from "@/utils/supabase/server"
+import createClient, { getUser } from "@/utils/supabase/server"
 import { NextRequest } from "next/server"
 
 export async function POST(req: NextRequest) {
@@ -12,6 +12,8 @@ export async function POST(req: NextRequest) {
       )
     }
     
+    const user = await getUser();
+    
     const supabase = await createClient()
     const { data, error } = await supabase.from('wishlist').insert([
       {
@@ -22,7 +24,8 @@ export async function POST(req: NextRequest) {
         year,
         comment,
         comment_ka,
-        image_src
+        image_src,
+        user_id: user?.id,
       },
     ])
 
